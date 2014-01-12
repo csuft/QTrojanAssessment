@@ -35,10 +35,10 @@ When the command finished, you can find a newly created sub directory in the pat
 
 5. Contributors
 ---------------
-1. Zhongke Zhang
-2. Shuyan Qu
-3. Nan Du
-4. Min Li
+1. Min Li (Project Leader)
+2. Nan Du (Vice Project Leader)
+3. Shuyan Qu (Senior Software Engineer)
+4. Zhongke Zhang (Plain Coder)
 
 6. Changelog
 ------------
