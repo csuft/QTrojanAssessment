@@ -5,16 +5,20 @@
 
 #include <string>
 #include <vector>
+#include <cassert>
 #include <Windows.h>
 #include <stdio.h>
 #include <tchar.h>
 #include <WinSock2.h>
 #include <IPHlpApi.h>  // for GetAdaptersAddresses() function
+#include <WinInet.h>
 
 #pragma comment(lib, "Ws2_32.lib")
 #pragma comment(lib, "Iphlpapi.lib")  // for GetAdaptersAddresses() function
+#pragma comment(lib, "Wininet.lib")
 
 using std::string;
+using std::wstring;
 using std::vector;
 
 #define INFO_BUFFER_SIZE 32767
@@ -73,6 +77,47 @@ private:
 	vector<string> m_volinfo;
 	string m_unknownResult;
 	vector<string> m_unknownVector;
+};
+
+class IECookieInfo
+{
+public:
+
+private:
+
+};
+
+typedef struct _CacheEntry
+{
+	wstring m_fileName;
+	wstring m_urlStr;
+	wstring m_localPath;
+	wstring m_subFolder;
+	wstring m_headerInfo;
+	long   m_entrySize;
+	int    m_hits;
+	string m_lastAccess;
+	string m_lastModified;
+	string m_expiration;
+	string m_lastChecked;
+	string m_entryType;
+}CacheEntry, *pCacheEntry;
+
+class IECacheInfo
+{
+public:
+	IECacheInfo();
+	~IECacheInfo() {}
+
+	const vector<CacheEntry>& getCacheEntVec() const { return m_recordsVec; }
+
+private:
+	HANDLE getStartCacheEntry(LPINTERNET_CACHE_ENTRY_INFO* startEnt);
+	bool getNextCacheEntry(HANDLE hDir, LPINTERNET_CACHE_ENTRY_INFO* next);
+	void setAllFields(pCacheEntry entry, const LPINTERNET_CACHE_ENTRY_INFO record);
+	void transformTimeFormat(pCacheEntry entry, const LPINTERNET_CACHE_ENTRY_INFO lpCacheEnt);
+private:
+	vector<CacheEntry> m_recordsVec;
 };
 
 #endif

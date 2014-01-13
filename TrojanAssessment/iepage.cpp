@@ -70,6 +70,8 @@ BrowserCacheTab::BrowserCacheTab(QWidget* parent /* = 0 */)
 	m_mainLayout->addWidget(m_viewList, 1);
 
 	setLayout(m_mainLayout);
+
+	IECacheInfo cache;
 }
 
 BrowserCacheTab::~BrowserCacheTab()

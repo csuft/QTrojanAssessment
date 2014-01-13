@@ -12,6 +12,8 @@
 #include <QDialogButtonBox>
 #include <QGroupBox>
 
+#include "BasicInformation.h"
+
 class BrowserCacheTab;
 class PluginsTab;
 class BrowserCookiesTab;

@@ -9,7 +9,6 @@ BasicInformation::BasicInformation(void)
 	_getNetworkInfo();
 }
 
-
 BasicInformation::~BasicInformation(void)
 {
 
@@ -300,7 +299,6 @@ bool BasicInformation::_getOSInformation()
 	// this function would never fail.
 	return true;
 }
-
 /*
  * 获取系统磁盘基本信息
  */
@@ -387,4 +385,179 @@ bool BasicInformation::_getVolumeInformation()
 	}
 
 	return true;
+}
+//////////////////////////////////////////////////////////////////////////
+// Cache record information
+IECacheInfo::IECacheInfo()
+{
+	// pointer to memory allocated in somewhere, so we have to free
+	// the memory manually at last.
+	LPINTERNET_CACHE_ENTRY_INFO lpCacheEntry = NULL;  
+	HANDLE hCacheDir;
+	CacheEntry tmp;
+	// To get the first cache entry
+	hCacheDir = getStartCacheEntry(&lpCacheEntry);
+	if (hCacheDir)
+	{
+		setAllFields(&tmp, lpCacheEntry);
+		transformTimeFormat(&tmp, lpCacheEntry);
+		delete [] lpCacheEntry;
+		m_recordsVec.push_back(tmp);  // push the first cache record
+		
+		while (getNextCacheEntry(hCacheDir, &lpCacheEntry))
+		{
+			memset(&tmp, 0, sizeof(CacheEntry));
+			setAllFields(&tmp, lpCacheEntry);
+			transformTimeFormat(&tmp, lpCacheEntry);
+			delete [] lpCacheEntry;
+			m_recordsVec.push_back(tmp);
+		}
+		FindCloseUrlCache(hCacheDir);  // close the file handle.
+	}
+}
+
+HANDLE IECacheInfo::getStartCacheEntry(LPINTERNET_CACHE_ENTRY_INFO* startEnt)
+{
+	HANDLE hCacheEnt;
+	DWORD dwEntrySize;
+	DWORD MAX_CACHE_ENTRY_INFO_SIZE = 4096;
+	dwEntrySize = MAX_CACHE_ENTRY_INFO_SIZE;
+	*startEnt = (LPINTERNET_CACHE_ENTRY_INFO) new char[dwEntrySize];
+	(*startEnt)->dwStructSize = dwEntrySize;
+HeadAgain:
+	if (!(hCacheEnt = FindFirstUrlCacheEntry(NULL, *startEnt, &dwEntrySize)))
+	{
+		delete [] *startEnt;
+		switch (GetLastError())
+		{
+		case ERROR_INSUFFICIENT_BUFFER:  // To allocate more memory to store the entry information
+			*startEnt = (LPINTERNET_CACHE_ENTRY_INFO) new char[dwEntrySize];
+			(*startEnt)->dwStructSize = dwEntrySize;
+			goto HeadAgain;
+			break;
+		default:
+			return (HANDLE)0;
+		}
+	}
+
+	return hCacheEnt;
+}
+
+bool IECacheInfo::getNextCacheEntry(HANDLE hDir, LPINTERNET_CACHE_ENTRY_INFO* next)
+{
+	DWORD dwEntrySize;
+	DWORD MAX_CACHE_ENTRY_INFO_SIZE = 4096;
+	dwEntrySize = MAX_CACHE_ENTRY_INFO_SIZE;
+
+	*next = (LPINTERNET_CACHE_ENTRY_INFO) new char[dwEntrySize];
+	(*next)->dwStructSize = dwEntrySize;
+HeadAgain:
+	if (!FindNextUrlCacheEntry(hDir, *next, &dwEntrySize))
+	{
+		delete [] *next;
+		switch(GetLastError())
+		{
+		case ERROR_INSUFFICIENT_BUFFER:
+			*next = (LPINTERNET_CACHE_ENTRY_INFO)new char[dwEntrySize];
+			(*next)->dwStructSize = dwEntrySize;
+			goto HeadAgain;
+			break;
+		default:
+			FindCloseUrlCache(hDir);
+			return false;
+		}
+	}
+	return true;
+}
+
+void IECacheInfo::setAllFields(pCacheEntry entry, const LPINTERNET_CACHE_ENTRY_INFO record)
+{
+	wchar_t *ptr = NULL;
+	wchar_t chTemp[256] = {'\0'};
+
+	if (!record->lpszLocalFileName)  // some cache entry present without this field. We just ignore it.
+	{
+		return ;
+	}
+	entry->m_hits = record->dwHitRate;
+	entry->m_urlStr = record->lpszSourceUrlName;
+	entry->m_localPath = record->lpszLocalFileName;
+	entry->m_entrySize = record->dwSizeLow;
+	entry->m_headerInfo = record->lpHeaderInfo?record->lpHeaderInfo:L"None exists";
+
+	// set cache type
+	if (record->CacheEntryType & COOKIE_CACHE_ENTRY)
+	{
+		entry->m_entryType = "Cookie";
+	}
+	else if (record->CacheEntryType & URLHISTORY_CACHE_ENTRY)
+	{
+		entry->m_entryType = "Visited cache";
+	}
+	else
+	{
+		entry->m_entryType = "Normal cache";
+	}
+	// set name of the cache file.
+	//wcscpy(chTemp, record->lpszLocalFileName);
+	assert(record->lpszLocalFileName != NULL);
+	wcscpy(chTemp, record->lpszLocalFileName);
+	//wmemcpy(chTemp, record->lpszLocalFileName, wcslen(record->lpszLocalFileName));
+	ptr = wcsrchr(chTemp, '\\');
+	entry->m_fileName = ptr+1; // skip to the next character to copy.
+
+	// set the name of sub folder into which we store the cache file.
+	*ptr = '\0';  // truncate the path
+	ptr = wcsrchr(chTemp, '\\');
+	entry->m_subFolder = ptr + 1; 
+}
+
+void IECacheInfo::transformTimeFormat(pCacheEntry entry, const LPINTERNET_CACHE_ENTRY_INFO lpCacheEnt)
+{
+	SYSTEMTIME st;
+	FILETIME ft;
+	const int TIMEBUFFER = 32;
+	char chDateTime[TIMEBUFFER];
+
+	// transform the last access time format.
+	memset(chDateTime, 0, TIMEBUFFER);
+	FileTimeToLocalFileTime(&lpCacheEnt->LastAccessTime, &ft);
+	FileTimeToSystemTime(&ft, &st);
+	_snprintf(chDateTime, TIMEBUFFER, "%04d-%02d-%02d %02d:%02d:%02d", st.wYear, st.wMonth, st.wDay, st.wHour, st.wMinute, st.wSecond);
+	entry->m_lastAccess = chDateTime;
+
+	// transform the last modified time format
+	memset(chDateTime, 0, TIMEBUFFER);
+	if (lpCacheEnt->LastModifiedTime.dwHighDateTime != 0 && lpCacheEnt->LastModifiedTime.dwLowDateTime != 0)
+	{
+		FileTimeToLocalFileTime(&lpCacheEnt->LastModifiedTime, &ft);
+		FileTimeToSystemTime(&ft, &st);
+		_snprintf(chDateTime, TIMEBUFFER, "%04d-%02d-%02d %02d:%02d:%02d", st.wYear, st.wMonth, st.wDay, st.wHour, st.wMinute, st.wSecond);
+	}
+	else
+	{
+		_snprintf(chDateTime, TIMEBUFFER, "N/A");
+	}
+	entry->m_lastModified = chDateTime;
+
+	// transform the last synchronized time format
+	memset(chDateTime, 0, TIMEBUFFER);
+	FileTimeToLocalFileTime(&lpCacheEnt->LastSyncTime, &ft);
+	FileTimeToSystemTime(&ft, &st);
+	_snprintf(chDateTime, TIMEBUFFER, "%04d-%02d-%02d %02d:%02d:%02d", st.wYear, st.wMonth, st.wDay, st.wHour, st.wMinute, st.wSecond);
+	entry->m_lastChecked = chDateTime;
+
+	// transform the format of expiration time
+	memset(chDateTime, 0, TIMEBUFFER);
+	if (lpCacheEnt->ExpireTime.dwHighDateTime != 0 && lpCacheEnt->ExpireTime.dwLowDateTime != 0)
+	{
+		FileTimeToLocalFileTime(&lpCacheEnt->ExpireTime, &ft);
+		FileTimeToSystemTime(&ft, &st);
+		_snprintf(chDateTime, TIMEBUFFER, "%04d-%02d-%02d %02d:%02d:%02d", st.wYear, st.wMonth, st.wDay, st.wHour, st.wMinute, st.wSecond);
+	}
+	else
+	{
+		_snprintf(chDateTime, TIMEBUFFER, "N/A");
+	}
+	entry->m_expiration = chDateTime;
 }
