@@ -6,9 +6,11 @@
 #include <string>
 #include <vector>
 #include <cassert>
-#include <Windows.h>
-#include <stdio.h>
+#include <fstream>
+#include <cstdio>
+
 #include <tchar.h>
+#include <qt_windows.h>  // modified version of Windows.h header file. To avoid the collision of min() and max() macros.
 #include <WinSock2.h>
 #include <IPHlpApi.h>  // for GetAdaptersAddresses() function
 #include <WinInet.h>
@@ -20,6 +22,7 @@
 using std::string;
 using std::wstring;
 using std::vector;
+using std::wofstream;
 
 #define INFO_BUFFER_SIZE 32767
 #define DIV 1024.0
@@ -89,12 +92,12 @@ private:
 
 typedef struct _CacheEntry
 {
-	wstring m_fileName;
-	wstring m_urlStr;
-	wstring m_localPath;
-	wstring m_subFolder;
-	wstring m_headerInfo;
-	long   m_entrySize;
+	string m_fileName;
+	string m_urlStr;
+	string m_localPath;
+	string m_subFolder;
+	string m_headerInfo;
+	long   m_entrySize;    // the size of the cache entry
 	int    m_hits;
 	string m_lastAccess;
 	string m_lastModified;

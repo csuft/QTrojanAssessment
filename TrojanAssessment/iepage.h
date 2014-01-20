@@ -8,11 +8,17 @@
 #include <QLineEdit>
 #include <QPushButton>
 #include <QTableView>
+#include <QHeaderView>
+#include <QStandardItemModel>
 #include <QSortFilterProxyModel>
 #include <QDialogButtonBox>
 #include <QGroupBox>
+#include <QComboBox>
+#include <QRegExp>
+#include <QMessageBox>
 
 #include "BasicInformation.h"
+#include "cacheentrydetail.h"
 
 class BrowserCacheTab;
 class PluginsTab;
@@ -51,13 +57,22 @@ public:
 private:
 	BrowserCacheTab(const BrowserCacheTab& obj);
 	BrowserCacheTab& operator=(const BrowserCacheTab& obj);
+
+	void initialModel();
+private slots:
+	void onFilterExpChanged(const QString& exp);
+	void onFilterColChanged(int index);
+	void onRefreshClicked();
+	void onCleanClicked();
+	void onViewPropertyClicked();
 private:
 	QLineEdit* m_filterExp;
-	QPushButton* m_find;
-	QPushButton* m_delete;
+	QComboBox* m_filterCol;
+	QPushButton* m_refresh;
 	QPushButton* m_clear;
 	QPushButton* m_view;
 	QTableView* m_viewList;
+	QStandardItemModel* m_srcModel;
 	QSortFilterProxyModel* m_proxyModel;
 
 	QVBoxLayout* m_mainLayout;

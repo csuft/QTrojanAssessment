@@ -49,29 +49,118 @@ BrowserCacheTab::BrowserCacheTab(QWidget* parent /* = 0 */)
 	: QWidget(parent)
 {
 	m_filterExp = new QLineEdit(this);
-	m_filterExp->setPlaceholderText(QStringLiteral("Filter"));
-	m_find = new QPushButton(QStringLiteral("Find..."), this);
-	m_delete = new QPushButton(QStringLiteral("Delete"), this);
-	m_clear = new QPushButton(QStringLiteral("Clear All"), this);
-	m_view = new QPushButton(QStringLiteral("View"), this);
+	m_filterExp->setPlaceholderText(QStringLiteral("Filter expression"));
+	m_filterCol = new QComboBox(this);
+	//add items
+	m_filterCol->addItem(QStringLiteral("By File Name"), 0);
+	m_filterCol->addItem(QStringLiteral("By URL Name"), 1);
+	m_filterCol->addItem(QStringLiteral("By Access Time"), 7);
+	m_filterCol->addItem(QStringLiteral("By Modified Time"), 8);
+	m_refresh = new QPushButton(QStringLiteral("Refresh"), this);
+	m_clear = new QPushButton(QStringLiteral("Clean Cache"), this);
+	m_view = new QPushButton(QStringLiteral("Properties"), this);
 	m_viewList = new QTableView(this);
+	m_viewList->setSelectionBehavior(QAbstractItemView::SelectRows);
+	m_viewList->setSelectionMode(QAbstractItemView::SingleSelection);
+	m_viewList->setSortingEnabled(true);
+	m_viewList->sortByColumn(0, Qt::AscendingOrder);
+	m_viewList->verticalHeader()->hide();
+	m_viewList->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
+	m_viewList->setWordWrap(false);
 	m_proxyModel = new QSortFilterProxyModel(this);
+	m_viewList->setModel(m_proxyModel);
+	m_srcModel = new QStandardItemModel(0, 10, this);
+	m_proxyModel->setSourceModel(m_srcModel);
+	// initialize and create the header of model.
+	m_srcModel->setHeaderData(0, Qt::Horizontal, QStringLiteral("File Name"));
+	m_srcModel->setHeaderData(1, Qt::Horizontal, QStringLiteral("Cache URL"));
+	m_srcModel->setHeaderData(2, Qt::Horizontal, QStringLiteral("Local Path"));
+	m_srcModel->setHeaderData(3, Qt::Horizontal, QStringLiteral("Sub Folder"));
+	m_srcModel->setHeaderData(4, Qt::Horizontal, QStringLiteral("Header Info"));
+	m_srcModel->setHeaderData(5, Qt::Horizontal, QStringLiteral("Hits"));
+	m_srcModel->setHeaderData(6, Qt::Horizontal, QStringLiteral("Size"));
+	m_srcModel->setHeaderData(7, Qt::Horizontal, QStringLiteral("Last Access"));
+	m_srcModel->setHeaderData(8, Qt::Horizontal, QStringLiteral("Last Modified"));
+	m_srcModel->setHeaderData(9, Qt::Horizontal, QStringLiteral("Expiration"));
+	initialModel();
 
 	m_mainLayout = new QVBoxLayout(this);  // the main layout widget should be initialized first.
 	m_topLayout = new QHBoxLayout(this);
 
 	m_topLayout->addWidget(m_filterExp, 1);
-	m_topLayout->addWidget(m_find);
-	m_topLayout->addWidget(m_delete);
+	m_topLayout->addWidget(m_filterCol);
+	m_topLayout->addWidget(m_refresh);
 	m_topLayout->addWidget(m_clear);
 	m_topLayout->addWidget(m_view);
 
 	m_mainLayout->addLayout(m_topLayout);
 	m_mainLayout->addWidget(m_viewList, 1);
-
 	setLayout(m_mainLayout);
 
+	connect(m_filterExp, SIGNAL(textChanged(const QString&)), this, SLOT(onFilterExpChanged(const QString&)));
+	connect(m_filterCol, SIGNAL(currentIndexChanged(int)), this, SLOT(onFilterColChanged(int)));
+	connect(m_refresh, SIGNAL(clicked()), this, SLOT(onRefreshClicked()));
+	connect(m_clear, SIGNAL(clicked()), this, SLOT(onCleanClicked()));
+	connect(m_view, SIGNAL(clicked()), this, SLOT(onViewPropertyClicked()));
+}
+
+void BrowserCacheTab::initialModel()
+{
+	m_srcModel->removeRows(0, m_srcModel->rowCount());
+	const int ROW = 0;
 	IECacheInfo cache;
+	vector<CacheEntry> vc = cache.getCacheEntVec();
+	for (vector<CacheEntry>::const_iterator ci = vc.cbegin(); ci != vc.cend(); ++ci)
+	{
+		m_srcModel->insertRow(0);
+		m_srcModel->setData(m_srcModel->index(ROW, 0), (*ci).m_fileName.c_str());
+		m_srcModel->setData(m_srcModel->index(ROW, 1), (*ci).m_urlStr.c_str());
+		m_srcModel->setData(m_srcModel->index(ROW, 2), (*ci).m_localPath.c_str());
+		m_srcModel->setData(m_srcModel->index(ROW, 3), (*ci).m_subFolder.c_str());
+		m_srcModel->setData(m_srcModel->index(ROW, 4), (*ci).m_headerInfo.c_str());
+		m_srcModel->setData(m_srcModel->index(ROW, 5), (*ci).m_hits);
+		m_srcModel->setData(m_srcModel->index(ROW, 6), (*ci).m_entrySize);
+		m_srcModel->setData(m_srcModel->index(ROW, 7), (*ci).m_lastAccess.c_str());
+		m_srcModel->setData(m_srcModel->index(ROW, 8), (*ci).m_lastModified.c_str());
+		m_srcModel->setData(m_srcModel->index(ROW, 9), (*ci).m_expiration.c_str());
+	}
+}
+
+void BrowserCacheTab::onFilterExpChanged(const QString& e)
+{
+	QRegExp exp(m_filterExp->text(), Qt::CaseInsensitive, QRegExp::FixedString);
+	m_proxyModel->setFilterRegExp(exp);
+}
+
+void BrowserCacheTab::onFilterColChanged(int index)
+{
+	m_proxyModel->setFilterKeyColumn(m_filterCol->itemData(index).toInt());
+}
+
+void BrowserCacheTab::onRefreshClicked()
+{
+	initialModel();
+}
+
+void BrowserCacheTab::onCleanClicked()
+{
+	QMessageBox::information(this, QStringLiteral("Tips"), QStringLiteral("Coming"), QMessageBox::Ok|QMessageBox::Cancel);
+}
+
+void BrowserCacheTab::onViewPropertyClicked()
+{
+	QItemSelectionModel* selModel = m_viewList->selectionModel();
+	// make sure the current index is valid.
+	if (selModel->hasSelection())
+	{
+		QModelIndex cindex = selModel->currentIndex();
+		CacheEntryDetail cd(this, cindex, m_srcModel);
+		cd.exec();
+	}
+	else
+	{
+		QMessageBox::critical(this, QStringLiteral("Error"), QStringLiteral("You have to choose at least one row!"), QMessageBox::Ok);
+	}
 }
 
 BrowserCacheTab::~BrowserCacheTab()

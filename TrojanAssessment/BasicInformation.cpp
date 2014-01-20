@@ -157,7 +157,6 @@ bool BasicInformation::_getHostName()
 
 	return true;
 }
-
 /*
  * 获取系统可用内存及总内存
  */
@@ -396,6 +395,7 @@ IECacheInfo::IECacheInfo()
 	HANDLE hCacheDir;
 	CacheEntry tmp;
 	// To get the first cache entry
+	
 	hCacheDir = getStartCacheEntry(&lpCacheEntry);
 	if (hCacheDir)
 	{
@@ -403,9 +403,12 @@ IECacheInfo::IECacheInfo()
 		transformTimeFormat(&tmp, lpCacheEntry);
 		delete [] lpCacheEntry;
 		m_recordsVec.push_back(tmp);  // push the first cache record
-		
 		while (getNextCacheEntry(hCacheDir, &lpCacheEntry))
 		{
+			if (lpCacheEntry->lpszLocalFileName == NULL)
+			{
+				continue;
+			}
 			memset(&tmp, 0, sizeof(CacheEntry));
 			setAllFields(&tmp, lpCacheEntry);
 			transformTimeFormat(&tmp, lpCacheEntry);
@@ -472,43 +475,39 @@ HeadAgain:
 
 void IECacheInfo::setAllFields(pCacheEntry entry, const LPINTERNET_CACHE_ENTRY_INFO record)
 {
-	wchar_t *ptr = NULL;
-	wchar_t chTemp[256] = {'\0'};
+	char *ptr = NULL;
+	char chTemp[512] = {'\0'};
+	char localPath[256] = {'\0'};
 
-	if (!record->lpszLocalFileName)  // some cache entry present without this field. We just ignore it.
+	if (record->lpszLocalFileName == NULL || record->lpszSourceUrlName == NULL)  // some cache entry present without this field. We just ignore it.
 	{
 		return ;
 	}
 	entry->m_hits = record->dwHitRate;
-	entry->m_urlStr = record->lpszSourceUrlName;
-	entry->m_localPath = record->lpszLocalFileName;
+	wcstombs(chTemp, record->lpszSourceUrlName, 256);
+	entry->m_urlStr = chTemp;
+	wcstombs(localPath, record->lpszLocalFileName, 256);
+	entry->m_localPath = localPath;
 	entry->m_entrySize = record->dwSizeLow;
-	entry->m_headerInfo = record->lpHeaderInfo?record->lpHeaderInfo:L"None exists";
-
-	// set cache type
-	if (record->CacheEntryType & COOKIE_CACHE_ENTRY)
+	memset(chTemp, 0, 256);
+	if (record->lpHeaderInfo)
 	{
-		entry->m_entryType = "Cookie";
-	}
-	else if (record->CacheEntryType & URLHISTORY_CACHE_ENTRY)
-	{
-		entry->m_entryType = "Visited cache";
+		wcstombs(chTemp, record->lpHeaderInfo, 256);
+		entry->m_headerInfo = chTemp;
 	}
 	else
 	{
-		entry->m_entryType = "Normal cache";
+		entry->m_headerInfo = "None exists";
 	}
-	// set name of the cache file.
-	//wcscpy(chTemp, record->lpszLocalFileName);
-	assert(record->lpszLocalFileName != NULL);
-	wcscpy(chTemp, record->lpszLocalFileName);
-	//wmemcpy(chTemp, record->lpszLocalFileName, wcslen(record->lpszLocalFileName));
-	ptr = wcsrchr(chTemp, '\\');
-	entry->m_fileName = ptr+1; // skip to the next character to copy.
+
+	ptr = strrchr(localPath, '\\');
+	// skip to the next character to copy.
+	entry->m_fileName = ptr+1; 
 
 	// set the name of sub folder into which we store the cache file.
-	*ptr = '\0';  // truncate the path
-	ptr = wcsrchr(chTemp, '\\');
+	// truncate the path
+	*ptr = '\0';  
+	ptr = strrchr(localPath, '\\');
 	entry->m_subFolder = ptr + 1; 
 }
 

@@ -143,6 +143,15 @@
     <ClCompile Include="GeneratedFiles\Release\moc_datamapperhelper.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
+    <ClCompile Include="cacheentrydetail.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_cacheentrydetail.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_cacheentrydetail.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="trojanassessment.h">
@@ -187,6 +196,12 @@
     <CustomBuild Include="datamapperhelper.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
+    <CustomBuild Include="cacheentrydetail.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="cacheentrydetail.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GeneratedFiles\ui_trojanassessment.h">
@@ -207,5 +222,14 @@
     <ClInclude Include="BasicInformation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_cacheentrydetail.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UIStyle.css" />
   </ItemGroup>
 </Project>
