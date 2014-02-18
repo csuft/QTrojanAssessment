@@ -113,15 +113,6 @@
     <ClCompile Include="GeneratedFiles\Release\moc_securitycenterpage.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="qchartviewer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_qchartviewer.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_qchartviewer.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
     <ClCompile Include="about.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -187,9 +178,6 @@
     <CustomBuild Include="aboutprogram.ui">
       <Filter>Form Files</Filter>
     </CustomBuild>
-    <CustomBuild Include="qchartviewer.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
     <CustomBuild Include="about.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
@@ -206,18 +194,6 @@
   <ItemGroup>
     <ClInclude Include="GeneratedFiles\ui_trojanassessment.h">
       <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="memblock.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="bchartdir.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="chartdir.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="FinanceChart.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BasicInformation.h">
       <Filter>Header Files</Filter>

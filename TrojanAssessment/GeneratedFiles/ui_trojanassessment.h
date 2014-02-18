@@ -1,8 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'trojanassessment.ui'
 **
-** Created: Fri Jan 10 14:26:17 2014
-**      by: Qt User Interface Compiler version 5.0.0
+** Created by: Qt User Interface Compiler version 5.0.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/

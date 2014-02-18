@@ -8,14 +8,19 @@
 #include <QLineEdit>
 #include <QPushButton>
 #include <QTableView>
+#include <QTableWidget>
 #include <QHeaderView>
+#include <QTableWidgetItem>
 #include <QStandardItemModel>
 #include <QSortFilterProxyModel>
 #include <QDialogButtonBox>
 #include <QGroupBox>
 #include <QComboBox>
 #include <QRegExp>
+#include <QToolTip>
 #include <QMessageBox>
+#include <QSysInfo>    // for OS version
+#include <fstream>
 
 #include "BasicInformation.h"
 #include "cacheentrydetail.h"
@@ -24,6 +29,7 @@ class BrowserCacheTab;
 class PluginsTab;
 class BrowserCookiesTab;
 class IESettingsTab;
+using std::ifstream;
 
 class IEPage : public QTabWidget
 {
@@ -98,6 +104,12 @@ private:
 };
 //////////////////////////////////////////////////////////////////////////
 // Definition of Internet Explorer Browser cookies class.
+// Windows 7/Vista: C:\Users\zzk\AppData\Roaming\Microsoft\Windows\Cookies\index.dat
+//                  C:\Users\zzk\AppData\Roaming\Microsoft\Windows\Cookies\Low\index.dat
+//                  C:\Users\zzk\AppData\Local\Microsoft\Windows\Temporary Internet Files\Content.IE5\index.dat
+//                  C:\Users\zzk\AppData\Local\Microsoft\Windows\Temporary Internet Files\Low\Content.IE5index.dat
+// Windows XP/2000: C:\Documents and Settings\<username>\Cookies\index.dat
+//                  C:\Documents and Settings\<username>\Local Settings\Temporary Internet Files\Content.IE5\index.dat
 class BrowserCookiesTab : public QWidget
 {
 	Q_OBJECT
@@ -108,19 +120,28 @@ public:
 private:
 	BrowserCookiesTab(const BrowserCookiesTab& obj);
 	BrowserCookiesTab& operator=(const BrowserCookiesTab& obj);
+
+	void createHeader();
+	void createCookieModel();
+	void resolveCookies(const char* fileName);
+	void createDetailsView(const vector<CookieRecord>& vc);
+	void transformTime(const char* low, const char* high, char* dst);
+	const char* setCreator(const char* flag);
+private slots:
+	void onTableViewClicked(const QModelIndex& index);
+	void onFilterExpChanged(const QString& text);
+	void showToolTips(const QModelIndex& index);
 private:
 	QLineEdit* m_filterExp;
 	QPushButton* m_openWithNotepad;
 	QPushButton* m_openWithWordpad;
-	QPushButton* m_viewProperties;
 	QTableView* m_cookiesList;
-	QTableView* m_detailsList;
-	QDialogButtonBox* m_dlgBtnBox;
-	QSortFilterProxyModel* m_model;
+	QTableWidget* m_detailsList;
+	QSortFilterProxyModel* m_proxyModel;
+	QStandardItemModel* m_model;
 
 	QVBoxLayout* m_mainLayout;
 	QHBoxLayout* m_topLayout;
-
 };
 
 //////////////////////////////////////////////////////////////////////////

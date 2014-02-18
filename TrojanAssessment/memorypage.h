@@ -3,8 +3,6 @@
 
 #include <QWidget>
 #include <QTabWidget>
-#include "qchartviewer.h"
-#include "chartdir.h"
 
 QT_BEGIN_NAMESPACE
 class QTableView;
@@ -84,9 +82,9 @@ private:
 	MemMonitorTab(const MemMonitorTab& obj);
 	MemMonitorTab& operator=(const MemMonitorTab& obj);
 private:
-	QChartViewer* m_viewer;
-	XYChart* m_realTime;
-	PieChart* m_stat;
+	//QChartViewer* m_viewer;
+	//XYChart* m_realTime;
+	//PieChart* m_stat;
 	QGroupBox* m_groupBox;
 	QDialogButtonBox* m_btns;
 };

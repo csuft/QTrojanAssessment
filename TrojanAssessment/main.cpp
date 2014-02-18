@@ -3,7 +3,6 @@
 #include <QStyleFactory>
 
 #define QT_NO_CAST_FROM_ASCII
-#pragma comment(lib, "chartdir51.lib")
 
 int main(int argc, char *argv[])
 {
@@ -13,6 +12,7 @@ int main(int argc, char *argv[])
 	app.setApplicationName(QStringLiteral("TrojanDetector"));
 	app.setApplicationVersion(QStringLiteral("1.0-alpha"));
 	QApplication::setStyle(QStyleFactory::create(QStringLiteral("Fusion")));
+	// To add a splash screen.
 
 	/* Create the main window */
 	TrojanAssessment win;

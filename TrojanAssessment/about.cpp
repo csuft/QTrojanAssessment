@@ -27,5 +27,4 @@ About::~About()
 	delete m_devs;
 	delete m_cpright;
 	delete m_btnbox;
-	delete m_layout;
 }

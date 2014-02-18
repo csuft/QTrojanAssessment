@@ -40,14 +40,27 @@ When the command finished, you can find a newly created sub directory in the pat
 3. Shuyan Qu (Senior Software Engineer)
 4. Zhongke Zhang (Plain Coder)
 
-6. Changelog
+6. To do
+--------
+* Add splash screen when the program started.
+* Net flow control support.
+
+7. Changelog
 ------------
-2013-12-17 Zhongke Zhang <zhangzhongke00@163.com>  
+2013-12-17 Zhongke Zhang <zhangzhongke007@163.com>  
 
   * The user interface worked.
   * Released the first version 1.0
   
-2014-1-4 Zhongke Zhang <zhangzhongke00@163.com> 
+2014-1-4 Zhongke Zhang <zhangzhongke007@163.com> 
 
   * Add system information tab in AssessmentCenter page
   * Change the time format showed on status bar
+
+2014-1-17 Zhongke Zhang <zhangzhongke007@163.com>
+  * URL Cache viewer works
+  * Add UI layout for process page.
+
+2014-2-17 Zhongke Zhang <zhangzhongke007@163.com>  
+  * Add IE cookies viewer
+  
