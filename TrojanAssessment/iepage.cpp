@@ -261,7 +261,7 @@ void BrowserCookiesTab::createHeader()
 	m_detailsList->setVerticalScrollMode(QAbstractItemView::ScrollPerPixel);
 	m_detailsList->setEditTriggers(QAbstractItemView::NoEditTriggers);
 	m_detailsList->verticalHeader()->hide();
-	m_detailsList->verticalHeader()->setStretchLastSection(true);
+	m_detailsList->horizontalHeader()->setStretchLastSection(true);
 }
 
 void BrowserCookiesTab::createCookieModel()

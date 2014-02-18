@@ -598,8 +598,8 @@ IECookieInfo::IECookieInfo(void)
 }
 IECookieInfo::~IECookieInfo()
 {
+	if (m_startAddr) UnmapViewOfFile((PBYTE)m_startAddr);
 	if (m_hMapping) CloseHandle(m_hMapping);
-	//if (m_startAddr) CloseHandle(m_startAddr);
 	if (m_hFile) CloseHandle(m_hFile);
 }
 
