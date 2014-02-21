@@ -6,6 +6,7 @@ TrojanAssessment::TrojanAssessment(QWidget *parent)
 	ui.setupUi(this);
 	setWindowTitle(QStringLiteral("System Security Assessment Platform"));
 	setStyleSheet(QString("font-family:Î¢ÈíÑÅºÚ; font-size: 9pt;"));
+	ui.centralWidget->layout()->setContentsMargins(1, 0, 1, 0);  // set margins smaller
 	/* disable the maximum button */
 	Qt::WindowFlags flag = windowFlags();
 	flag &= ~Qt::WindowMaximizeButtonHint;

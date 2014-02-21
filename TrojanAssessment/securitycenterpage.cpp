@@ -121,7 +121,7 @@ SysInfoTab::SysInfoTab(QWidget *parent)
 	m_clipboard = new QDialogButtonBox(Qt::Horizontal, this);
 	m_clipboard->addButton("Copy to clipboard", QDialogButtonBox::ActionRole);
 	m_vlayout->addWidget(m_clipboard);
-
+	m_vlayout->setContentsMargins(0,0,0,0);
 	setLayout(m_vlayout);
 
 	connect(m_clipboard, SIGNAL(clicked(QAbstractButton*)), SLOT(onCopytoClipboard(QAbstractButton*)));
@@ -138,19 +138,81 @@ SysInfoTab::~SysInfoTab()
 }
 
 //////////////////////////////////////////////////////////////////////////
-//
+// Show the libaries loaded by the program
 LoadedLibTab::LoadedLibTab(QWidget *parent)
 	: QWidget(parent)
 {
 	m_layout = new QVBoxLayout(this);
-	m_filterExp = new QLineEdit(this);
-	m_filterExp->setPlaceholderText("Filter expression");
-	m_dllList = new QListView(this);
-	m_filterModel = new QSortFilterProxyModel;
-	m_layout->addWidget(m_filterExp);
-	m_layout->addWidget(m_dllList);
+	m_layout->setContentsMargins(0,0,0,0);
+	m_libtable = new QTableView(this);
+	m_libtable->verticalHeader()->hide();
+	m_libtable->setVerticalScrollMode(QAbstractItemView::ScrollPerPixel);
+	m_libtable->setHorizontalScrollMode(QAbstractItemView::ScrollPerPixel);
+	m_libtable->horizontalHeader()->setStretchLastSection(true);
+	m_libtable->setSelectionBehavior(QAbstractItemView::SelectRows);
+	m_libtable->setSelectionMode(QAbstractItemView::SingleSelection);
 
+	m_model = new QStandardItemModel(0, 5, this);
+	m_model->removeRows(0, m_model->rowCount());
+	m_model->setHeaderData(0, Qt::Horizontal, QStringLiteral("Module Name"));
+	m_model->setHeaderData(1, Qt::Horizontal, QStringLiteral("Module Path"));
+	m_model->setHeaderData(2, Qt::Horizontal, QStringLiteral("PID"));
+	m_model->setHeaderData(3, Qt::Horizontal, QStringLiteral("Base Address"));
+	m_model->setHeaderData(4, Qt::Horizontal, QStringLiteral("Size"));
+	doLoadlibs();
+	m_libtable->setModel(m_model);
+	m_layout->addWidget(m_libtable);
+	
 	setLayout(m_layout);
+}
+
+void LoadedLibTab::doLoadlibs()
+{
+	HANDLE hModuleSnap = INVALID_HANDLE_VALUE; 
+	MODULEENTRY32 me32; 
+	int index = 0;
+	char buffer[256] = {'\0'};
+
+	//  Take a snapshot of all modules in the specified process. 
+	hModuleSnap = CreateToolhelp32Snapshot( TH32CS_SNAPMODULE, GetCurrentProcessId()); 
+	if( hModuleSnap == INVALID_HANDLE_VALUE ) 
+	{ 
+		return ; 
+	} 
+
+	//  Set the size of the structure before using it. 
+	me32.dwSize = sizeof( MODULEENTRY32 ); 
+
+	//  Retrieve information about the first module, 
+	//  and exit if unsuccessful 
+	if( !Module32First( hModuleSnap, &me32 ) ) 
+	{ 
+		CloseHandle( hModuleSnap );     // Must clean up the snapshot object! 
+		return ; 
+	} 
+
+	//  Now walk the module list of the process, 
+	//  and display information about each module 
+	do 
+	{
+		m_model->insertRow(index);
+		wcstombs(buffer, me32.szModule, 256);
+		m_model->setData(m_model->index(index, 0), buffer);
+		wcstombs(buffer, me32.szExePath, 256);
+		m_model->setData(m_model->index(index, 1), buffer);
+		memset(buffer, 0, 256);
+		_snprintf(buffer, 256, "0x%08X(%d)", me32.th32ProcessID, me32.th32ProcessID);
+		m_model->setData(m_model->index(index, 2), buffer);
+		memset(buffer, 0, 256);
+		_snprintf(buffer, 256, "0x%08X", (DWORD)me32.modBaseAddr);
+		m_model->setData(m_model->index(index, 3), buffer);
+		memset(buffer, 0, 256);
+		_snprintf(buffer, 256, "0x%08X", me32.modBaseSize);
+		m_model->setData(m_model->index(index, 4), buffer);
+		index++;
+	} while( Module32Next( hModuleSnap, &me32 ) ); 
+	//  Do not forget to clean up the snapshot object. 
+	CloseHandle( hModuleSnap ); 
 }
 
 LoadedLibTab::~LoadedLibTab()

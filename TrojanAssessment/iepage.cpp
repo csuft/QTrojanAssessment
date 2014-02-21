@@ -8,7 +8,6 @@ IEPage::IEPage(QWidget *parent)
 	m_cookieTab = new BrowserCookiesTab;
 	m_settingsTab = new IESettingsTab;
 
-	
 	addTab(m_cacheTab, QStringLiteral("IE Caches"));
 	addTab(m_pluginsTab, QStringLiteral("Browser Plugins"));
 	addTab(m_cookieTab, QStringLiteral("Host Cookies"));
@@ -97,6 +96,7 @@ BrowserCacheTab::BrowserCacheTab(QWidget* parent /* = 0 */)
 
 	m_mainLayout->addLayout(m_topLayout);
 	m_mainLayout->addWidget(m_viewList, 1);
+	m_mainLayout->setContentsMargins(0,0,0,0);
 	setLayout(m_mainLayout);
 
 	connect(m_filterExp, SIGNAL(textChanged(const QString&)), this, SLOT(onFilterExpChanged(const QString&)));
@@ -183,6 +183,7 @@ PluginsTab::PluginsTab(QWidget* parent /* = 0 */)
 	m_layout = new QVBoxLayout(this);
 	m_layout->addWidget(m_filterExp);
 	m_layout->addWidget(m_viewList, 1);
+	m_layout->setContentsMargins(0,0,0,0);
 
 	setLayout(m_layout);
 }
@@ -229,7 +230,7 @@ BrowserCookiesTab::BrowserCookiesTab(QWidget* parent /* = 0 */)
 	m_mainLayout->addLayout(m_topLayout);
 	m_mainLayout->addWidget(m_cookiesList);
 	m_mainLayout->addWidget(m_detailsList);
-
+	m_mainLayout->setContentsMargins(0,0,0,0);
 	setLayout(m_mainLayout);	
 	connect(m_cookiesList, SIGNAL(clicked(const QModelIndex&)), this, SLOT(onTableViewClicked(const QModelIndex&)));
 	connect(m_cookiesList, SIGNAL(entered(const QModelIndex&)), this, SLOT(showToolTips(const QModelIndex&)));
@@ -426,7 +427,7 @@ IESettingsTab::IESettingsTab(QWidget* parent /* = 0 */)
 	m_layout = new QVBoxLayout(this);
 	m_layout->addWidget(m_IEsettings, 1);
 	m_layout->addWidget(m_dlgBtnBox);
-
+	m_layout->setContentsMargins(0,0,0,0);
 	setLayout(m_layout);
 }
 

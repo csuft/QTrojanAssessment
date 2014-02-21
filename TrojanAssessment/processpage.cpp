@@ -75,7 +75,7 @@ WinServicesTab::~WinServicesTab()
 }
 
 //////////////////////////////////////////////////////////////////////////
-//
+// To show the snapshot of running process
 ProcessListTab::ProcessListTab(QWidget *parent)
 	: QWidget(parent)
 {
@@ -115,7 +115,7 @@ ProcessListTab::~ProcessListTab()
 
 
 //////////////////////////////////////////////////////////////////////////
-//
+// The tab contains a list of software installed
 SoftwareInstalledTab::SoftwareInstalledTab(QWidget *parent)
 	: QWidget(parent)
 {

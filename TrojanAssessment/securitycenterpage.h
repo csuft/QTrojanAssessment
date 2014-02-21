@@ -14,9 +14,12 @@
 #include <QAbstractButton>
 #include <QMessageBox>
 #include <QComboBox>
-#include <QSortFilterProxyModel>
+#include <QTableView>
+#include <QHeaderView>
+#include <QStandardItemModel>
 
 #include "BasicInformation.h"
+#include <tlhelp32.h> 
 
 class AssessmentTab;
 class SysInfoTab;
@@ -106,11 +109,11 @@ public:
 private:
 	LoadedLibTab(const LoadedLibTab& obj);
 	LoadedLibTab& operator=(const LoadedLibTab& obj);
+
+	void doLoadlibs();
 private:
-	QListView* m_dllList;
-	QDialogButtonBox* m_export;
-	QSortFilterProxyModel* m_filterModel;
-	QLineEdit* m_filterExp;
+	QTableView* m_libtable;
+	QStandardItemModel* m_model;
 	QVBoxLayout* m_layout;
 };
 
