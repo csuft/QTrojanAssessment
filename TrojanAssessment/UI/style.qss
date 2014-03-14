@@ -1,0 +1,47 @@
+QTableView {
+	selection-background-color: rgb(220,230,220);
+}
+
+QMenu{
+    background:white;
+	border:1px solid lightgray;
+}
+
+QMenu::item{
+	padding:0px 20px 0px 20px;
+	height:25px;
+}
+
+QMenu::item:selected:enabled{
+    background: #86BA10;
+	color:white;
+}
+
+QMenu::separator{
+    height:1px;
+    background: lightgray;
+	margin:2px 0px 2px 0px;
+}
+
+QMenu::item:selected:!enabled{
+    background:transparent;
+}
+
+QLineEdit {
+    border: 1px solid green;
+    border-radius: 2px;
+    padding: 0 5px;
+    background: white;
+    selection-background-color: blue;
+}
+
+QPushButton#CustomBtn{
+	border-radius: 2px;
+	border: 1px solid rgb(89, 153, 48);
+	background:transparent;
+	color: green;
+}
+
+QPushButton#CustomBtn:hover {
+	background: #86BA10;
+}
