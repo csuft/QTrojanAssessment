@@ -86,6 +86,7 @@
     <ClCompile Include="base\CustomControl\customitemmodel.cpp" />
     <ClCompile Include="base\CustomControl\custompushbutton.cpp" />
     <ClCompile Include="base\CustomControl\customtoolbutton.cpp" />
+    <ClCompile Include="base\BusinessLayer\DynamicMemory.cpp" />
     <ClCompile Include="forms\AboutDialog\about.cpp" />
     <ClCompile Include="base\BusinessLayer\BasicInformation.cpp" />
     <ClCompile Include="forms\CacheTab\cacheentrydetail.cpp" />
@@ -289,6 +290,7 @@
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DQT_DLL -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -D_UNICODE "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtGui" "-I.\base\CustomControl" "-I.\forms\TitleWidget"</Command>
     </CustomBuild>
+    <ClInclude Include="base\BusinessLayer\DynamicMemory.h" />
     <ClInclude Include="GeneratedFiles\ui_cacheentrydetail.h" />
     <CustomBuild Include="forms\AboutDialog\about.h">
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>

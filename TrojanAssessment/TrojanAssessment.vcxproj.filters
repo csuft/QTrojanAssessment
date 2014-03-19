@@ -191,6 +191,9 @@
     <ClCompile Include="base\BusinessLayer\WindowsServices.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="base\BusinessLayer\DynamicMemory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="UI\trojanassessment.qrc">
@@ -256,6 +259,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="base\BusinessLayer\WindowsServices.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="base\BusinessLayer\DynamicMemory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

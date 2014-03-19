@@ -65,19 +65,19 @@ void CustomToolButton::enterEvent(QEvent *event)
 
 void CustomToolButton::leaveEvent(QEvent *event)
 {
-	m_mousePressed = false;
+	m_mouseHover = false;
 	update();
 }
 
 void CustomToolButton::paintEvent(QPaintEvent *event)
 {
-	if (m_mousePressed)
+	if (m_mouseHover)
 	{
 		doPaintStuff(0, 100, 150);
 	}
 	else
 	{
-		if (m_mouseHover)
+		if (m_mousePressed)
 		{
 			doPaintStuff(0, 100, 150);
 		}

@@ -40,12 +40,6 @@ AssessmentTab::AssessmentTab(QWidget *parent)
 
 }
 
-AssessmentTab::~AssessmentTab()
-{
-
-}
-
-
 //////////////////////////////////////////////////////////////////////////
 //
 SysInfoTab::SysInfoTab(QWidget *parent)
@@ -128,21 +122,19 @@ void SysInfoTab::onCopytoClipboard(QAbstractButton* btn)
 {
 	QMessageBox::information(this, "Tips", "Not Done!", QMessageBox::Ok);
 }
-
-SysInfoTab::~SysInfoTab()
-{
-
-}
-
 //////////////////////////////////////////////////////////////////////////
 // Show the libaries loaded by the program
 LoadedLibTab::LoadedLibTab(QWidget *parent)
 	: QWidget(parent)
 {
+	QVector<int> col_list;
+	col_list.append(2);
+	col_list.append(3);
+	col_list.append(4);
 	m_layout = new QVBoxLayout(this);
 	m_layout->setContentsMargins(0,0,0,0);
 
-	m_model = new CustomItemModel(QVector<int>({2, 3, 4}), QVector<int>(), 0, 5, this);
+	m_model = new CustomItemModel(col_list, QVector<int>(), 0, 5, this);
 	m_model->setHeaderData(0, Qt::Horizontal, QStringLiteral("Module Name"));
 	m_model->setHeaderData(1, Qt::Horizontal, QStringLiteral("Module Path"));
 	m_model->setHeaderData(2, Qt::Horizontal, QStringLiteral("PID"));
@@ -158,6 +150,7 @@ LoadedLibTab::LoadedLibTab(QWidget *parent)
 	m_libtable->setSelectionBehavior(QAbstractItemView::SelectRows);
 	m_libtable->setSelectionMode(QAbstractItemView::SingleSelection);
 	m_libtable->setEditTriggers(QAbstractItemView::NoEditTriggers);
+	m_libtable->setWordWrap(false);
 	m_libtable->setShowGrid(false);
 	m_libtable->horizontalHeader()->setHighlightSections(false);
 	m_libtable->horizontalHeader()->setDefaultSectionSize(75);
@@ -216,9 +209,4 @@ void LoadedLibTab::doLoadlibs()
 	} while( Module32Next( hModuleSnap, &me32 ) ); 
 	//  Do not forget to clean up the snapshot object. 
 	CloseHandle( hModuleSnap ); 
-}
-
-LoadedLibTab::~LoadedLibTab()
-{
-
 }

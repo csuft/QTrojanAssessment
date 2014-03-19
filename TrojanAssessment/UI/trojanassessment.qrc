@@ -1,6 +1,6 @@
 <RCC>
     <qresource prefix="/Qss">
-        <file alias="sytlesheets">style.qss</file>
+        <file alias="stylesheet">style.qss</file>
     </qresource>
     <qresource prefix="/ToolButtons">
         <file alias="fileTab">images/ToolButtons/gongNeng.png</file>
@@ -23,9 +23,9 @@
         <file alias="min_pressed">images/SysButtons/min_pressed.png</file>
     </qresource>
     <qresource prefix="/background">
-        <file alias="title_background">images/Misc/Title_background.jpg</file>
-        <file alias="little_background">images/Misc/little_background.jpg</file>
         <file alias="logo">images/Misc/logo.png</file>
+        <file alias="little_background">images/Misc/5.png</file>
+        <file alias="title_background">images/Misc/5_big.png</file>
     </qresource>
     <qresource prefix="/menu">
         <file alias="about">images/Misc/about.png</file>

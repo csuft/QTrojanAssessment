@@ -39,7 +39,7 @@ class IEPage : public QTabWidget
 
 public:
 	IEPage(QWidget *parent = 0);
-	~IEPage();
+	~IEPage(){}
 private slots:
 	void onChangeTab(int index);
 
@@ -61,7 +61,7 @@ class BrowserCacheTab : public QWidget
 
 public:
 	BrowserCacheTab(QWidget* parent = 0);
-	~BrowserCacheTab();
+	~BrowserCacheTab(){}
 private:
 	BrowserCacheTab(const BrowserCacheTab& obj);
 	BrowserCacheTab& operator=(const BrowserCacheTab& obj);
@@ -94,7 +94,7 @@ class PluginsTab : public QWidget
 
 public:
 	PluginsTab(QWidget* parent = 0);
-	~PluginsTab();
+	~PluginsTab(){}
 private:
 	PluginsTab(const PluginsTab& obj);
 	PluginsTab& operator=(const PluginsTab& obj);
@@ -118,7 +118,7 @@ class BrowserCookiesTab : public QWidget
 
 public:
 	BrowserCookiesTab(QWidget* parent = 0);
-	~BrowserCookiesTab();
+	~BrowserCookiesTab(){}
 private:
 	BrowserCookiesTab(const BrowserCookiesTab& obj);
 	BrowserCookiesTab& operator=(const BrowserCookiesTab& obj);
@@ -154,7 +154,7 @@ class IESettingsTab : public QWidget
 
 public:
 	IESettingsTab(QWidget* parent = 0);
-	~IESettingsTab();
+	~IESettingsTab(){}
 private:
 	IESettingsTab(const IESettingsTab& obj);
 	IESettingsTab& operator=(const IESettingsTab& obj);

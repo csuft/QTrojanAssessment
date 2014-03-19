@@ -13,7 +13,7 @@ public:
 	explicit CustomItemModel(QObject *parent = NULL){}
 	CustomItemModel(int r, int c, QObject* parent = NULL) ;
 	CustomItemModel(QVector<int>& colsAlignCenter, QVector<int>& colsAlignRight, int row, int col, QObject* parent);
-	QVariant data(const QModelIndex& index, int role = Qt::DisplayRole);
+	QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const;
 	~CustomItemModel(){}
 
 private:

@@ -14,10 +14,6 @@ IEPage::IEPage(QWidget *parent)
 	addTab(m_settingsTab, QStringLiteral("Browser Settings"));
 }
 
-IEPage::~IEPage()
-{
-}
-
 void IEPage::onChangeTab(int index)
 {
 	if (index == 1)
@@ -45,6 +41,7 @@ BrowserCacheTab::BrowserCacheTab(QWidget* parent /* = 0 */)
 {
 	m_filterExp = new QLineEdit(this);
 	m_filterExp->setPlaceholderText(QStringLiteral("Filter expression"));
+	m_filterExp->setFixedHeight(25);
 	m_filterCol = new QComboBox(this);
 	//add items
 	m_filterCol->addItem(QStringLiteral("By File Name"), 0);
@@ -53,8 +50,11 @@ BrowserCacheTab::BrowserCacheTab(QWidget* parent /* = 0 */)
 	m_filterCol->addItem(QStringLiteral("By Modified Time"), 8);
 
 	m_refresh = new QPushButton(QStringLiteral("Refresh"), this);
+	m_refresh->setFixedSize(75, 25);
 	m_clear = new QPushButton(QStringLiteral("Clean Cache"), this);
+	m_clear->setFixedSize(75, 25);
 	m_view = new QPushButton(QStringLiteral("Properties"), this);
+	m_view->setFixedSize(75, 25);
 	// initialize model proxy and connect with the source model.
 	m_proxyModel = new QSortFilterProxyModel(this);
 	m_srcModel = new CustomItemModel(0, 10, this);
@@ -74,6 +74,7 @@ BrowserCacheTab::BrowserCacheTab(QWidget* parent /* = 0 */)
 	m_viewList->horizontalHeader()->setHighlightSections(false);
 	m_viewList->setItemDelegate(new NoFocusDelegate());
 	m_viewList->setModel(m_proxyModel);
+	m_viewList->setFrameShape(QFrame::NoFrame);
 
 	// initialize and create the header of model.
 	m_srcModel->setHeaderData(0, Qt::Horizontal, QStringLiteral("File Name"));
@@ -96,7 +97,7 @@ BrowserCacheTab::BrowserCacheTab(QWidget* parent /* = 0 */)
 	m_topLayout->addWidget(m_clear, 0, Qt::AlignVCenter);
 	m_topLayout->addWidget(m_view, 0, Qt::AlignVCenter);
 	m_topLayout->setSpacing(5);
-	m_topLayout->setContentsMargins(5, 0, 5, 0);
+	m_topLayout->setContentsMargins(0, 0, 0, 1);
 
 	m_mainLayout->addLayout(m_topLayout);
 	m_mainLayout->addWidget(m_viewList, 1);
@@ -170,11 +171,6 @@ void BrowserCacheTab::onViewPropertyClicked()
 	}
 }
 
-BrowserCacheTab::~BrowserCacheTab()
-{
-
-
-}
 
 //////////////////////////////////////////////////////////////////////////
 // The tab contains the list of plugins installed on IE
@@ -188,15 +184,10 @@ PluginsTab::PluginsTab(QWidget* parent /* = 0 */)
 	m_layout = new QVBoxLayout(this);
 	m_layout->addWidget(m_filterExp);
 	m_layout->addWidget(m_viewList, 1);
+	m_layout->setSpacing(0);
 	m_layout->setContentsMargins(0,0,0,0);
 
 	setLayout(m_layout);
-}
-
-PluginsTab::~PluginsTab()
-{
-
-
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -206,9 +197,12 @@ BrowserCookiesTab::BrowserCookiesTab(QWidget* parent /* = 0 */)
 {
 	m_filterExp = new QLineEdit(this);
 	m_filterExp->setPlaceholderText("Filter");
+	m_filterExp->setFixedHeight(25);
 	m_openWithNotepad = new QPushButton(QStringLiteral("Open..."), this);
+	m_openWithNotepad->setFixedSize(75, 25);
 	m_openWithNotepad->setToolTip(QStringLiteral("Open with notepad"));
 	m_openWithWordpad = new QPushButton(QStringLiteral("Open..."), this);
+	m_openWithWordpad->setFixedSize(75, 25);
 	m_openWithWordpad->setToolTip(QStringLiteral("Open with wordpad"));
 
 	m_detailsList = new QTableWidget(this);
@@ -229,6 +223,8 @@ BrowserCookiesTab::BrowserCookiesTab(QWidget* parent /* = 0 */)
 	m_cookiesList->setShowGrid(false);
 	m_cookiesList->horizontalHeader()->setHighlightSections(false);
 	m_cookiesList->setItemDelegate(new NoFocusDelegate());
+	m_cookiesList->verticalHeader()->hide();
+	m_cookiesList->setFrameShape(QFrame::NoFrame);
 	m_cookiesList->setModel(m_proxyModel);
 	
 	m_mainLayout = new QVBoxLayout(this);   // the main layout widget should be initialized first.
@@ -237,7 +233,7 @@ BrowserCookiesTab::BrowserCookiesTab(QWidget* parent /* = 0 */)
 	m_topLayout->addWidget(m_openWithNotepad, 0, Qt::AlignVCenter);
 	m_topLayout->addWidget(m_openWithWordpad, 0, Qt::AlignVCenter);
 	m_topLayout->setSpacing(5);
-	m_topLayout->setContentsMargins(5, 0, 5, 0);
+	m_topLayout->setContentsMargins(0, 0, 0, 0);
 
 	m_mainLayout->addLayout(m_topLayout);
 	m_mainLayout->addWidget(m_cookiesList);
@@ -278,6 +274,7 @@ void BrowserCookiesTab::createHeader()
 	m_detailsList->verticalHeader()->hide();
 	m_detailsList->horizontalHeader()->setStretchLastSection(true);
 	m_detailsList->setShowGrid(false);
+	m_detailsList->setFrameShape(QFrame::NoFrame);
 }
 
 void BrowserCookiesTab::createCookieModel()
@@ -423,12 +420,6 @@ void BrowserCookiesTab::showToolTips(const QModelIndex& index)
 	}
 }
 
-BrowserCookiesTab::~BrowserCookiesTab()
-{
-
-
-}
-
 //////////////////////////////////////////////////////////////////////////
 // Shows IE options for users.
 IESettingsTab::IESettingsTab(QWidget* parent /* = 0 */)
@@ -437,17 +428,12 @@ IESettingsTab::IESettingsTab(QWidget* parent /* = 0 */)
 	m_IEsettings = new QGroupBox(QStringLiteral("IE Settings"), this);
 	m_dlgBtnBox = new QDialogButtonBox(this);
 	m_apply = new QPushButton(QStringLiteral("Apply"), this);
+	m_apply->setFixedSize(75, 25);
 	m_dlgBtnBox->addButton(m_apply, QDialogButtonBox::AcceptRole);
 
 	m_layout = new QVBoxLayout(this);
-	m_layout->addWidget(m_IEsettings, 1);
-	m_layout->addWidget(m_dlgBtnBox);
+	m_layout->addWidget(m_IEsettings);
+	m_layout->addWidget(m_dlgBtnBox, 0, Qt::AlignVCenter);
 	m_layout->setContentsMargins(0,0,0,0);
 	setLayout(m_layout);
-}
-
-IESettingsTab::~IESettingsTab()
-{
-
-
 }

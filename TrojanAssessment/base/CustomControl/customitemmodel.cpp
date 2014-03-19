@@ -1,12 +1,6 @@
 #include "customitemmodel.h"
 
-CustomItemModel::CustomItemModel(QObject *parent)
-	: QStandardItemModel(parent)
-{
-
-}
-
-CustomItemModel::CustomItemModel(int r, int c, QObject* parent = NULL)
+CustomItemModel::CustomItemModel(int r, int c, QObject* parent)
 	: QStandardItemModel(r, c, parent), m_columnsAlignCenter(), m_columnsAlignRight()
 {
 	// NOTHING to do
@@ -22,7 +16,7 @@ CustomItemModel::CustomItemModel(QVector<int>& colsAlignCenter, QVector<int>& co
  * Since the text alignment defaults to Qt::AlignLeft, we only need to reimplement the other
  * two alignments.
  */
-QVariant CustomItemModel::data(const QModelIndex& index, int role = Qt::DisplayRole)
+QVariant CustomItemModel::data(const QModelIndex& index, int role) const
 {
 	if (role == Qt::TextAlignmentRole)
 	{

@@ -9,6 +9,7 @@
 #include <QLabel>
 #include <QLineEdit>
 #include <QVBoxLayout>
+#include <QGridLayout>
 #include <QPushButton>
 #include <QFormLayout>
 #include <QAbstractButton>
@@ -55,12 +56,12 @@ class AssessmentTab : public QWidget
 
 public:
 	AssessmentTab(QWidget* parent = 0);
-	~AssessmentTab();
+	~AssessmentTab(){}
 private:
 	AssessmentTab(const AssessmentTab& obj);
 	AssessmentTab& operator=(const AssessmentTab& obj);
 private:
-
+	QGridLayout* m_mainLayout;
 };
 
 //////////////////////////////////////////////////////////////////////////
@@ -71,7 +72,7 @@ class SysInfoTab : public QWidget
 
 public:
 	SysInfoTab(QWidget* parent = 0);
-	~SysInfoTab();
+	~SysInfoTab(){}
 
 private slots:
 	void onCopytoClipboard(QAbstractButton* btn);
@@ -107,7 +108,7 @@ class LoadedLibTab : public QWidget
 
 public:
 	LoadedLibTab(QWidget* parent = 0);
-	~LoadedLibTab();
+	~LoadedLibTab(){}
 private:
 	LoadedLibTab(const LoadedLibTab& obj);
 	LoadedLibTab& operator=(const LoadedLibTab& obj);

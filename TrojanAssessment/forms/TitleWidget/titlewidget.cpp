@@ -8,6 +8,7 @@ TitleWidget::TitleWidget(QWidget *parent)
 	// initialize top part
 	m_topLayout = new QHBoxLayout(this);
 	m_windowTitle = new QLabel(QStringLiteral("Trojan Assessment Platform"), this);
+	m_windowTitle->setObjectName("WhiteLabel");
 	m_settings = new CustomPushButton(this);
 	m_minBtn = new CustomPushButton(this);
 	m_closeBtn = new CustomPushButton(this);
@@ -42,7 +43,7 @@ TitleWidget::TitleWidget(QWidget *parent)
 	}
 	connect(sigMapper, SIGNAL(mapped(const QString&)), this, SLOT(onToolBtnClicked(const QString&)));
 	m_bottomLayout->addStretch();
-	m_bottomLayout->setSpacing(10);
+	m_bottomLayout->setSpacing(5);
 	m_bottomLayout->setContentsMargins(15, 0, 15, 0);
 
 	//////////////////////////////////////////////////////////////////////////
@@ -53,7 +54,7 @@ TitleWidget::TitleWidget(QWidget *parent)
 	// apply the layout
 	setLayout(m_mainLayout);
 	// make the height of main window constant
-	setFixedHeight(110);
+	setFixedHeight(100);
 	// connect slots with signals
 	connect(m_settings, SIGNAL(clicked()), this, SIGNAL(SettingsBtnClicked()));
 	connect(m_minBtn, SIGNAL(clicked()), this, SIGNAL(ShowMinimizedBtnClicked()));

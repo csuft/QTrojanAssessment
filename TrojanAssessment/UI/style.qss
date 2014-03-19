@@ -35,13 +35,50 @@ QLineEdit {
     selection-background-color: blue;
 }
 
-QPushButton#CustomBtn{
+QPushButton {
 	border-radius: 2px;
 	border: 1px solid rgb(89, 153, 48);
 	background:transparent;
 	color: green;
 }
 
-QPushButton#CustomBtn:hover {
+QPushButton:hover {
 	background: #86BA10;
+}
+
+QTabWidget::pane{
+	border:none;
+}
+
+QTabBar::tab{
+	background:rgb(44, 122, 191);
+	color:white;
+	min-width:70px;
+	min-height:25px;
+}
+
+QTabBar::tab:selected{
+	border-color: white;
+	background:white;
+	color:green;
+}
+
+QLabel#WhiteLabel {
+	color: white;
+}
+
+QComboBox {
+	border: 1px solid rgb(180, 180, 180);
+}
+
+QHeaderView::section {
+	background-color: rgb(41, 119, 191);
+	color: white;
+	padding-left: 4px;
+	border: none;
+	min-height: 25px;
+}
+
+QToolButton {
+	background: transparent;
 }

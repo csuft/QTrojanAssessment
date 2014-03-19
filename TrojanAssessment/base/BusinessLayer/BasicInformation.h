@@ -282,11 +282,11 @@ typedef struct _moduleEntry
 class RetrieveHelper
 {
 public:
-	RetrieveHelper(void);
-	~RetrieveHelper(void);
+	RetrieveHelper(void){}
+	~RetrieveHelper(void){}
 
-	const vector<AppEntry>& getApplist() const { return m_appList; }
-	const vector<ProcEntry>& getProclist() const { return m_procList; }
+	const vector<AppEntry>& getApplist(){ setApplist(); return m_appList; }
+	const vector<ProcEntry>& getProclist(){ setProclist(); return m_procList; }
 private:
 	RetrieveHelper& operator=(const RetrieveHelper& obj);
 	RetrieveHelper(const RetrieveHelper& obj);

@@ -16,7 +16,7 @@ int main(int argc, char *argv[])
 	// To add a splash screen.
 
 	// add qt style sheet
-	QFile file(":/sytlesheets");
+	QFile file(":/Qss/stylesheet");
 	file.open(QFile::ReadOnly);
 	qApp->setStyleSheet(file.readAll());
 	file.close();

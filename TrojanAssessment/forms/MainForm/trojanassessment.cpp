@@ -9,17 +9,11 @@ TrojanAssessment::TrojanAssessment(QWidget *parent)
 	setWindowIcon(QIcon(QStringLiteral(":/background/logo")));
 	/* set the width and height of the window fixed. */
 	setFixedSize(900, 600);
-	setWindowTitle(QStringLiteral("Security Assessment Platform"));
-	/* disable the maximum button */
-	Qt::WindowFlags flag = windowFlags();
-	flag &= ~Qt::WindowMaximizeButtonHint;
-	setWindowFlags(flag);
-
 	// create tree widget and stacked widget
 	treeWidget = new QTreeWidget(this);
 	treeWidget->setFrameShape(QFrame::NoFrame);
 	stackedWidget = new QStackedWidget(this);
-	stackedWidget->resize(650, 500);
+	stackedWidget->resize(680, 500);
 	stackedWidget->setFrameShape(QFrame::NoFrame);
 	initStackedWidget();
 	initTreeWidget();
@@ -29,7 +23,7 @@ TrojanAssessment::TrojanAssessment(QWidget *parent)
 	splitter->setHandleWidth(1);
 	splitter->addWidget(treeWidget);
 	splitter->addWidget(stackedWidget);
-	splitter->handle(0)->setEnabled(false);
+	splitter->handle(1)->setDisabled(true);
 
 	// create title widget and status bar
 	titleWidget = new TitleWidget(this);
@@ -41,8 +35,8 @@ TrojanAssessment::TrojanAssessment(QWidget *parent)
 	m_bottomLayout->addStretch();
 	m_bottomLayout->addWidget(icon_label, 0, Qt::AlignCenter);
 	m_bottomLayout->addWidget(lastrun_label, 0, Qt::AlignCenter);
-	m_bottomLayout->setSpacing(2);
-	m_bottomLayout->setContentsMargins(0, 0, 10, 0);
+	m_bottomLayout->setSpacing(5);
+	m_bottomLayout->setContentsMargins(0, 3, 10, 3);
 
 	// remember the time when the program start
 	login_dt = QDateTime::currentDateTime();
@@ -54,11 +48,14 @@ TrojanAssessment::TrojanAssessment(QWidget *parent)
 	treeWidget->setAutoFillBackground(true);
 	stackedWidget->setPalette(plt);
 	stackedWidget->setAutoFillBackground(true);
-	
+
 	// settings for main layout
-	setLayout(m_mainLayout);
+	m_mainLayout->addWidget(titleWidget);
+	m_mainLayout->addWidget(splitter);
+	m_mainLayout->addLayout(m_bottomLayout);
 	m_mainLayout->setSpacing(0);
 	m_mainLayout->setContentsMargins(5, 5, 5, 5);
+	setLayout(m_mainLayout);
 	/* take responding actions when the user clicked any items in the tree widget */
 	connect(treeWidget, SIGNAL(currentItemChanged(QTreeWidgetItem*, QTreeWidgetItem*)), SLOT(changePage(QTreeWidgetItem*, QTreeWidgetItem*)));
 	connect(treeWidget, SIGNAL(toolButtonChangePage(QTreeWidgetItem*, QTreeWidgetItem*)), SLOT(changePage(QTreeWidgetItem*, QTreeWidgetItem*)));
@@ -96,7 +93,6 @@ void TrojanAssessment::initTreeWidget()
 	/* add the third top level node with children filled */
 	mem = new QTreeWidgetItem((QTreeWidget*)0, QStringList(QString("System Memory")));
 	childs.clear();
-	childs.append(new QTreeWidgetItem(mem, QStringList(QString("Application Usage"))));
 	childs.append(new QTreeWidgetItem(mem, QStringList(QString("System Usage"))));
 	childs.append(new QTreeWidgetItem(mem, QStringList(QString("Memory Monitor"))));
 	childs.append(new QTreeWidgetItem(mem, QStringList(QString("Memory Protection"))));
@@ -384,19 +380,17 @@ void TrojanAssessment::paintEvent(QPaintEvent* event)
 	// First, we pass the paint event to parent widget to draw window shadow.
 	// Then, we do our specific painting stuff.
 	ShadowWindow::paintEvent(event);
-
 	// draw the background using the specified image.
 	QPainter painter(this);
 	painter.setPen(Qt::NoPen);
-	painter.setBrush(Qt::NoBrush);
-	painter.drawPixmap(5, 5, 5, 5, QPixmap(":/background/title_background"));
+	painter.setBrush(Qt::white);
+	painter.drawPixmap(5, 5, width()-10, height()-10, QPixmap(":/background/title_background"));
 }
 
 void TrojanAssessment::storeSettings()
 {
 	QString dt = QDateTime::currentDateTime().toString(QStringLiteral("yyyy-M-d h:m"));
 	settings->beginGroup(QStringLiteral("UI"));
-	settings->setValue(QStringLiteral("State"), saveState());
 	settings->setValue(QStringLiteral("Geometry"), saveGeometry());
 	settings->setValue(QStringLiteral("Login"), login_dt.toString(QStringLiteral("yyyy-M-d h:m")));
 	settings->endGroup();
@@ -411,9 +405,8 @@ void TrojanAssessment::restoreSettings()
 	/* set status bar*/
 	settings = new QSettings(QSettings::IniFormat, QSettings::UserScope, QStringLiteral("HUST"), QStringLiteral("TrojanDetector"));
 	settings->beginGroup(QStringLiteral("UI"));
-	restoreState(settings->value(QStringLiteral("State")).toByteArray());
 	restoreGeometry(settings->value(QStringLiteral("Geometry")).toByteArray());
-	QString dt = QString("[Last run]: <b><font color=blue>%1</font></b>").arg(settings->value("Login", "/").toString())
+	QString dt = QString("[Last run]: <b><font color=blue>%1</font></b>").arg(settings->value("Login", "/").toString());
 	lastrun_label->setText(dt);
 	settings->endGroup();
 

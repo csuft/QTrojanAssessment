@@ -42,11 +42,6 @@ RuntimeMonitorTab::RuntimeMonitorTab(QWidget *parent)
 
 }
 
-RuntimeMonitorTab::~RuntimeMonitorTab()
-{
-
-}
-
 //////////////////////////////////////////////////////////////////////////
 //
 WinServicesTab::WinServicesTab(QWidget *parent)
@@ -68,7 +63,9 @@ ProcessListTab::ProcessListTab(QWidget *parent)
 {
 	m_filterExp = new QLineEdit(this);
 	m_filterExp->setPlaceholderText(QStringLiteral("Filter Expression"));
+	m_filterExp->setFixedHeight(25);
 	m_refresh = new QPushButton(QStringLiteral("Refresh"), this);
+	m_refresh->setFixedSize(75, 25);
 
 	m_srcModel = new CustomItemModel(0, 6, this);  // initially 0 row and 6 cols.
 	m_proxyModel = new QSortFilterProxyModel(this);
@@ -86,10 +83,10 @@ ProcessListTab::ProcessListTab(QWidget *parent)
 	m_topLayout->addWidget(m_filterExp, 1, Qt::AlignVCenter);
 	m_topLayout->addWidget(m_refresh, 0, Qt::AlignVCenter);
 	m_topLayout->setSpacing(5);
-	m_topLayout->setContentsMargins(5, 0, 5, 0);
+	m_topLayout->setContentsMargins(0, 0, 0, 1);
 	
 	initProcList();
-	m_helper = new RetrieveHelper();
+	m_helper = new RetrieveHelper;
 	loadProcessList();
 	m_mainLayout->addLayout(m_topLayout);
 	m_mainLayout->addWidget(m_view);
@@ -113,6 +110,7 @@ void ProcessListTab::initProcList()
 	m_view->setItemDelegate(new NoFocusDelegate());
 	m_view->horizontalHeader()->setHighlightSections(false);
 	m_view->setFrameShape(QFrame::NoFrame);
+	m_view->horizontalHeader()->setStretchLastSection(true);
 	m_view->setModel(m_proxyModel);
 	createProcHeader();
 }
@@ -154,14 +152,14 @@ void ProcessListTab::loadProcessList()
 SoftwareInstalledTab::SoftwareInstalledTab(QWidget *parent)
 	: QWidget(parent)
 {
+	m_helper = new RetrieveHelper;
 	initAppList();
-	loadApplist();
-
 	m_mainLayout = new QVBoxLayout(this);
 	m_mainLayout->addWidget(m_view);
 	m_mainLayout->setContentsMargins(0, 0, 0, 0);
-
 	setLayout(m_mainLayout);
+
+	loadApplist();
 }
 
 void SoftwareInstalledTab::initAppList()
