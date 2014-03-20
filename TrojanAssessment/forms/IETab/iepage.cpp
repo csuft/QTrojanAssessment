@@ -43,6 +43,7 @@ BrowserCacheTab::BrowserCacheTab(QWidget* parent /* = 0 */)
 	m_filterExp->setPlaceholderText(QStringLiteral("Filter expression"));
 	m_filterExp->setFixedHeight(25);
 	m_filterCol = new QComboBox(this);
+	m_filterCol->setFixedHeight(25);
 	//add items
 	m_filterCol->addItem(QStringLiteral("By File Name"), 0);
 	m_filterCol->addItem(QStringLiteral("By URL Name"), 1);
@@ -179,12 +180,13 @@ PluginsTab::PluginsTab(QWidget* parent /* = 0 */)
 {
 	m_filterExp = new QLineEdit(this);
 	m_filterExp->setPlaceholderText("Filter expression");
+	m_filterExp->setFixedHeight(25);
 	m_viewList = new QTableView(this);
 	m_model = new QSortFilterProxyModel(this);
 	m_layout = new QVBoxLayout(this);
 	m_layout->addWidget(m_filterExp);
 	m_layout->addWidget(m_viewList, 1);
-	m_layout->setSpacing(0);
+	m_layout->setSpacing(3);
 	m_layout->setContentsMargins(0,0,0,0);
 
 	setLayout(m_layout);
@@ -233,7 +235,7 @@ BrowserCookiesTab::BrowserCookiesTab(QWidget* parent /* = 0 */)
 	m_topLayout->addWidget(m_openWithNotepad, 0, Qt::AlignVCenter);
 	m_topLayout->addWidget(m_openWithWordpad, 0, Qt::AlignVCenter);
 	m_topLayout->setSpacing(5);
-	m_topLayout->setContentsMargins(0, 0, 0, 0);
+	m_topLayout->setContentsMargins(1, 0, 1, 3);
 
 	m_mainLayout->addLayout(m_topLayout);
 	m_mainLayout->addWidget(m_cookiesList);
@@ -432,8 +434,9 @@ IESettingsTab::IESettingsTab(QWidget* parent /* = 0 */)
 	m_dlgBtnBox->addButton(m_apply, QDialogButtonBox::AcceptRole);
 
 	m_layout = new QVBoxLayout(this);
-	m_layout->addWidget(m_IEsettings);
+	m_layout->addWidget(m_IEsettings, 1);
 	m_layout->addWidget(m_dlgBtnBox, 0, Qt::AlignVCenter);
-	m_layout->setContentsMargins(0,0,0,0);
+	m_layout->setSpacing(3);
+	m_layout->setContentsMargins(0,0,0,1);
 	setLayout(m_layout);
 }

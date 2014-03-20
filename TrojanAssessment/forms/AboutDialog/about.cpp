@@ -11,7 +11,7 @@ About::About(QWidget *parent)
 	m_website = new QLabel(QStringLiteral("<a href='http://www.cnblogs.com/csuftzzk/'>www.cnblogs.com/csuftzzk/</a>"), this);
 
 	m_btnbox = new QDialogButtonBox(QDialogButtonBox::Ok, this);
-
+	m_btnbox->setFixedSize(75, 25);
 	m_layout->addRow(QStringLiteral("<b>Developers</b>:"), m_devs);
 	m_layout->addRow(QStringLiteral("<b>Copyright</b>:"), m_cpright);
 	m_layout->addRow(QStringLiteral("<b>Website</b>:"), m_website);

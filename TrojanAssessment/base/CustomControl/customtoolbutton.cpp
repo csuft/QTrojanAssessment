@@ -9,28 +9,22 @@ CustomToolButton::CustomToolButton(const QString& path, QWidget *parent)
 	// Get the widget's palette, we do have to change the color of the tool button.
 	QPalette text_palette = palette();
 	text_palette.setColor(QPalette::ButtonText, QColor(230, 230, 230));
-
+	setPalette(text_palette);
 	// set the style of QToolButton.
 	setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
 
 	// set the font style of tool buttons
 	// since the return value has the type of const, we have to remove the
 	// constness if we want to modify.
-	QFont& text_font = const_cast<QFont&>(font());
+	QFont text_font = const_cast<QFont&>(font());
 	text_font.setBold(true);
+	setFont(text_font);
 	// set the fixed size for tool buttons.
 	QPixmap background(m_filePath);
 	setIcon(background);
 	setIconSize(background.size());
 	setFixedSize(background.width()+25, background.height()+25);
-	
 	setAutoRaise(true);
-	setObjectName(QStringLiteral("ToolButton"));
-}
-
-CustomToolButton::~CustomToolButton()
-{
-
 }
 /*
  * Arguments topColor, centerColor, bottomColor are alpha values for QColor.
@@ -41,7 +35,7 @@ void CustomToolButton::doPaintStuff(int topColor, int centerColor, int bottomCol
 	QPen p(Qt::NoBrush, 1);
 	painter.setPen(p);
 	// create linear gradient brush to draw the widget
-	QLinearGradient linear(rect().topLeft(), rect().bottomRight());
+	QLinearGradient linear(rect().topLeft(), rect().bottomLeft());
 	linear.setColorAt(0, QColor(230, 230, 230, topColor));
 	linear.setColorAt(0.5, QColor(230, 230, 230, centerColor));
 	linear.setColorAt(1, QColor(230, 230, 230, bottomColor));
@@ -81,7 +75,7 @@ void CustomToolButton::paintEvent(QPaintEvent *event)
 		{
 			doPaintStuff(0, 100, 150);
 		}
-	}
+	}	
 	QToolButton::paintEvent(event);
 }
 

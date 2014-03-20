@@ -16,7 +16,7 @@ class TitleWidget : public QWidget
 
 public:
 	explicit TitleWidget(QWidget *parent = NULL);
-	~TitleWidget();
+	~TitleWidget(){}
 private:
 	TitleWidget& operator=(const TitleWidget& obj);
 	TitleWidget(const TitleWidget& obj);

@@ -178,6 +178,7 @@ void SoftwareInstalledTab::initAppList()
 	m_view->setVerticalScrollMode(QAbstractItemView::ScrollPerPixel);
 	m_view->horizontalHeader()->setHighlightSections(false);
 	m_view->verticalHeader()->setDefaultSectionSize(25);
+	m_view->setItemDelegate(new NoFocusDelegate());
 	m_view->setFrameShape(QFrame::NoFrame);
 	m_view->setModel(m_model);
 

@@ -12,10 +12,6 @@ SecurityCenterPage::SecurityCenterPage(QWidget *parent)
 	addTab(m_loadedLibsTab, QStringLiteral("Loaded Libraries"));
 }
 
-SecurityCenterPage::~SecurityCenterPage()
-{
-}
-
 void SecurityCenterPage::onChangeTab(int index)
 {
 	if (index == 1)
@@ -49,9 +45,13 @@ SysInfoTab::SysInfoTab(QWidget *parent)
 	vector<string>::const_iterator it;
 	m_softwareBox = new QGroupBox(QStringLiteral("Software"), this);
 	m_hardwareBox = new QGroupBox(QStringLiteral("Hardware"), this);
+	// software group box
 	m_slayout = new QFormLayout(this);
+	m_slayout->setSpacing(10);
 	m_vlayout = new QVBoxLayout(this);
+	// hardware group box
 	m_hlayout = new QFormLayout(this);
+	m_hlayout->setSpacing(10);
 	// system boot time
 	m_boottime = new QLabel(QString::fromStdString(info.getSystemBootTime()), this);
 	m_slayout->addRow(QStringLiteral("Boot Time:"), m_boottime);
@@ -60,6 +60,7 @@ SysInfoTab::SysInfoTab(QWidget *parent)
 	m_slayout->addRow(QStringLiteral("Host Name:"), m_hostname);
 	// ip address
 	m_ip = new QComboBox(this);
+	m_ip->setFixedHeight(25);
 	vector<string> tmp = info.getIPAddress();
 	for (it = tmp.cbegin(); it != tmp.cend(); ++it)
 	{
@@ -68,6 +69,7 @@ SysInfoTab::SysInfoTab(QWidget *parent)
 	m_slayout->addRow(QStringLiteral("IP Address:"), m_ip);
 	// mac address
 	m_mac = new QComboBox(this);
+	m_mac->setFixedHeight(25);
 	tmp = info.getMACAddress();
 	for (it = tmp.cbegin(); it != tmp.cend(); ++it)
 	{
@@ -78,10 +80,12 @@ SysInfoTab::SysInfoTab(QWidget *parent)
 	m_osinfo = new QLineEdit(this);
 	m_osinfo->setReadOnly(true);
 	m_osinfo->setText(QString::fromStdString(info.getOSInformation()));
+	m_osinfo->setFixedHeight(25);
 	m_slayout->addRow(QStringLiteral("OS Details:"), m_osinfo);
 	m_softwareBox->setLayout(m_slayout);
 	// network card information
 	m_ncard = new QComboBox(this);
+	m_ncard->setFixedHeight(25);
 	tmp = info.getNetworkCard();
 	for (it = tmp.cbegin(); it != tmp.cend(); ++it)
 	{
@@ -92,36 +96,30 @@ SysInfoTab::SysInfoTab(QWidget *parent)
 	m_cpu = new QLineEdit(this);
 	m_cpu->setReadOnly(true);
 	m_cpu->setText(QString::fromStdString(info.getCPUInfos()));
+	m_cpu->setFixedHeight(25);
 	m_hlayout->addRow(QStringLiteral("CPU:"), m_cpu);
 	// memory information
 	m_memTotalAvail = new QLabel(this);
+	m_memTotalAvail->setFixedHeight(25);
 	m_memTotalAvail->setText(QString::fromStdString(info.getMemAvailTotal()));
 	m_hlayout->addRow(QStringLiteral("Memory infos: "), m_memTotalAvail);
 	// disk information
 	m_volumeinfo = new QComboBox(this);
+	m_volumeinfo->setFixedHeight(25);
 	tmp = info.getVolumeInformation();
 	for (it = tmp.cbegin(); it != tmp.cend(); ++it)
 	{
-		m_volumeinfo->addItem(QIcon(QStringLiteral(":images/25.ico")), QString::fromLocal8Bit((*it).c_str()));  // the same as above
+		m_volumeinfo->addItem(QIcon(QStringLiteral(":/menu/disk")), QString::fromLocal8Bit((*it).c_str()));  // the same as above
 	}
 	m_hlayout->addRow(QStringLiteral("Disk infos: "), m_volumeinfo);
 	m_hardwareBox->setLayout(m_hlayout);
 
 	m_vlayout->addWidget(m_softwareBox);
 	m_vlayout->addWidget(m_hardwareBox);
-	m_clipboard = new QDialogButtonBox(Qt::Horizontal, this);
-	m_clipboard->addButton("Copy to clipboard", QDialogButtonBox::ActionRole);
-	m_vlayout->addWidget(m_clipboard);
-	m_vlayout->setContentsMargins(0,0,0,0);
+	m_vlayout->setContentsMargins(0,2,2,2);
 	setLayout(m_vlayout);
-
-	connect(m_clipboard, SIGNAL(clicked(QAbstractButton*)), SLOT(onCopytoClipboard(QAbstractButton*)));
 }
 
-void SysInfoTab::onCopytoClipboard(QAbstractButton* btn)
-{
-	QMessageBox::information(this, "Tips", "Not Done!", QMessageBox::Ok);
-}
 //////////////////////////////////////////////////////////////////////////
 // Show the libaries loaded by the program
 LoadedLibTab::LoadedLibTab(QWidget *parent)

@@ -28,7 +28,7 @@ QMenu::item:selected:!enabled{
 }
 
 QLineEdit {
-    border: 1px solid green;
+    border: 1px solid rgb(41, 119, 191);
     border-radius: 2px;
     padding: 0 5px;
     background: white;
@@ -37,13 +37,14 @@ QLineEdit {
 
 QPushButton {
 	border-radius: 2px;
-	border: 1px solid rgb(89, 153, 48);
+	border: 1px solid rgb(41, 119, 191);
 	background:transparent;
-	color: green;
+	color: rgb(41, 119, 191);
 }
 
 QPushButton:hover {
-	background: #86BA10;
+	background: rgb(41, 119, 191);
+	color: white;
 }
 
 QTabWidget::pane{
@@ -60,7 +61,7 @@ QTabBar::tab{
 QTabBar::tab:selected{
 	border-color: white;
 	background:white;
-	color:green;
+	color: rgb(41, 119, 191);
 }
 
 QLabel#WhiteLabel {
@@ -68,7 +69,21 @@ QLabel#WhiteLabel {
 }
 
 QComboBox {
-	border: 1px solid rgb(180, 180, 180);
+	border: 1px solid rgb(33, 172, 227);
+}
+
+QComboBox QAbstractItemView::item {
+	height: 25px;
+	background: transparent;
+}
+
+QComboxBox::down-arrow {
+	image: url(:/menu/arrow);
+}
+
+QComboBox::drop-down {
+	width: 20px;
+	border: none;
 }
 
 QHeaderView::section {

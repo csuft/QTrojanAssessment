@@ -16,19 +16,18 @@ class CustomToolButton : public QToolButton
 
 public:
 	CustomToolButton(const QString& path, QWidget *parent = NULL);
-	~CustomToolButton();
+	~CustomToolButton(){}
 	void setButtonPressed(bool isPressed);
 
 private:
 	CustomToolButton(const CustomToolButton& obj);
 	CustomToolButton& operator=(const CustomToolButton& obj);
-	
-	void doPaintStuff(int topColor, int centerColor, int bottomColor);
 protected:
-	virtual void enterEvent(QEvent *event);
-	virtual void leaveEvent(QEvent *event);
-	virtual void paintEvent(QPaintEvent *event);
-	virtual void mousePressEvent(QMouseEvent *event);
+	void enterEvent(QEvent *event);
+	void leaveEvent(QEvent *event);
+	void paintEvent(QPaintEvent *event);
+	void mousePressEvent(QMouseEvent *event);
+	void doPaintStuff(int topColor, int centerColor, int bottomColor);
 private:
 	bool m_mousePressed;
 	bool m_mouseHover;

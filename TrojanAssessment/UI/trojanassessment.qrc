@@ -36,5 +36,7 @@
         <file alias="quit">images/Misc/quit.png</file>
         <file alias="setting">images/Misc/setting.png</file>
         <file alias="update">images/Misc/update.png</file>
+        <file alias="arrow">images/Misc/arrowDown.png</file>
+        <file alias="disk">images/Misc/disk.ico</file>
     </qresource>
 </RCC>

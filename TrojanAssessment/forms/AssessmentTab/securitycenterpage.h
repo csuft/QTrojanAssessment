@@ -34,7 +34,7 @@ class SecurityCenterPage : public QTabWidget
 
 public:
 	SecurityCenterPage(QWidget *parent = 0);
-	~SecurityCenterPage();
+	~SecurityCenterPage(){}
 private slots:
 	void onChangeTab(int index);
 
@@ -74,16 +74,12 @@ public:
 	SysInfoTab(QWidget* parent = 0);
 	~SysInfoTab(){}
 
-private slots:
-	void onCopytoClipboard(QAbstractButton* btn);
-
 private:
 	SysInfoTab(const SysInfoTab& obj);
 	SysInfoTab& operator=(const SysInfoTab& obj);
 private:
 	QGroupBox* m_softwareBox;
 	QGroupBox* m_hardwareBox;
-	QDialogButtonBox* m_clipboard;
 	QFormLayout* m_slayout;  // for software info
 	QFormLayout* m_hlayout;  // for hardware info
 	QVBoxLayout* m_vlayout;  // the main layout for the tab

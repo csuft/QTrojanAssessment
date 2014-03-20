@@ -59,10 +59,11 @@ TrojanAssessment::TrojanAssessment(QWidget *parent)
 	/* take responding actions when the user clicked any items in the tree widget */
 	connect(treeWidget, SIGNAL(currentItemChanged(QTreeWidgetItem*, QTreeWidgetItem*)), SLOT(changePage(QTreeWidgetItem*, QTreeWidgetItem*)));
 	connect(treeWidget, SIGNAL(toolButtonChangePage(QTreeWidgetItem*, QTreeWidgetItem*)), SLOT(changePage(QTreeWidgetItem*, QTreeWidgetItem*)));
+	connect(this, SIGNAL(toolButtonChangePage(QTreeWidgetItem*, QTreeWidgetItem*)), SLOT(changePage(QTreeWidgetItem*, QTreeWidgetItem*)));
 	connect(titleWidget, SIGNAL(ShowMinimizedBtnClicked()), SLOT(showMinimized()));
 	connect(titleWidget, SIGNAL(CloseWindowBtnClicked()), SLOT(close()));
-	connect(titleWidget, SIGNAL(SettingsBtnClicked()), SLOT(onShowSettingsMenu()));
-	connect(titleWidget, SIGNAL(ToolBtnClicked(int)), SLOT(onToolBtnClicked(int)));
+	connect(titleWidget, SIGNAL(SettingsBtnClicked()), this, SLOT(onShowSettingsMenu()));
+	connect(titleWidget, SIGNAL(ToolBtnClicked(int)), this, SLOT(onToolBtnClicked(int)));
 }
 
 void TrojanAssessment::initTreeWidget()
