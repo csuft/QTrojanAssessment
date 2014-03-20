@@ -42,7 +42,7 @@ TitleWidget::TitleWidget(QWidget *parent)
 	for (int i = 0; i < strList.size(); ++i)
 	{
 		// create a custom tool button
-		CustomToolButton* tmpBtn = new CustomToolButton(strList.at(i));
+		CustomToolButton* tmpBtn = new CustomToolButton(strList.at(i), this);
 		connect(tmpBtn, SIGNAL(clicked()), sigMapper, SLOT(map()));
 		// set tool buttons' text
 		tmpBtn->setText(textList.at(i));
@@ -65,7 +65,7 @@ TitleWidget::TitleWidget(QWidget *parent)
 	// apply the layout
 	setLayout(m_mainLayout);
 	// make the height of main window constant
-	setFixedHeight(100);
+	setFixedHeight(110);
 	onToolBtnClicked(QStringLiteral("0"));
 	// connect slots with signals
 	connect(m_settings, SIGNAL(clicked()), this, SIGNAL(SettingsBtnClicked()));
@@ -81,7 +81,7 @@ void TitleWidget::onToolBtnClicked(const QString& obj)
 {
 	int index = obj.toInt();
 
-	for (int i = 0; i < m_toolBtnList.size(); ++i)
+	for (int i = 0; i < m_toolBtnList.count(); ++i)
 	{
 		CustomToolButton* tmpBtn = m_toolBtnList.at(i);
 		// normalize all tool buttons except the one the user clicked.

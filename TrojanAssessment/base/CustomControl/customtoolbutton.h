@@ -23,8 +23,8 @@ private:
 	CustomToolButton(const CustomToolButton& obj);
 	CustomToolButton& operator=(const CustomToolButton& obj);
 protected:
-	void enterEvent(QEvent *event);
-	void leaveEvent(QEvent *event);
+	void enterEvent(QEvent *);
+	void leaveEvent(QEvent *);
 	void paintEvent(QPaintEvent *event);
 	void mousePressEvent(QMouseEvent *event);
 	void doPaintStuff(int topColor, int centerColor, int bottomColor);

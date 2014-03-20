@@ -54,7 +54,7 @@ QTabWidget::pane{
 QTabBar::tab{
 	background:rgb(44, 122, 191);
 	color:white;
-	min-width:70px;
+	min-width:100px;
 	min-height:25px;
 }
 
@@ -94,6 +94,3 @@ QHeaderView::section {
 	min-height: 25px;
 }
 
-QToolButton {
-	background: transparent;
-}

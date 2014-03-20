@@ -368,6 +368,7 @@ void TrojanAssessment::onToolBtnClicked(int index)
 	// Get the widget item in tree widget corresponding to the
 	// tool button the user clicked.
 	QTreeWidgetItem* cur = treeWidget->topLevelItem(index);
+	treeWidget->setCurrentItem(cur);
 	emit toolButtonChangePage(cur, prev);
 }
 

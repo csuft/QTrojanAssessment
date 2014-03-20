@@ -3,16 +3,12 @@
 CustomToolButton::CustomToolButton(const QString& path, QWidget *parent)
 	: QToolButton(parent), m_filePath(path)
 {
-	m_mousePressed = false;
-	m_mouseHover = false;
-
 	// Get the widget's palette, we do have to change the color of the tool button.
 	QPalette text_palette = palette();
 	text_palette.setColor(QPalette::ButtonText, QColor(230, 230, 230));
 	setPalette(text_palette);
 	// set the style of QToolButton.
 	setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
-
 	// set the font style of tool buttons
 	// since the return value has the type of const, we have to remove the
 	// constness if we want to modify.
@@ -24,7 +20,10 @@ CustomToolButton::CustomToolButton(const QString& path, QWidget *parent)
 	setIcon(background);
 	setIconSize(background.size());
 	setFixedSize(background.width()+25, background.height()+25);
+
 	setAutoRaise(true);
+	m_mousePressed = false;
+	m_mouseHover = false;
 }
 /*
  * Arguments topColor, centerColor, bottomColor are alpha values for QColor.
@@ -51,13 +50,13 @@ void CustomToolButton::setButtonPressed(bool isPressed)
 	update();
 }
 
-void CustomToolButton::enterEvent(QEvent *event)
+void CustomToolButton::enterEvent(QEvent *)
 {
 	m_mouseHover = true;
 	update();
 }
 
-void CustomToolButton::leaveEvent(QEvent *event)
+void CustomToolButton::leaveEvent(QEvent *)
 {
 	m_mouseHover = false;
 	update();
@@ -75,7 +74,7 @@ void CustomToolButton::paintEvent(QPaintEvent *event)
 		{
 			doPaintStuff(0, 100, 150);
 		}
-	}	
+	}
 	QToolButton::paintEvent(event);
 }
 
