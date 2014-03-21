@@ -1,7 +1,7 @@
 QTrojanAssessment
 =================
 
-A generic trojan assessment platform developed with Qt5.0 framework. The project explored the usage of almost all widgets implemented in Qt framework.
+A generic trojan assessment platform developed with Qt5 framework. The project explored the usage of almost all widgets implemented in Qt framework.
 * * *
 
 1. Get source code
@@ -16,23 +16,24 @@ When the command finished, you can find a newly created sub directory in the pat
 **System Prerequisite** 
  1. ```Microsoft Visual Studio 2010``` or later
  2. ```Windows XP SP3``` or higher
- 3. Qt library version ```Qt 5.0.0-rc2```, earlier version may also work.
+ 3. Qt library version ```Qt 5.2.1-OpenGL```, earlier version may also work.
  4.  Qt plugin for MSVC2010 ```qt-vs-addin-1.2.0``` 
 
 
 **Note**
 
->   The project is developed using Qt5.0 framework, that means you have to install the latest Qt framework library on your machine. Though the framework is designed cross-platform, it won't be suitable for this project.  
+>   The project is developed using Qt5 framework, that means you have to install the latest Qt framework library on your machine. Though the framework is designed cross-platform, it won't be suitable for this project.  
 >   As we called large mounts of Windows API to implement most system dependent functions, it is necessary for you to make sure that the ```Windows SDK``` is present on your system path.
 
 
 3. Introduction
 ---------------
-
+For more information, please visit http://www.cnblogs.com/csuftzzk
 
 4. Screen shot
 --------------
-
+![MethodOne.jpg](https://github.com/csuft/QTrojanAssessment/raw/master/TrojanAssessment/Screenshots/2014-03-21_073706.png "")  
+![MethodOne.jpg](https://github.com/csuft/QTrojanAssessment/raw/master/TrojanAssessment/Screenshots/2014-03-21_074023.png "")
 5. Contributors
 ---------------
 1. Min Li (Project Leader)
@@ -40,10 +41,10 @@ When the command finished, you can find a newly created sub directory in the pat
 3. Shuyan Qu (Senior Software Engineer)
 4. Zhongke Zhang (Plain Coder)
 
-6. To do
+6. To do list
 --------
 * Add splash screen when the program started.
-* Net flow control support.
+* Netflow control support.
 
 7. Changelog
 ------------
