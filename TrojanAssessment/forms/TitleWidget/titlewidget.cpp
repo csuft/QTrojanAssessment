@@ -53,9 +53,24 @@ TitleWidget::TitleWidget(QWidget *parent)
 		
 	}
 	connect(sigMapper, SIGNAL(mapped(const QString&)), this, SLOT(onToolBtnClicked(const QString&)));
+	m_hust_label = new QLabel(QStringLiteral("HUST"), this);
+	m_security_label = new QLabel(QStringLiteral("Security Lab"), this);
+	m_hust_label->setObjectName("WhiteLabel");
+	m_security_label->setObjectName("WhiteLabel");
+	m_labelLayout = new QVBoxLayout(this);
+	m_labelLayout->addWidget(m_hust_label, 0, Qt::AlignCenter);
+	m_labelLayout->addWidget(m_security_label, 0, Qt::AlignTop);
+	m_labelLayout->setSpacing(5);
+	font = const_cast<QFont&>(m_security_label->font());
+	font.setBold(true);
+	font.setPointSize(16);
+	m_hust_label->setFont(font);
+	m_security_label->setFont(font);
+
 	m_bottomLayout->addStretch();
 	m_bottomLayout->setSpacing(5);
-	m_bottomLayout->setContentsMargins(15, 0, 15, 0);
+	m_bottomLayout->addLayout(m_labelLayout);
+	m_bottomLayout->setContentsMargins(15, 0, 20, 0);
 
 	//////////////////////////////////////////////////////////////////////////
 	m_mainLayout->addLayout(m_topLayout);

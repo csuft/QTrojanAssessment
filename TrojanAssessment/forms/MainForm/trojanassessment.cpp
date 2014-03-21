@@ -139,14 +139,6 @@ void TrojanAssessment::initTreeWidget()
 	childs.append(new QTreeWidgetItem(stat, QStringList(QString("About"))));
 	stat->addChildren(childs);
 	treeWidget->addTopLevelItem(stat);
-
-	/* set icons for every child tree widgets item */
-	QTreeWidgetItemIterator iterator(treeWidget, QTreeWidgetItemIterator::NoChildren);
-	while (*iterator)
-	{
-		(*iterator)->setIcon(0, QIcon(":images/23.ico"));
-		++iterator;
-	}
 	/* expand all top level items after created the window */
 	treeWidget->expandAll();
 

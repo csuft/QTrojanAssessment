@@ -1,5 +1,11 @@
 QTableView {
 	selection-background-color: rgb(220,230,220);
+	alternate-background-color: rgb(231, 233, 250);
+}
+
+QGroupBox::title {
+	color: rgb(41, 119, 191);
+	padding: 3px;
 }
 
 QMenu{
@@ -69,15 +75,15 @@ QLabel#WhiteLabel {
 }
 
 QComboBox {
-	border: 1px solid rgb(33, 172, 227);
+	border: 1px solid rgb(41, 119, 191);
+	background: transparent;
 }
 
 QComboBox QAbstractItemView::item {
 	height: 25px;
-	background: transparent;
 }
 
-QComboxBox::down-arrow {
+QComboBox::down-arrow {
 	image: url(:/menu/arrow);
 }
 
@@ -94,3 +100,56 @@ QHeaderView::section {
 	min-height: 25px;
 }
 
+QScrollBar:horizontal {
+	background: transparent;
+	height: 7px;
+}
+
+QScrollBar::handle:horizontal {
+	background: rgb(43,122,193);
+	border-radius: 2px;
+}
+
+QScrollBar::add-line:horizontal {
+	border: nonde;
+	background: transparent;
+}
+
+QScrollBar::sub-line:horizontal {
+	border: none;
+	background: transparent;
+}
+
+QScrollBar:vertical {
+	background: transparent;
+	width: 7px;
+}
+
+QScrollBar::handle:vertical {
+	background: rgb(43, 122, 193);
+	border-radius: 2px;
+}
+
+QScrollBar::add-line:vertical {
+	border: none;
+	background: transparent;
+}
+
+QScrollBar::sub-line:vertical {
+	border: none;
+	background: transparent;
+}
+
+QScrollBar::add-page:horizontal, QScrollBar::add-page:vertical {
+	border: none;
+	background: transparent;
+}
+
+QScrollBar::sub-page:horizontal, QScrollBar::sub-page:vertical {
+	border: none;
+	background: transparent;
+}
+
+QTreeView::item {
+
+}

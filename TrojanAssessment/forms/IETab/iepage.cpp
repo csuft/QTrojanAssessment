@@ -58,7 +58,12 @@ BrowserCacheTab::BrowserCacheTab(QWidget* parent /* = 0 */)
 	m_view->setFixedSize(75, 25);
 	// initialize model proxy and connect with the source model.
 	m_proxyModel = new QSortFilterProxyModel(this);
-	m_srcModel = new CustomItemModel(0, 10, this);
+	// specify which columns align center;
+	QVector<int> center; 
+	center.push_back(3);
+	center.push_back(5);
+	center.push_back(6);
+	m_srcModel = new CustomItemModel(center, QVector<int>(), 0, 10, this);
 	m_proxyModel->setSourceModel(m_srcModel);
 
 	m_viewList = new QTableView(this);
@@ -75,7 +80,20 @@ BrowserCacheTab::BrowserCacheTab(QWidget* parent /* = 0 */)
 	m_viewList->horizontalHeader()->setHighlightSections(false);
 	m_viewList->setItemDelegate(new NoFocusDelegate());
 	m_viewList->setModel(m_proxyModel);
+	m_viewList->setAlternatingRowColors(true);  // alternative colors 
 	m_viewList->setFrameShape(QFrame::NoFrame);
+
+	// column width
+	m_viewList->setColumnWidth(0, 85);
+	m_viewList->setColumnWidth(1, 180);
+	m_viewList->setColumnWidth(2, 90);
+	m_viewList->setColumnWidth(3, 80);
+	m_viewList->setColumnWidth(4, 80);
+	m_viewList->setColumnWidth(5, 30);
+	m_viewList->setColumnWidth(6, 40);
+	m_viewList->setColumnWidth(7, 120);
+	m_viewList->setColumnWidth(8, 120);
+	m_viewList->setColumnWidth(9, 120);
 
 	// initialize and create the header of model.
 	m_srcModel->setHeaderData(0, Qt::Horizontal, QStringLiteral("File Name"));
@@ -98,7 +116,7 @@ BrowserCacheTab::BrowserCacheTab(QWidget* parent /* = 0 */)
 	m_topLayout->addWidget(m_clear, 0, Qt::AlignVCenter);
 	m_topLayout->addWidget(m_view, 0, Qt::AlignVCenter);
 	m_topLayout->setSpacing(5);
-	m_topLayout->setContentsMargins(0, 0, 0, 1);
+	m_topLayout->setContentsMargins(1, 1, 2, 1);
 
 	m_mainLayout->addLayout(m_topLayout);
 	m_mainLayout->addWidget(m_viewList, 1);
@@ -186,8 +204,8 @@ PluginsTab::PluginsTab(QWidget* parent /* = 0 */)
 	m_layout = new QVBoxLayout(this);
 	m_layout->addWidget(m_filterExp);
 	m_layout->addWidget(m_viewList, 1);
-	m_layout->setSpacing(3);
-	m_layout->setContentsMargins(0,0,0,0);
+	m_layout->setSpacing(1);
+	m_layout->setContentsMargins(0,1,0,1);
 
 	setLayout(m_layout);
 }
@@ -208,7 +226,14 @@ BrowserCookiesTab::BrowserCookiesTab(QWidget* parent /* = 0 */)
 	m_openWithWordpad->setToolTip(QStringLiteral("Open with wordpad"));
 
 	m_detailsList = new QTableWidget(this);
-	m_model = new CustomItemModel(0, 9, this);
+	QVector<int> alignCols;
+	int cols[] = {1, 2, 3, 4, 5, 6, 7};
+	for (int i = 0; i < 7; ++i)
+	{
+		alignCols.push_back(cols[i]);
+	}
+	m_model = new CustomItemModel(alignCols, QVector<int>(), 0, 9, this);
+
 	createHeader();
 	createCookieModel();
 	m_proxyModel = new QSortFilterProxyModel(this);
@@ -227,15 +252,24 @@ BrowserCookiesTab::BrowserCookiesTab(QWidget* parent /* = 0 */)
 	m_cookiesList->setItemDelegate(new NoFocusDelegate());
 	m_cookiesList->verticalHeader()->hide();
 	m_cookiesList->setFrameShape(QFrame::NoFrame);
+	m_cookiesList->setAlternatingRowColors(true);
 	m_cookiesList->setModel(m_proxyModel);
+
+	// specify the width of columns
+	int width[] = {105, 40, 115, 115, 105, 50, 55, 50};
+	for (int i = 0; i < 8; ++i)
+	{
+		m_cookiesList->setColumnWidth(i, width[i]);
+	}
 	
-	m_mainLayout = new QVBoxLayout(this);   // the main layout widget should be initialized first.
+	// the main layout widget should be initialized first.
+	m_mainLayout = new QVBoxLayout(this);   
 	m_topLayout = new QHBoxLayout(this);
 	m_topLayout->addWidget(m_filterExp, 0, Qt::AlignVCenter);
 	m_topLayout->addWidget(m_openWithNotepad, 0, Qt::AlignVCenter);
 	m_topLayout->addWidget(m_openWithWordpad, 0, Qt::AlignVCenter);
 	m_topLayout->setSpacing(5);
-	m_topLayout->setContentsMargins(1, 0, 1, 3);
+	m_topLayout->setContentsMargins(1, 1, 1, 1);
 
 	m_mainLayout->addLayout(m_topLayout);
 	m_mainLayout->addWidget(m_cookiesList);
@@ -275,6 +309,7 @@ void BrowserCookiesTab::createHeader()
 	m_detailsList->setEditTriggers(QAbstractItemView::NoEditTriggers);
 	m_detailsList->verticalHeader()->hide();
 	m_detailsList->horizontalHeader()->setStretchLastSection(true);
+	m_detailsList->setAlternatingRowColors(true);
 	m_detailsList->setShowGrid(false);
 	m_detailsList->setFrameShape(QFrame::NoFrame);
 }

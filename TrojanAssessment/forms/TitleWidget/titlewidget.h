@@ -41,6 +41,10 @@ private:
 	QHBoxLayout* m_topLayout;
 	QHBoxLayout* m_bottomLayout;
 	QVBoxLayout* m_mainLayout;
+
+	QLabel* m_hust_label;
+	QLabel* m_security_label;
+	QVBoxLayout* m_labelLayout;
 };
 
 #endif // TITLEWIDGET_H

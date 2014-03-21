@@ -3,7 +3,7 @@
 
 #include <QDialog>
 #include <QFormLayout>
-#include <QDialogButtonBox>
+#include <QPushButton>
 #include <QLabel>
 
 class About : public QDialog
@@ -18,7 +18,7 @@ private:
 	QLabel* m_devs;
 	QLabel* m_cpright;
 	QLabel* m_website;
-	QDialogButtonBox* m_btnbox;
+	QPushButton* m_btnbox;
 	QFormLayout* m_layout;
 };
 

@@ -67,7 +67,12 @@ ProcessListTab::ProcessListTab(QWidget *parent)
 	m_refresh = new QPushButton(QStringLiteral("Refresh"), this);
 	m_refresh->setFixedSize(75, 25);
 
-	m_srcModel = new CustomItemModel(0, 6, this);  // initially 0 row and 6 cols.
+	QVector<int> colsAlignCenter;
+	for (int i = 1; i <= 5; ++i)
+	{
+		colsAlignCenter.push_back(i);
+	}
+	m_srcModel = new CustomItemModel(colsAlignCenter, QVector<int>(), 0, 6, this);  // initially 0 row and 6 cols.
 	m_proxyModel = new QSortFilterProxyModel(this);
 	m_proxyModel->setSourceModel(m_srcModel);
 	// setup completer
@@ -83,7 +88,7 @@ ProcessListTab::ProcessListTab(QWidget *parent)
 	m_topLayout->addWidget(m_filterExp, 1, Qt::AlignVCenter);
 	m_topLayout->addWidget(m_refresh, 0, Qt::AlignVCenter);
 	m_topLayout->setSpacing(5);
-	m_topLayout->setContentsMargins(0, 0, 0, 1);
+	m_topLayout->setContentsMargins(1, 1, 1, 1);
 	
 	initProcList();
 	m_helper = new RetrieveHelper;
@@ -112,6 +117,14 @@ void ProcessListTab::initProcList()
 	m_view->setFrameShape(QFrame::NoFrame);
 	m_view->horizontalHeader()->setStretchLastSection(true);
 	m_view->setModel(m_proxyModel);
+	m_view->setAlternatingRowColors(true);
+
+	// specify the widths of columns
+	int widths[] = {180, 50, 80, 55, 70};
+	for (int i = 0; i < 5; ++i)
+	{
+		m_view->setColumnWidth(i, widths[i]);
+	}
 	createProcHeader();
 }
 
@@ -164,7 +177,7 @@ SoftwareInstalledTab::SoftwareInstalledTab(QWidget *parent)
 
 void SoftwareInstalledTab::initAppList()
 {
-	m_model = new CustomItemModel(0, 6, this);
+	m_model = new CustomItemModel(0, 5, this);
 	m_view = new QTableView(this);
 	m_view->verticalHeader()->hide();
 	m_view->setShowGrid(false);
@@ -181,6 +194,14 @@ void SoftwareInstalledTab::initAppList()
 	m_view->setItemDelegate(new NoFocusDelegate());
 	m_view->setFrameShape(QFrame::NoFrame);
 	m_view->setModel(m_model);
+	m_view->setAlternatingRowColors(true);
+
+	// specify the widths of columns
+	int widths[] = {250, 85, 70, 220, 140};
+	for (int i = 0; i < 5; ++i)
+	{
+		m_view->setColumnWidth(i, widths[i]);
+	}
 
 	createAppListHeader();
 }

@@ -150,9 +150,16 @@ LoadedLibTab::LoadedLibTab(QWidget *parent)
 	m_libtable->setEditTriggers(QAbstractItemView::NoEditTriggers);
 	m_libtable->setWordWrap(false);
 	m_libtable->setShowGrid(false);
+	m_libtable->setAlternatingRowColors(true);
 	m_libtable->horizontalHeader()->setHighlightSections(false);
 	m_libtable->horizontalHeader()->setDefaultSectionSize(75);
 	m_libtable->setItemDelegate(new NoFocusDelegate());
+
+	m_libtable->setColumnWidth(0, 130);
+	m_libtable->setColumnWidth(1, 170);
+	m_libtable->setColumnWidth(2, 110);
+	m_libtable->setColumnWidth(3, 100);
+	m_libtable->setColumnWidth(4, 75);
 
 	doLoadlibs();
 
