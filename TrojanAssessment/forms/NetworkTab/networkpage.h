@@ -3,10 +3,13 @@
 
 #include <QWidget>
 #include <QTabWidget>
+#include <QTableView>
+#include <QLabel>
+#include <QVBoxLayout>
+
+#include "../../base/CustomControl/customitemmodel.h"
 
 class RealTimeFlowTab;
-class HistoryFlowTab;
-class FlowFilterTab;
 class AppRankTab;
 class PortsStatusTab;
 
@@ -16,7 +19,7 @@ class NetworkPage : public QTabWidget
 
 public:
 	NetworkPage(QWidget *parent = 0);
-	~NetworkPage();
+	~NetworkPage(){}
 private slots:
 	void onChangeTab(int index);
 
@@ -27,8 +30,6 @@ private:
 	QTabWidget* m_tabWidget;
 
 	RealTimeFlowTab* m_realtimeTab;
-	HistoryFlowTab* m_histTab;
-	FlowFilterTab* m_filterTab;
 	AppRankTab* m_rankTab;
 	PortsStatusTab* m_portsTab;
 };
@@ -41,42 +42,10 @@ class RealTimeFlowTab : public QWidget
 
 public:
 	RealTimeFlowTab(QWidget* parent = 0);
-	~RealTimeFlowTab();
+	~RealTimeFlowTab(){}
 private:
 	RealTimeFlowTab(const RealTimeFlowTab& obj);
 	RealTimeFlowTab& operator=(const RealTimeFlowTab& obj);
-private:
-
-};
-
-//////////////////////////////////////////////////////////////////////////
-// Definition of real time flow class.
-class HistoryFlowTab : public QWidget
-{
-	Q_OBJECT
-
-public:
-	HistoryFlowTab(QWidget* parent = 0);
-	~HistoryFlowTab();
-private:
-	HistoryFlowTab(const HistoryFlowTab& obj);
-	HistoryFlowTab& operator=(const HistoryFlowTab& obj);
-private:
-
-};
-
-//////////////////////////////////////////////////////////////////////////
-// Definition of real time flow class.
-class FlowFilterTab : public QWidget
-{
-	Q_OBJECT
-
-public:
-	FlowFilterTab(QWidget* parent = 0);
-	~FlowFilterTab();
-private:
-	FlowFilterTab(const FlowFilterTab& obj);
-	FlowFilterTab& operator=(const FlowFilterTab& obj);
 private:
 
 };
@@ -89,7 +58,7 @@ class AppRankTab : public QWidget
 
 public:
 	AppRankTab(QWidget* parent = 0);
-	~AppRankTab();
+	~AppRankTab(){}
 private:
 	AppRankTab(const AppRankTab& obj);
 	AppRankTab& operator=(const AppRankTab& obj);
@@ -105,12 +74,16 @@ class PortsStatusTab : public QWidget
 
 public:
 	PortsStatusTab(QWidget* parent = 0);
-	~PortsStatusTab();
+	~PortsStatusTab(){}
 private:
 	PortsStatusTab(const PortsStatusTab& obj);
 	PortsStatusTab& operator=(const PortsStatusTab& obj);
 private:
+	QTableView* m_view;
+	CustomItemModel* m_model;
+	QLabel* m_infoLabel;
 
+	QVBoxLayout* m_layout;
 };
 
 

@@ -56,6 +56,9 @@ TrojanAssessment::TrojanAssessment(QWidget *parent)
 	m_mainLayout->setSpacing(0);
 	m_mainLayout->setContentsMargins(5, 5, 5, 5);
 	setLayout(m_mainLayout);
+
+	m_systemTray = new SystemTray(this);
+	m_systemTray->show();
 	/* take responding actions when the user clicked any items in the tree widget */
 	connect(treeWidget, SIGNAL(currentItemChanged(QTreeWidgetItem*, QTreeWidgetItem*)), SLOT(changePage(QTreeWidgetItem*, QTreeWidgetItem*)));
 	connect(treeWidget, SIGNAL(toolButtonChangePage(QTreeWidgetItem*, QTreeWidgetItem*)), SLOT(changePage(QTreeWidgetItem*, QTreeWidgetItem*)));
@@ -104,9 +107,7 @@ void TrojanAssessment::initTreeWidget()
 	flow = new QTreeWidgetItem((QTreeWidget*)0, QStringList(QString("Network Flow")));
 	childs.clear();
 	childs.append(new QTreeWidgetItem(flow, QStringList(QString("Real Time"))));
-	childs.append(new QTreeWidgetItem(flow, QStringList(QString("History Trend"))));
 	childs.append(new QTreeWidgetItem(flow, QStringList(QString("Flow Rank"))));
-	childs.append(new QTreeWidgetItem(flow, QStringList(QString("Netflow Filter"))));
 	childs.append(new QTreeWidgetItem(flow, QStringList(QString("Ports Status"))));
 	flow->addChildren(childs);
 	treeWidget->addTopLevelItem(flow);
@@ -122,11 +123,10 @@ void TrojanAssessment::initTreeWidget()
 	treeWidget->addTopLevelItem(process);
 
 	/* add the sixth top level node with children filled */
-	registers = new QTreeWidgetItem((QTreeWidget*)0, QStringList(QString("Windows Register")));
+	registers = new QTreeWidgetItem((QTreeWidget*)0, QStringList(QString("Windows Registry")));
 	childs.clear();
-	childs.append(new QTreeWidgetItem(registers, QStringList(QString("Register Details"))));
 	childs.append(new QTreeWidgetItem(registers, QStringList(QString("Settings"))));
-	childs.append(new QTreeWidgetItem(registers, QStringList(QString("Monitor Settings"))));
+	childs.append(new QTreeWidgetItem(registers, QStringList(QString("Real-time Monitor"))));
 	registers->addChildren(childs);
 	treeWidget->addTopLevelItem(registers);
 
@@ -276,21 +276,13 @@ void TrojanAssessment::changePage(QTreeWidgetItem* cur, QTreeWidgetItem* prev)
 				{
 					emit changeTabNP(1);
 				}
-				else if (cur->text(0) == "History Trend")
+				else if (cur->text(0) == "Flow Rank")
 				{
 					emit changeTabNP(2);
 				}
-				else if (cur->text(0) == "Flow Rank")
-				{
-					emit changeTabNP(3);
-				}
-				else if (cur->text(0) == "Netflow Filter")
-				{
-					emit changeTabNP(4);
-				}
 				else  //ports status
 				{
-					emit changeTabNP(5);
+					emit changeTabNP(3);
 				}
 			}
 			else if (str == "Internet Explorer")
@@ -313,20 +305,16 @@ void TrojanAssessment::changePage(QTreeWidgetItem* cur, QTreeWidgetItem* prev)
 					emit changeTabIEP(4);
 				}
 			}
-			else if (str == "Windows Register")
+			else if (str == "Windows Registry")
 			{
 				stackedWidget->setCurrentWidget(rp);	
-				if (cur->text(0) == "Register Details")
+				if (cur->text(0) == "Real-time Monitor")
 				{
 					emit changeTabRP(1);
 				}
-				else if (cur->text(0) == "Settings")
+				else
 				{
 					emit changeTabRP(2);
-				}
-				else // monitor settings
-				{
-					emit changeTabRP(3);
 				}
 			}
 			else  // Assessment center

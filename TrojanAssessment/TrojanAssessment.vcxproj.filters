@@ -194,6 +194,15 @@
     <ClCompile Include="base\BusinessLayer\DynamicMemory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="base\CustomControl\systemtray.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_systemtray.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_systemtray.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="UI\trojanassessment.qrc">
@@ -248,6 +257,9 @@
       <Filter>Header Files</Filter>
     </CustomBuild>
     <CustomBuild Include="base\CustomControl\customtoolbutton.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="base\CustomControl\systemtray.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
   </ItemGroup>

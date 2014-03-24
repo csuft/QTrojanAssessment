@@ -34,9 +34,12 @@
         <file alias="home">images/Misc/home.png</file>
         <file alias="open">images/Misc/open.png</file>
         <file alias="quit">images/Misc/quit.png</file>
-        <file alias="setting">images/Misc/setting.png</file>
+        <file alias="settings">images/Misc/setting.png</file>
         <file alias="update">images/Misc/update.png</file>
         <file alias="arrow">images/Misc/arrowDown.png</file>
         <file alias="disk">images/Misc/disk.ico</file>
+        <file alias="autorun">images/Misc/run.png</file>
+        <file alias="notification">images/Misc/notification.png</file>
+        <file alias="restore">images/Misc/restore.png</file>
     </qresource>
 </RCC>

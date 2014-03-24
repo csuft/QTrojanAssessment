@@ -3,6 +3,19 @@
 
 #include <QWidget>
 #include <QTabWidget>
+#include <QFileSystemModel>
+#include <QSortFilterProxyModel>
+#include <QStandardItemModel>
+#include <QFileSystemModel>
+#include <QTableView>
+#include <QTreeView>
+#include <QHBoxLayout>
+#include <QVBoxLayout>
+#include <QLineEdit>
+#include <QPushButton>
+#include <QLabel>
+
+#include "base/CustomControl/customitemmodel.h"
 
 class DataFileTab;
 class ExecFileTab;
@@ -14,7 +27,7 @@ class FileMonitorPage : public QTabWidget
 
 public:
 	FileMonitorPage(QWidget *parent = 0);
-	~FileMonitorPage();
+	~FileMonitorPage(){}
 private slots:
 	void onChangeTab(int index);
 private:
@@ -36,13 +49,31 @@ class DataFileTab : public QWidget
 
 public:
 	DataFileTab(QWidget* parent = 0);
-	~DataFileTab();
+	~DataFileTab(){}
 
 private:
 	DataFileTab(const DataFileTab& obj);
 	DataFileTab& operator=(const DataFileTab& obj);
 private:
+	CustomItemModel* m_model;
+	QSortFilterProxyModel* m_proxy;
+	QTableView* m_view;
 	
+	QHBoxLayout* m_statusLayout;
+	QLabel* m_status;
+	QLineEdit* m_status_info;
+
+	QHBoxLayout* m_topLayout;
+	QLineEdit* m_filter;
+	QPushButton* m_clearBtn;
+	QPushButton* m_exportBtn;
+
+	QHBoxLayout* m_bottomLayout;
+	QPushButton* m_chooseDir;
+	QPushButton* m_startBtn;
+	QPushButton* m_stopBtn;
+
+	QVBoxLayout* m_mainLayout;
 };
 
 //////////////////////////////////////////////////////////////////////////
@@ -53,13 +84,22 @@ class ExecFileTab : public QWidget
 
 public:
 	ExecFileTab(QWidget* parent = 0);
-	~ExecFileTab();
+	~ExecFileTab(){}
 
 private:
 	ExecFileTab(const ExecFileTab& obj);
 	ExecFileTab& operator=(const ExecFileTab& obj);
 private:
-	
+	QTableView* m_view;
+	QStandardItemModel* m_model;
+
+	QHBoxLayout* m_topLayout;
+	QLineEdit* m_filter;
+	QPushButton* m_clearBtn;
+	QPushButton* m_startBtn;
+	QPushButton* m_stopBtn;
+
+	QHBoxLayout* m_mainLayout;
 };
 
 //////////////////////////////////////////////////////////////////////////
@@ -70,13 +110,15 @@ class FileBrowserTab : public QWidget
 
 public:
 	FileBrowserTab(QWidget* parent = 0);
-	~FileBrowserTab();
+	~FileBrowserTab(){}
 
 private:
 	FileBrowserTab(const FileBrowserTab& obj);
 	FileBrowserTab& operator=(const FileBrowserTab& obj);
 private:
-	
+	QTreeView* m_view;
+	QFileSystemModel* m_model;
+	QVBoxLayout* m_layout;
 };
 
 #endif // FILEMONITORPAGE_H

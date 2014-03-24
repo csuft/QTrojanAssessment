@@ -47,13 +47,71 @@ RuntimeMonitorTab::RuntimeMonitorTab(QWidget *parent)
 WinServicesTab::WinServicesTab(QWidget *parent)
 	: QWidget(parent)
 {
-	//m_srcModel = new QStandardItemModel(this);
-	m_view = new QTableView(this);
-	m_view->verticalHeader()->hide();
+	QVector<int> colsAlignCenter;
+	colsAlignCenter.push_back(2);
+	colsAlignCenter.push_back(3);
+	colsAlignCenter.push_back(4);
 
 	m_layout = new QVBoxLayout(this);
-	m_layout->addWidget(m_view, 1);
+	m_topLayout = new QHBoxLayout(this);
+
+	m_srcModel = new CustomItemModel(colsAlignCenter, QVector<int>(), 0, 5, this);
+	m_proxyModel = new QSortFilterProxyModel(this);
+	m_proxyModel->setSourceModel(m_srcModel);
+
+	m_view = new QTableView(this);
+	m_view->verticalHeader()->hide();
+	m_view->setSelectionMode(QAbstractItemView::SingleSelection);
+	m_view->setSelectionBehavior(QAbstractItemView::SelectRows);
+	m_view->setHorizontalScrollMode(QAbstractItemView::ScrollPerPixel);
+	m_view->setVerticalScrollMode(QAbstractItemView::ScrollPerPixel);
+	m_view->setAlternatingRowColors(true);
+	m_view->horizontalHeader()->setStretchLastSection(true);
+	m_view->horizontalHeader()->setHighlightSections(false);
+	m_view->setSortingEnabled(false);
+	m_view->verticalHeader()->setDefaultSectionSize(20);
+	m_view->setShowGrid(false);
+	m_view->setModel(m_proxyModel);
+
+	createHeaders();
+
+	m_filter = new QLineEdit(this);
+	m_filter->setPlaceholderText(QStringLiteral("Filter Expression"));
+	m_filter->setFixedHeight(25);
+	m_reloadBtn = new QPushButton(QStringLiteral("Reload"), this);
+	m_reloadBtn->setFixedSize(75, 25);
+	m_topLayout->addWidget(m_filter, 1, Qt::AlignCenter);
+	m_topLayout->addWidget(m_reloadBtn, 0, Qt::AlignCenter);
+	m_topLayout->setSpacing(5);
+	m_topLayout->setContentsMargins(1, 1, 1, 1);
+	
+	m_layout->addLayout(m_topLayout, 0);
+	m_layout->addWidget(m_view, 0, Qt::AlignCenter);
+	m_layout->setContentsMargins(0, 0, 0, 0);
 	setLayout(m_layout);
+
+	connect(m_reloadBtn, SIGNAL(clicked()), this, SLOT(enrichTableView()));
+}
+
+void WinServicesTab::enrichTableView()
+{
+
+
+}
+
+void WinServicesTab::createHeaders()
+{
+	m_view->setColumnWidth(0, 150);
+	m_view->setColumnWidth(1, 120);
+	m_view->setColumnWidth(2, 50);
+	m_view->setColumnWidth(3, 80);
+	m_view->setColumnWidth(4, 50);
+
+	m_srcModel->setHeaderData(0, Qt::Horizontal, QStringLiteral("Display Name"));
+	m_srcModel->setHeaderData(1, Qt::Horizontal, QStringLiteral("Service Name"));
+	m_srcModel->setHeaderData(2, Qt::Horizontal, QStringLiteral("Type"));
+	m_srcModel->setHeaderData(3, Qt::Horizontal, QStringLiteral("Current State"));
+	m_srcModel->setHeaderData(4, Qt::Horizontal, QStringLiteral("Process ID"));
 }
 
 //////////////////////////////////////////////////////////////////////////

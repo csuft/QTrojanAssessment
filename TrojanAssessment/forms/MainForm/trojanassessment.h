@@ -23,6 +23,7 @@
 #include "../AssessmentTab/securitycenterpage.h"
 #include "../AboutDialog/about.h"
 #include "../base/CustomControl/shadowwindow.h"
+#include "../base/CustomControl/systemtray.h"
 #include "../TitleWidget/titlewidget.h"
 
 class TrojanAssessment : public ShadowWindow
@@ -70,6 +71,7 @@ private:
 	QTreeWidgetItem* registers;		// windows register.
 	QTreeWidgetItem* mem;			// memory monitoring
 	QTreeWidgetItem* stat;			// statistics of system
+	SystemTray* m_systemTray;
 	// small components
 	QLabel* icon_label;
 	QLabel* lastrun_label;

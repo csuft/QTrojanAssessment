@@ -13,6 +13,7 @@
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <QCompleter>
+#include <QLineEdit>
 #include <QFileIconProvider>
 
 #include "../../base/CustomControl/customitemmodel.h"
@@ -75,9 +76,20 @@ public:
 private:
 	WinServicesTab(const WinServicesTab& obj);
 	WinServicesTab& operator=(const WinServicesTab& obj);
+	void createHeaders();
+
+private slots:
+	void enrichTableView();
+
 private:
 	QTableView* m_view;
 	CustomItemModel* m_srcModel;
+	QSortFilterProxyModel* m_proxyModel;
+
+	QHBoxLayout* m_topLayout;
+	QLineEdit* m_filter;
+	QPushButton* m_reloadBtn;
+
 	QVBoxLayout* m_layout;
 };
 

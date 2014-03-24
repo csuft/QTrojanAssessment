@@ -12,10 +12,6 @@ FileMonitorPage::FileMonitorPage(QWidget *parent)
 	addTab(m_browserTab, QStringLiteral("File Browser"));
 }
 
-FileMonitorPage::~FileMonitorPage()
-{
-}
-
 void FileMonitorPage::onChangeTab(int index)
 {
 	if (index == 1)
@@ -41,10 +37,6 @@ DataFileTab::DataFileTab(QWidget* parent)
 
 }
 
-DataFileTab::~DataFileTab()
-{
-	
-}
 //////////////////////////////////////////////////////////////////////////
 // Implementation of ExecFileTab class.
 ExecFileTab::ExecFileTab(QWidget* parent)
@@ -53,20 +45,10 @@ ExecFileTab::ExecFileTab(QWidget* parent)
 
 }
 
-ExecFileTab::~ExecFileTab()
-{
-	
-}
-
 //////////////////////////////////////////////////////////////////////////
 // Implementation of FileBrowserTab class.
 FileBrowserTab::FileBrowserTab(QWidget* parent /* = 0 */)
 	: QWidget(parent)
-{
-	
-}
-
-FileBrowserTab::~FileBrowserTab()
 {
 	
 }
