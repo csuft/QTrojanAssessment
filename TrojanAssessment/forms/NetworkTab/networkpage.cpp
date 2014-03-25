@@ -49,6 +49,28 @@ AppRankTab::AppRankTab(QWidget *parent)
 PortsStatusTab::PortsStatusTab(QWidget *parent)
 	: QWidget(parent)
 {
+	m_layout = new QVBoxLayout(this);
+	m_infoLabel = new QLabel(QStringLiteral("Loading..."), this);
 
+	m_model = new CustomItemModel(0, 5, this);
+
+	m_view = new QTableView(this);
+	m_view->verticalHeader()->hide();
+	m_view->horizontalHeader()->setHighlightSections(false);
+	m_view->setSelectionMode(QAbstractItemView::SingleSelection);
+	m_view->setSelectionBehavior(QAbstractItemView::SelectRows);
+	m_view->setHorizontalScrollMode(QAbstractItemView::ScrollPerPixel);
+	m_view->setVerticalScrollMode(QAbstractItemView::ScrollPerPixel);
+	m_view->horizontalHeader()->setStretchLastSection(true);
+	m_view->setShowGrid(false);
+	m_view->setAlternatingRowColors(true);
+	m_view->verticalHeader()->setDefaultSectionSize(25);
+	m_view->setModel(m_model);
+
+	m_layout->addWidget(m_view, 1, Qt::AlignCenter);
+	m_layout->addWidget(m_infoLabel, 0, Qt::AlignLeft);
+	m_layout->setSpacing(2);
+	m_layout->setContentsMargins(1, 1, 1, 1);
+	setLayout(m_layout);
 }
 

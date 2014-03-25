@@ -5,10 +5,12 @@
 #include <QTabWidget>
 #include <QSortFilterProxyModel>
 #include <QTableView>
+#include <QHeaderView>
 #include <QPushButton>
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 #include <QLabel>
+#include <QLineEdit>
 #include <QGroupBox>
 
 #include "base/CustomControl/customitemmodel.h"
@@ -63,22 +65,24 @@ public:
 private:
 	RegMonitorTab(const RegMonitorTab& obj);
 	RegMonitorTab& operator=(const RegMonitorTab& obj);
+
+	void createHeaders();
+
 private:
 	CustomItemModel* m_model;
 	QSortFilterProxyModel* m_proxy;
 	QTableView* m_view;
-	QLabel* m_infoLabel;
 
+	QHBoxLayout* m_centerLayout;
 	QLineEdit* m_filter;
 	QPushButton* m_clearBtn;
 	QPushButton* m_exportBtn;
 	
+	QHBoxLayout* m_topLayout;
 	QPushButton* m_registryRoot;
 	QPushButton* m_startBtn;
 	QPushButton* m_stopBtn;
 
-	QHBoxLayout* m_topLayout;
-	QHBoxLayout* m_centerLayout;
 	QVBoxLayout* m_mainLayout;
 };
 

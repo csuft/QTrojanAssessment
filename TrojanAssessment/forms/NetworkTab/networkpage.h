@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <QTabWidget>
 #include <QTableView>
+#include <QHeaderView>
 #include <QLabel>
 #include <QVBoxLayout>
 
@@ -47,7 +48,7 @@ private:
 	RealTimeFlowTab(const RealTimeFlowTab& obj);
 	RealTimeFlowTab& operator=(const RealTimeFlowTab& obj);
 private:
-
+	// flow chart
 };
 
 //////////////////////////////////////////////////////////////////////////
@@ -63,7 +64,7 @@ private:
 	AppRankTab(const AppRankTab& obj);
 	AppRankTab& operator=(const AppRankTab& obj);
 private:
-
+	// flow chart
 };
 
 //////////////////////////////////////////////////////////////////////////

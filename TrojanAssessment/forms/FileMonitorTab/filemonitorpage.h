@@ -7,8 +7,10 @@
 #include <QSortFilterProxyModel>
 #include <QStandardItemModel>
 #include <QFileSystemModel>
+#include <QDir>
 #include <QTableView>
 #include <QTreeView>
+#include <QHeaderView>
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 #include <QLineEdit>
