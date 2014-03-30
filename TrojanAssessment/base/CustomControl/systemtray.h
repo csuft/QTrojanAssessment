@@ -51,7 +51,7 @@ private:
 	QWidget* m_topWidget;
 	QWidgetAction* m_topWidgetAction;
 	QLabel* m_topLabel;
-	QPushButton* m_homeBtn;
+	QLabel* m_homeBtn;
 
 	QWidget* m_bottomWidget;
 	QWidgetAction* m_bottomWidgetAction;

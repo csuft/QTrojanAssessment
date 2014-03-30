@@ -8,6 +8,12 @@ QGroupBox::title {
 	padding: 3px;
 }
 
+QToolTip {
+	background: white;
+	border: 1px solid gray;
+	color: black;
+}
+
 QMenu{
     background:white;
 	border:1px solid lightgray;
@@ -15,12 +21,13 @@ QMenu{
 
 QMenu::item{
 	padding:0px 20px 0px 20px;
+	margin-left: 5px;
 	height:25px;
 }
 
 QMenu::item:selected:enabled{
-    background: #86BA10;
-	color:white;
+    background: lightgray;
+	color: white;
 }
 
 QMenu::separator{
@@ -31,6 +38,16 @@ QMenu::separator{
 
 QMenu::item:selected:!enabled{
     background:transparent;
+}
+
+QPushButton#TrayButton {
+	border: none;
+	background: transparent;
+}
+
+QPushButton#TrayButton:hover {
+	background: rgb(233, 237, 252);
+	color: rgb(42, 120, 192);
 }
 
 QLineEdit {

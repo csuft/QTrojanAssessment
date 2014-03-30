@@ -1,7 +1,7 @@
 #include <QtWidgets/QApplication>
 #include <QStyleFactory>
 
-#include "../forms/MainForm/trojanassessment.h"
+#include "forms/MainForm/trojanassessment.h"
 
 #define QT_NO_CAST_FROM_ASCII
 

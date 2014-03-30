@@ -8,6 +8,8 @@ SystemTray::SystemTray(QWidget *parent)
 	createTopWidget();
 	createBottomWidget();
 	createTrayMenu();
+
+	setToolTip(QStringLiteral("Trojan Assessment Platform"));
 }
 
 void SystemTray::createTopWidget()
@@ -16,16 +18,16 @@ void SystemTray::createTopWidget()
 	m_topWidgetAction = new QWidgetAction(m_trayMenu);
 	m_topLabel = new QLabel(QStringLiteral("HUST Information Security Lab"));
 	m_topLabel->setObjectName(QStringLiteral("WhiteLabel"));
-	m_homeBtn = new QPushButton(QStringLiteral("Details..."));
+	m_homeBtn = new QLabel(QStringLiteral("Visit"));
 	m_homeBtn->setCursor(Qt::PointingHandCursor);
-	m_homeBtn->setObjectName(QStringLiteral("TrayButton"));
+	m_homeBtn->setObjectName(QStringLiteral("WhiteLabel"));
 
 	QVBoxLayout* m_topLayout = new QVBoxLayout();
 	m_topLayout->addWidget(m_topLabel, 0, Qt::AlignLeft|Qt::AlignVCenter);
 	m_topLayout->addWidget(m_homeBtn, 0, Qt::AlignRight|Qt::AlignVCenter);
 
 	m_topLayout->setSpacing(5);
-	m_topLayout->setContentsMargins(10, 5, 0, 5);
+	m_topLayout->setContentsMargins(5, 5, 5, 5);
 
 	m_topWidget->setLayout(m_topLayout);
 	m_topWidget->installEventFilter(this);
@@ -39,12 +41,15 @@ void SystemTray::createBottomWidget()
 
 	m_updateBtn = new QPushButton(QIcon(":/menu/update"), QStringLiteral("Update"));
 	m_updateBtn->setObjectName(QStringLiteral("TrayButton"));
+	m_updateBtn->setFixedSize(60, 25);
 
 	m_aboutBtn = new QPushButton(QIcon(":/menu/about"), QStringLiteral("About"));
 	m_aboutBtn->setObjectName(QStringLiteral("TrayButton"));
+	m_aboutBtn->setFixedSize(60, 25);
 
-	m_exitBtn = new QPushButton(QIcon(":/menu/exit"), QStringLiteral("Exit"));
+	m_exitBtn = new QPushButton(QIcon(":/menu/quit"), QStringLiteral("Exit"));
 	m_exitBtn->setObjectName(QStringLiteral("TrayButton"));
+	m_exitBtn->setFixedSize(60, 25);
 
 	QHBoxLayout* m_bottomLayout = new QHBoxLayout();
 	m_bottomLayout->addWidget(m_updateBtn, 0, Qt::AlignCenter);
@@ -52,7 +57,7 @@ void SystemTray::createBottomWidget()
 	m_bottomLayout->addWidget(m_exitBtn, 0, Qt::AlignCenter);
 
 	m_bottomLayout->setSpacing(5);
-	m_bottomLayout->setContentsMargins(10,0,10,5);
+	m_bottomLayout->setContentsMargins(5,5,5,5);
 
 	m_bottomWidget->setLayout(m_bottomLayout);
 	m_bottomWidgetAction->setDefaultWidget(m_bottomWidget);
@@ -60,8 +65,6 @@ void SystemTray::createBottomWidget()
 
 void SystemTray::createTrayMenu()
 {
-	
-
 	m_runOnSystemBoot = new QAction(QIcon(":/menu/autorun"), QStringLiteral("Run on System Boot"), this);
 	m_helpOnline = new QAction(QIcon(":/menu/help"), QStringLiteral("Help Online"), this);
 	m_homePage = new QAction(QIcon(":/menu/home"), QStringLiteral("Visit Home Page"), this);

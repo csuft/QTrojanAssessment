@@ -51,10 +51,10 @@ RegMonitorTab::RegMonitorTab(QWidget *parent)
 	m_startBtn->setFixedSize(75, 25);
 	m_stopBtn = new QPushButton(QStringLiteral("Stop"), this);
 	m_stopBtn->setFixedSize(75, 25);
+	m_topLayout->addWidget(m_registryRoot);
 	m_topLayout->addStretch();
-	m_topLayout->addWidget(m_registryRoot, 0, Qt::AlignVCenter);
-	m_topLayout->addWidget(m_startBtn, 0, Qt::AlignVCenter);
-	m_topLayout->addWidget(m_stopBtn, 0, Qt::AlignVCenter);
+	m_topLayout->addWidget(m_startBtn);
+	m_topLayout->addWidget(m_stopBtn);
 	m_topLayout->setSpacing(5);
 	m_topLayout->setContentsMargins(0, 1, 1, 1);
 
@@ -82,7 +82,7 @@ RegMonitorTab::RegMonitorTab(QWidget *parent)
 	m_view->setModel(m_proxy);
 	m_mainLayout->addLayout(m_topLayout);
 	m_mainLayout->addLayout(m_centerLayout);
-	m_mainLayout->addWidget(m_view, 1, Qt::AlignCenter);
+	m_mainLayout->addWidget(m_view, 1);
 	m_mainLayout->setSpacing(1);
 	m_mainLayout->setContentsMargins(0, 0, 0, 0);
 

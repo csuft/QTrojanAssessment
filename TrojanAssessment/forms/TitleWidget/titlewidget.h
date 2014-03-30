@@ -7,8 +7,8 @@
 #include <QVBoxLayout>
 #include <QSignalMapper>
 
-#include "../../base/CustomControl/customtoolbutton.h"
-#include "../../base/CustomControl/custompushbutton.h"
+#include "base/CustomControl/customtoolbutton.h"
+#include "base/CustomControl/custompushbutton.h"
 
 class TitleWidget : public QWidget
 {

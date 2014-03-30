@@ -47,9 +47,9 @@ DataFileTab::DataFileTab(QWidget* parent)
 	m_clearBtn->setFixedSize(75, 25);
 	m_exportBtn = new QPushButton(QStringLiteral("Export"), this);
 	m_exportBtn->setFixedSize(75, 25);
-	m_topLayout->addWidget(m_filter, 1, Qt::AlignCenter);
-	m_topLayout->addWidget(m_clearBtn, 0, Qt::AlignCenter);
-	m_topLayout->addWidget(m_exportBtn, 0, Qt::AlignCenter);
+	m_topLayout->addWidget(m_filter, 1, Qt::AlignVCenter);
+	m_topLayout->addWidget(m_clearBtn, 0, Qt::AlignVCenter);
+	m_topLayout->addWidget(m_exportBtn, 0, Qt::AlignVCenter);
 	m_topLayout->setSpacing(5);
 	m_topLayout->setContentsMargins(1, 1, 1, 1);
 
@@ -99,10 +99,10 @@ DataFileTab::DataFileTab(QWidget* parent)
 
 	// main layout
 	m_mainLayout->addLayout(m_topLayout);
-	m_mainLayout->addWidget(m_view, 1, Qt::AlignCenter);
+	m_mainLayout->addWidget(m_view);
 	m_mainLayout->addLayout(m_statusLayout);
 	m_mainLayout->addLayout(m_bottomLayout);
-	m_mainLayout->setSpacing(1);
+	m_mainLayout->setSpacing(0);
 	m_mainLayout->setContentsMargins(0, 0, 0, 0);
 
 	setLayout(m_mainLayout);

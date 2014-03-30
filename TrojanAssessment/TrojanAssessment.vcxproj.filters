@@ -35,65 +35,32 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="GeneratedFiles\Debug\moc_trojanassessment.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_trojanassessment.cpp">
       <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\qrc_trojanassessment.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_filemonitorpage.cpp">
-      <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_filemonitorpage.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_processpage.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_processpage.cpp">
       <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_memorypage.cpp">
-      <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_memorypage.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_networkpage.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_networkpage.cpp">
       <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_iepage.cpp">
-      <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_iepage.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_registerpage.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_registerpage.cpp">
       <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_securitycenterpage.cpp">
-      <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_securitycenterpage.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_about.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_about.cpp">
       <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_cacheentrydetail.cpp">
-      <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_cacheentrydetail.cpp">
       <Filter>Generated Files\Release</Filter>
@@ -134,17 +101,11 @@
     <ClCompile Include="base\BusinessLayer\BasicInformation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_nofocusdelegate.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_nofocusdelegate.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
     <ClCompile Include="base\CustomControl\nofocusdelegate.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_shadowwindow.cpp">
-      <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_shadowwindow.cpp">
       <Filter>Generated Files\Release</Filter>
@@ -155,17 +116,11 @@
     <ClCompile Include="base\CustomControl\customitemmodel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_customitemmodel.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_customitemmodel.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
     <ClCompile Include="base\CustomControl\custompushbutton.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_custompushbutton.cpp">
-      <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_custompushbutton.cpp">
       <Filter>Generated Files\Release</Filter>
@@ -173,14 +128,8 @@
     <ClCompile Include="forms\TitleWidget\titlewidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_titlewidget.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_titlewidget.cpp">
       <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_customtoolbutton.cpp">
-      <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_customtoolbutton.cpp">
       <Filter>Generated Files\Release</Filter>
@@ -197,11 +146,101 @@
     <ClCompile Include="base\CustomControl\systemtray.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_systemtray.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_systemtray.cpp">
       <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="3rdParty\Manometer\abstractmeter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_abstractmeter.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_abstractmeter.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="3rdParty\Manometer\functions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="3rdParty\Manometer\manometer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_manometer.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_manometer.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="3rdParty\Manometer\widgetwithbackground.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_widgetwithbackground.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_widgetwithbackground.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="3rdParty\ChartDirector\qchartviewer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_qchartviewer.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_qchartviewer.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_about.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_cacheentrydetail.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_customitemmodel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_custompushbutton.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_customtoolbutton.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_filemonitorpage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_iepage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_memorypage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_networkpage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_nofocusdelegate.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_processpage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_registerpage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_securitycenterpage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_shadowwindow.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_systemtray.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_titlewidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_trojanassessment.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\qrc_trojanassessment.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -262,11 +301,20 @@
     <CustomBuild Include="base\CustomControl\systemtray.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
+    <CustomBuild Include="3rdParty\Manometer\abstractmeter.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="3rdParty\Manometer\manometer.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="3rdParty\Manometer\widgetwithbackground.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="3rdParty\ChartDirector\qchartviewer.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GeneratedFiles\ui_cacheentrydetail.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
     <ClInclude Include="base\BusinessLayer\BasicInformation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -276,8 +324,58 @@
     <ClInclude Include="base\BusinessLayer\DynamicMemory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="3rdParty\ChartDirector\bchartdir.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="3rdParty\ChartDirector\chartdir.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="3rdParty\ChartDirector\FinanceChart.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="3rdParty\ChartDirector\memblock.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="3rdParty\Manometer\functions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_cacheentrydetail.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="UI\style.qss" />
+    <None Include="UI\images\Misc\5.png" />
+    <None Include="UI\images\Misc\5_big.png" />
+    <None Include="UI\images\Misc\update.png" />
+    <None Include="UI\images\Misc\about.png" />
+    <None Include="UI\images\Misc\arrowDown.png" />
+    <None Include="UI\images\Misc\cloud.png" />
+    <None Include="UI\images\Misc\disk.ico" />
+    <None Include="UI\images\Misc\help.png" />
+    <None Include="UI\images\Misc\home.png" />
+    <None Include="UI\images\Misc\logo.png" />
+    <None Include="UI\images\Misc\notification.png" />
+    <None Include="UI\images\Misc\open.png" />
+    <None Include="UI\images\Misc\quit.png" />
+    <None Include="UI\images\Misc\restore.png" />
+    <None Include="UI\images\Misc\run.png" />
+    <None Include="UI\images\Misc\setting.png" />
+    <None Include="UI\images\SysButtons\close.png" />
+    <None Include="UI\images\SysButtons\min_pressed.png" />
+    <None Include="UI\images\SysButtons\close_hover.png" />
+    <None Include="UI\images\SysButtons\close_pressed.png" />
+    <None Include="UI\images\SysButtons\menu.png" />
+    <None Include="UI\images\SysButtons\menu_hover.png" />
+    <None Include="UI\images\SysButtons\menu_pressed.png" />
+    <None Include="UI\images\SysButtons\min.png" />
+    <None Include="UI\images\SysButtons\min_hover.png" />
+    <None Include="UI\images\ToolButtons\gongNeng.png" />
+    <None Include="UI\images\ToolButtons\xiTong.png" />
+    <None Include="UI\images\ToolButtons\jiaSu.png" />
+    <None Include="UI\images\ToolButtons\louDong.png" />
+    <None Include="UI\images\ToolButtons\muMa.png" />
+    <None Include="UI\images\ToolButtons\ruanJian.png" />
+    <None Include="UI\images\ToolButtons\tiJian.png" />
   </ItemGroup>
 </Project>

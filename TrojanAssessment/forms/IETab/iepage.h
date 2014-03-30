@@ -22,10 +22,10 @@
 #include <QSysInfo>    // for OS version
 #include <fstream>
 
-#include "../../base/BusinessLayer/BasicInformation.h"
-#include "../../base/CustomControl/customitemmodel.h"
-#include "../../base/CustomControl/nofocusdelegate.h"
-#include "../CacheTab/cacheentrydetail.h"
+#include "base/BusinessLayer/BasicInformation.h"
+#include "base/CustomControl/customitemmodel.h"
+#include "base/CustomControl/nofocusdelegate.h"
+#include "forms/CacheTab/cacheentrydetail.h"
 
 class BrowserCacheTab;
 class PluginsTab;

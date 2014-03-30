@@ -19,9 +19,9 @@
 #include <QHeaderView>
 #include <QStandardItemModel>
 
-#include "../../base/BusinessLayer/BasicInformation.h"
-#include "../../base/CustomControl/nofocusdelegate.h"
-#include "../../base/CustomControl/customitemmodel.h"
+#include "base/BusinessLayer/BasicInformation.h"
+#include "base/CustomControl/nofocusdelegate.h"
+#include "base/CustomControl/customitemmodel.h"
 #include <tlhelp32.h> 
 
 class AssessmentTab;

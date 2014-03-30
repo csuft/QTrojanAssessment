@@ -14,17 +14,20 @@
 #include <QSplitterHandle>
 #include <QPainter>
 
-#include "../FileMonitorTab/filemonitorpage.h"
-#include "../IETab/iepage.h"
-#include "../MemoryTab/memorypage.h"
-#include "../NetworkTab/networkpage.h"
-#include "../ProcessTab/processpage.h"
-#include "../RegistryTab/registerpage.h"
-#include "../AssessmentTab/securitycenterpage.h"
-#include "../AboutDialog/about.h"
-#include "../base/CustomControl/shadowwindow.h"
-#include "../base/CustomControl/systemtray.h"
-#include "../TitleWidget/titlewidget.h"
+#include "forms/FileMonitorTab/filemonitorpage.h"
+#include "forms/IETab/iepage.h"
+#include "forms/MemoryTab/memorypage.h"
+#include "forms/NetworkTab/networkpage.h"
+#include "forms/ProcessTab/processpage.h"
+#include "forms/RegistryTab/registerpage.h"
+#include "forms/AssessmentTab/securitycenterpage.h"
+#include "forms/AboutDialog/about.h"
+#include "forms/TitleWidget/titlewidget.h"
+
+#include "base/CustomControl/shadowwindow.h"
+#include "base/CustomControl/systemtray.h"
+
+#pragma comment(lib, "chartdir51.lib")
 
 class TrojanAssessment : public ShadowWindow
 {

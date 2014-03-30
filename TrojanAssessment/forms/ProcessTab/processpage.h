@@ -16,9 +16,9 @@
 #include <QLineEdit>
 #include <QFileIconProvider>
 
-#include "../../base/CustomControl/customitemmodel.h"
-#include "../../base/CustomControl/nofocusdelegate.h"
-#include "../../base/BusinessLayer/BasicInformation.h"
+#include "base/CustomControl/customitemmodel.h"
+#include "base/CustomControl/nofocusdelegate.h"
+#include "base/BusinessLayer/BasicInformation.h"
 
 #include <vector>
 using std::vector;

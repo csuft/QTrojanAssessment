@@ -45,8 +45,8 @@
     <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
     <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Qt\Qt5.0.2\5.0.2\msvc2010\include;$(IncludePath)</IncludePath>
     <ReferencePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Qt\Qt5.0.2\5.0.2\msvc2010\lib;$(ReferencePath)</ReferencePath>
-    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Qt\Qt5.0.2\5.0.2\msvc2010\lib;$(LibraryPath)</LibraryPath>
-    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(LibraryPath)</LibraryPath>
+    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">E:\1-Reading\Qt\chartdir_cpp_win32\ChartDirector\lib;C:\Qt\Qt5.0.2\5.0.2\msvc2010\lib;$(LibraryPath)</LibraryPath>
+    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">E:\1-Reading\Qt\chartdir_cpp_win32\ChartDirector\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -72,7 +72,7 @@
       <DebugInformationFormat>
       </DebugInformationFormat>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <TreatWChar_tAsBuiltInType>false</TreatWChar_tAsBuiltInType>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -83,6 +83,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="3rdParty\ChartDirector\qchartviewer.cpp" />
+    <ClCompile Include="3rdParty\Manometer\abstractmeter.cpp" />
+    <ClCompile Include="3rdParty\Manometer\functions.cpp" />
+    <ClCompile Include="3rdParty\Manometer\manometer.cpp" />
+    <ClCompile Include="3rdParty\Manometer\widgetwithbackground.cpp" />
     <ClCompile Include="base\CustomControl\customitemmodel.cpp" />
     <ClCompile Include="base\CustomControl\custompushbutton.cpp" />
     <ClCompile Include="base\CustomControl\customtoolbutton.cpp" />
@@ -93,55 +98,33 @@
     <ClCompile Include="forms\CacheTab\cacheentrydetail.cpp" />
     <ClCompile Include="forms\FileMonitorTab\filemonitorpage.cpp" />
     <ClCompile Include="forms\TitleWidget\titlewidget.cpp" />
-    <ClCompile Include="GeneratedFiles\Debug\moc_about.cpp">
+    <ClCompile Include="GeneratedFiles\Debug\moc_about.cpp" />
+    <ClCompile Include="GeneratedFiles\Debug\moc_abstractmeter.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_cacheentrydetail.cpp">
+    <ClCompile Include="GeneratedFiles\Debug\moc_cacheentrydetail.cpp" />
+    <ClCompile Include="GeneratedFiles\Debug\moc_customitemmodel.cpp" />
+    <ClCompile Include="GeneratedFiles\Debug\moc_custompushbutton.cpp" />
+    <ClCompile Include="GeneratedFiles\Debug\moc_customtoolbutton.cpp" />
+    <ClCompile Include="GeneratedFiles\Debug\moc_filemonitorpage.cpp" />
+    <ClCompile Include="GeneratedFiles\Debug\moc_iepage.cpp" />
+    <ClCompile Include="GeneratedFiles\Debug\moc_manometer.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_customitemmodel.cpp">
+    <ClCompile Include="GeneratedFiles\Debug\moc_memorypage.cpp" />
+    <ClCompile Include="GeneratedFiles\Debug\moc_networkpage.cpp" />
+    <ClCompile Include="GeneratedFiles\Debug\moc_nofocusdelegate.cpp" />
+    <ClCompile Include="GeneratedFiles\Debug\moc_processpage.cpp" />
+    <ClCompile Include="GeneratedFiles\Debug\moc_qchartviewer.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_custompushbutton.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_customtoolbutton.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_filemonitorpage.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_iepage.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_memorypage.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_networkpage.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_nofocusdelegate.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_processpage.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_registerpage.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_securitycenterpage.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_shadowwindow.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_systemtray.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_titlewidget.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_trojanassessment.cpp">
+    <ClCompile Include="GeneratedFiles\Debug\moc_registerpage.cpp" />
+    <ClCompile Include="GeneratedFiles\Debug\moc_securitycenterpage.cpp" />
+    <ClCompile Include="GeneratedFiles\Debug\moc_shadowwindow.cpp" />
+    <ClCompile Include="GeneratedFiles\Debug\moc_systemtray.cpp" />
+    <ClCompile Include="GeneratedFiles\Debug\moc_titlewidget.cpp" />
+    <ClCompile Include="GeneratedFiles\Debug\moc_trojanassessment.cpp" />
+    <ClCompile Include="GeneratedFiles\Debug\moc_widgetwithbackground.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\qrc_trojanassessment.cpp">
@@ -151,6 +134,9 @@
       </PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_about.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_abstractmeter.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_cacheentrydetail.cpp">
@@ -171,6 +157,9 @@
     <ClCompile Include="GeneratedFiles\Release\moc_iepage.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_manometer.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_memorypage.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
@@ -181,6 +170,9 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_processpage.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_qchartviewer.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_registerpage.cpp">
@@ -212,6 +204,9 @@
     <ClCompile Include="base\CustomControl\nofocusdelegate.cpp" />
     <ClCompile Include="base\CustomControl\shadowwindow.cpp" />
     <ClCompile Include="base\BusinessLayer\WindowsServices.cpp" />
+    <ClCompile Include="GeneratedFiles\Release\moc_widgetwithbackground.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="forms\MainForm\trojanassessment.h">
@@ -226,6 +221,52 @@
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="3rdParty\ChartDirector\bchartdir.h" />
+    <ClInclude Include="3rdParty\ChartDirector\chartdir.h" />
+    <ClInclude Include="3rdParty\ChartDirector\FinanceChart.h" />
+    <ClInclude Include="3rdParty\ChartDirector\memblock.h" />
+    <ClInclude Include="GeneratedFiles\ui_cacheentrydetail.h" />
+    <CustomBuild Include="3rdParty\ChartDirector\qchartviewer.h">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing qchartviewer.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DQT_DLL -DQT_CORE_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -D_UNICODE "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtGui" "-I.\base\CustomControl" "-I.\forms\TitleWidget"</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing qchartviewer.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DQT_DLL -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -D_UNICODE "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtGui" "-I.\base\CustomControl" "-I.\forms\TitleWidget"</Command>
+    </CustomBuild>
+    <CustomBuild Include="3rdParty\Manometer\abstractmeter.h">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing abstractmeter.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DQT_DLL -DQT_CORE_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -D_UNICODE "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtGui" "-I.\base\CustomControl" "-I.\forms\TitleWidget"</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing abstractmeter.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DQT_DLL -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -D_UNICODE "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtGui" "-I.\base\CustomControl" "-I.\forms\TitleWidget"</Command>
+    </CustomBuild>
+    <ClInclude Include="3rdParty\Manometer\functions.h" />
+    <CustomBuild Include="3rdParty\Manometer\manometer.h">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing manometer.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DQT_DLL -DQT_CORE_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -D_UNICODE "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtGui" "-I.\base\CustomControl" "-I.\forms\TitleWidget"</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing manometer.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DQT_DLL -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -D_UNICODE "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtGui" "-I.\base\CustomControl" "-I.\forms\TitleWidget"</Command>
+    </CustomBuild>
+    <CustomBuild Include="3rdParty\Manometer\widgetwithbackground.h">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing widgetwithbackground.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DQT_DLL -DQT_CORE_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -D_UNICODE "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtGui" "-I.\base\CustomControl" "-I.\forms\TitleWidget"</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing widgetwithbackground.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DQT_DLL -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -D_UNICODE "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtGui" "-I.\base\CustomControl" "-I.\forms\TitleWidget"</Command>
+    </CustomBuild>
     <ClInclude Include="base\BusinessLayer\WindowsServices.h" />
     <CustomBuild Include="base\CustomControl\shadowwindow.h">
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
@@ -308,7 +349,6 @@
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DQT_DLL -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -D_UNICODE "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtGui" "-I.\base\CustomControl" "-I.\forms\TitleWidget"</Command>
     </CustomBuild>
-    <ClInclude Include="GeneratedFiles\ui_cacheentrydetail.h" />
     <CustomBuild Include="forms\AboutDialog\about.h">
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing about.h...</Message>
@@ -418,6 +458,38 @@
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
+    <None Include="UI\images\Misc\5.png" />
+    <None Include="UI\images\Misc\5_big.png" />
+    <None Include="UI\images\Misc\about.png" />
+    <None Include="UI\images\Misc\arrowDown.png" />
+    <None Include="UI\images\Misc\cloud.png" />
+    <None Include="UI\images\Misc\disk.ico" />
+    <None Include="UI\images\Misc\help.png" />
+    <None Include="UI\images\Misc\home.png" />
+    <None Include="UI\images\Misc\logo.png" />
+    <None Include="UI\images\Misc\notification.png" />
+    <None Include="UI\images\Misc\open.png" />
+    <None Include="UI\images\Misc\quit.png" />
+    <None Include="UI\images\Misc\restore.png" />
+    <None Include="UI\images\Misc\run.png" />
+    <None Include="UI\images\Misc\setting.png" />
+    <None Include="UI\images\Misc\update.png" />
+    <None Include="UI\images\SysButtons\close.png" />
+    <None Include="UI\images\SysButtons\close_hover.png" />
+    <None Include="UI\images\SysButtons\close_pressed.png" />
+    <None Include="UI\images\SysButtons\menu.png" />
+    <None Include="UI\images\SysButtons\menu_hover.png" />
+    <None Include="UI\images\SysButtons\menu_pressed.png" />
+    <None Include="UI\images\SysButtons\min.png" />
+    <None Include="UI\images\SysButtons\min_hover.png" />
+    <None Include="UI\images\SysButtons\min_pressed.png" />
+    <None Include="UI\images\ToolButtons\gongNeng.png" />
+    <None Include="UI\images\ToolButtons\jiaSu.png" />
+    <None Include="UI\images\ToolButtons\louDong.png" />
+    <None Include="UI\images\ToolButtons\muMa.png" />
+    <None Include="UI\images\ToolButtons\ruanJian.png" />
+    <None Include="UI\images\ToolButtons\tiJian.png" />
+    <None Include="UI\images\ToolButtons\xiTong.png" />
     <None Include="UI\style.qss" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

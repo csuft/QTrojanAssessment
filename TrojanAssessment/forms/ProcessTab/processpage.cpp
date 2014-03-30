@@ -80,13 +80,14 @@ WinServicesTab::WinServicesTab(QWidget *parent)
 	m_filter->setFixedHeight(25);
 	m_reloadBtn = new QPushButton(QStringLiteral("Reload"), this);
 	m_reloadBtn->setFixedSize(75, 25);
-	m_topLayout->addWidget(m_filter, 1, Qt::AlignCenter);
-	m_topLayout->addWidget(m_reloadBtn, 0, Qt::AlignCenter);
+	m_topLayout->addWidget(m_filter, 1);
+	m_topLayout->addWidget(m_reloadBtn);
 	m_topLayout->setSpacing(5);
 	m_topLayout->setContentsMargins(1, 1, 1, 1);
 	
-	m_layout->addLayout(m_topLayout, 0);
-	m_layout->addWidget(m_view, 0, Qt::AlignCenter);
+	m_layout->addLayout(m_topLayout);
+	m_layout->addWidget(m_view);
+	m_layout->setSpacing(0);
 	m_layout->setContentsMargins(0, 0, 0, 0);
 	setLayout(m_layout);
 

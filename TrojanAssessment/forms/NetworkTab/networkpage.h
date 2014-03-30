@@ -8,7 +8,7 @@
 #include <QLabel>
 #include <QVBoxLayout>
 
-#include "../../base/CustomControl/customitemmodel.h"
+#include "base/CustomControl/customitemmodel.h"
 
 class RealTimeFlowTab;
 class AppRankTab;
@@ -64,7 +64,10 @@ private:
 	AppRankTab(const AppRankTab& obj);
 	AppRankTab& operator=(const AppRankTab& obj);
 private:
-	// flow chart
+	// read operations count, write operations count, other I/O operations count, 
+	// number of bytes read, number of bytes write, number of bytes transfered by other I/O operations.
+	// typedef struct _IO_COUNTERS {};
+	 
 };
 
 //////////////////////////////////////////////////////////////////////////

@@ -7,14 +7,13 @@
 #include <QHBoxLayout>
 #include <QTableView>
 #include <QStandardItemModel>
+#include <QSortFilterProxyModel>
 #include <QTableWidget>
+#include <QCompleter>
 #include <QFormLayout>
 
-QT_BEGIN_NAMESPACE
-class QTableView;
-class QDialogButtonBox;
-class QGroupBox;
-QT_END_NAMESPACE
+#include "base/CustomControl/customitemmodel.h"
+#include "base/CustomControl/nofocusdelegate.h"
 
 class SysUsageTab;
 class MemMonitorTab;
@@ -34,9 +33,9 @@ private:
 	MemoryPage& operator=(const MemoryPage& obj);
 	MemoryPage(const MemoryPage& obj);
 private:
-	SysUsageTab* m_sysUsage;   // 操作系统所占用内存使用情况
-	MemMonitorTab* m_memMonitor;  // 内存分配状况的动态图和统计图
-	MemProtectionTab* m_memProtect;  // 内存保护，高级内容
+	SysUsageTab* m_sysUsage;			// system memory usage
+	MemMonitorTab* m_memMonitor;		// runtime memory monitoring
+	MemProtectionTab* m_memProtect;		// memory protection
 };
 
 //////////////////////////////////////////////////////////////////////////
@@ -54,9 +53,12 @@ private:
 private:
 	QVBoxLayout* m_mainLayout;
 	QTableView* m_procList;
-	QStandardItemModel* m_procModel;
-
-	QTableWidget* m_table;
+	CustomItemModel* m_procModel;
+	QSortFilterProxyModel* m_proxy;
+	QLineEdit* m_filter;
+	QCompleter* m_completer;
+	// PageFaultCount, PeakWorkingSetSize, WorkingSetSize, QuotaPeakPagedPoolUsage, QuotaPagedPoolUsage
+	// QuotaPeakNonPagedPoolUsage, QuotaNonPagedPoolUsage, PagefileUsage, PeakPagefileUsage
 };
 
 //////////////////////////////////////////////////////////////////////////
@@ -85,13 +87,16 @@ class MemProtectionTab : public QWidget
 	Q_OBJECT
 
 public:
-	MemProtectionTab(QWidget* parent = 0);
+	explicit MemProtectionTab(QWidget* parent = 0);
 	~MemProtectionTab();
 private:
 	MemProtectionTab(const MemProtectionTab& obj);
 	MemProtectionTab& operator=(const MemProtectionTab& obj);
 private:
-	
+	// PID, Name, AllocationBase, State, AllocationProtect, BaseAddress, RegionSize, Type, Protect
+	QTableView* m_view;
+	CustomItemModel* m_model;
+	QVBoxLayout* m_layout;
 };
 
 #endif // MEMORYPAGE_H

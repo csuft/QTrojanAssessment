@@ -51,6 +51,7 @@ PortsStatusTab::PortsStatusTab(QWidget *parent)
 {
 	m_layout = new QVBoxLayout(this);
 	m_infoLabel = new QLabel(QStringLiteral("Loading..."), this);
+	m_infoLabel->setObjectName(QStringLiteral("BlueLabel"));
 
 	m_model = new CustomItemModel(0, 5, this);
 
@@ -67,7 +68,7 @@ PortsStatusTab::PortsStatusTab(QWidget *parent)
 	m_view->verticalHeader()->setDefaultSectionSize(25);
 	m_view->setModel(m_model);
 
-	m_layout->addWidget(m_view, 1, Qt::AlignCenter);
+	m_layout->addWidget(m_view, 1);
 	m_layout->addWidget(m_infoLabel, 0, Qt::AlignLeft);
 	m_layout->setSpacing(2);
 	m_layout->setContentsMargins(1, 1, 1, 1);
