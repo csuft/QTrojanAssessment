@@ -242,6 +242,15 @@
     <ClCompile Include="GeneratedFiles\qrc_trojanassessment.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="3rdParty\ChartDirector\realtimechart.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_realtimechart.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_realtimechart.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="UI\trojanassessment.qrc">
@@ -311,6 +320,9 @@
       <Filter>Header Files</Filter>
     </CustomBuild>
     <CustomBuild Include="3rdParty\ChartDirector\qchartviewer.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="3rdParty\ChartDirector\realtimechart.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
   </ItemGroup>

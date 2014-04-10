@@ -11,6 +11,7 @@
 #include <QTableWidget>
 #include <QCompleter>
 #include <QFormLayout>
+#include <QLabel>
 
 #include "base/CustomControl/customitemmodel.h"
 #include "base/CustomControl/nofocusdelegate.h"
@@ -18,6 +19,8 @@
 class SysUsageTab;
 class MemMonitorTab;
 class MemProtectionTab;
+class ManoMeter;
+class RealtimeChart;
 
 class MemoryPage : public QTabWidget
 {
@@ -78,6 +81,11 @@ private:
 	QFormLayout* m_formLayout;
 	QVBoxLayout* m_mainLayout;
 	QHBoxLayout* m_bottomLayout;
+	RealtimeChart* m_chart;
+	ManoMeter* m_memusage;
+	QLabel* m_total_mem;
+	QLabel* m_avail_mem;
+	QLabel* m_used_mem;
 };
 
 //////////////////////////////////////////////////////////////////////////

@@ -45,7 +45,7 @@ RegMonitorTab::RegMonitorTab(QWidget *parent)
 	m_centerLayout = new QHBoxLayout(this);
 
 	// top layout
-	m_registryRoot = new QPushButton(QStringLiteral("Reg Root"), this);
+	m_registryRoot = new QPushButton(QStringLiteral("Registry Root"), this);
 	m_registryRoot->setFixedSize(75, 25);
 	m_startBtn = new QPushButton(QStringLiteral("Start"), this);
 	m_startBtn->setFixedSize(75, 25);
@@ -80,6 +80,7 @@ RegMonitorTab::RegMonitorTab(QWidget *parent)
 	m_view = new QTableView(this);
 	m_view->verticalHeader()->hide();
 	m_view->setModel(m_proxy);
+	m_view->horizontalHeader()->setStretchLastSection(true);
 	m_mainLayout->addLayout(m_topLayout);
 	m_mainLayout->addLayout(m_centerLayout);
 	m_mainLayout->addWidget(m_view, 1);

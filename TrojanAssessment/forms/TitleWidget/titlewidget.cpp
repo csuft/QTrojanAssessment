@@ -18,11 +18,11 @@ TitleWidget::TitleWidget(QWidget *parent)
 	m_minBtn = new CustomPushButton(this);
 	m_closeBtn = new CustomPushButton(this);
 	m_settings->setBtnBackground(QStringLiteral(":/SysButtons/menu"));
-	m_settings->setToolTip(QStringLiteral("System Settings"));
+	m_settings->setToolTip(QStringLiteral("Settings"));
 	m_minBtn->setBtnBackground(QStringLiteral(":/SysButtons/min"));
-	m_minBtn->setToolTip(QStringLiteral("Minimize Window"));
+	m_minBtn->setToolTip(QStringLiteral("Minimize"));
 	m_closeBtn->setBtnBackground(QStringLiteral(":/SysButtons/close"));
-	m_closeBtn->setToolTip(QStringLiteral("Close Window"));
+	m_closeBtn->setToolTip(QStringLiteral("Close"));
 
 	m_topLayout->addWidget(m_windowTitle, 0, Qt::AlignVCenter);
 	m_topLayout->addStretch();

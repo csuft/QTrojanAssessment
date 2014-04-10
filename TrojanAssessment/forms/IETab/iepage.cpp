@@ -69,8 +69,7 @@ BrowserCacheTab::BrowserCacheTab(QWidget* parent /* = 0 */)
 	m_viewList = new QTableView(this);
 	m_viewList->setSelectionBehavior(QAbstractItemView::SelectRows);
 	m_viewList->setSelectionMode(QAbstractItemView::SingleSelection);
-	m_viewList->setSortingEnabled(true);
-	m_viewList->sortByColumn(0, Qt::AscendingOrder);
+	m_viewList->setSortingEnabled(false);
 	m_viewList->verticalHeader()->hide();
 	m_viewList->setWordWrap(false);
 	m_viewList->setHorizontalScrollMode(QAbstractItemView::ScrollPerPixel);

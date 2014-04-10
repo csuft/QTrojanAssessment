@@ -1,4 +1,6 @@
 #include "securitycenterpage.h"
+#include "3rdParty/Manometer/manometer.h"
+#include "3rdParty/ChartDirector/realtimechart.h"
 
 SecurityCenterPage::SecurityCenterPage(QWidget *parent)
 	: QTabWidget(parent)
@@ -30,10 +32,52 @@ void SecurityCenterPage::onChangeTab(int index)
 
 //////////////////////////////////////////////////////////////////////////
 //
-AssessmentTab::AssessmentTab(QWidget *parent)
-	: QWidget(parent)
+AssessmentTab::AssessmentTab(QWidget *parent): QWidget(parent)
 {
+	m_mainLayout = new QVBoxLayout(this);
+	m_bottomLayout = new QHBoxLayout(this);
+	m_chart = new RealtimeChart("Network Flow(KB/s)", "Network Flow Monitor", "Business", "Non-business", this);
+	m_cpu = new ManoMeter(this);
+	m_cpu_label = new QLabel(QStringLiteral("CPU Usage"), this);
+	m_layout1 = new QVBoxLayout(this);
+	m_layout1->addWidget(m_cpu, 1);
+	m_layout1->addWidget(m_cpu_label, 0, Qt::AlignCenter);
+	m_layout1->setSpacing(0);
+	m_layout1->setContentsMargins(0, 0, 0, 0);
+	m_disk = new ManoMeter(this);
+	m_disk_label = new QLabel(QStringLiteral("Disk Load"), this);
+	m_layout2->addWidget(m_disk, 1);
+	m_layout2->addWidget(m_disk_label, 0, Qt::AlignCenter);
+	m_layout2->setSpacing(0);
+	m_layout2->setContentsMargins(0, 0, 0, 0);
+	m_mem = new ManoMeter(this);
+	m_mem_label = new QLabel(QStringLiteral("Memory Usage"), this);
+	m_layout3->addWidget(m_mem, 1);
+	m_layout3->addWidget(m_mem_label, 0, Qt::AlignCenter);
+	m_layout3->setSpacing(0);
+	m_layout3->setContentsMargins(0, 0, 0, 0);
 
+	m_cpu->setSuffix("%");
+	m_cpu->setValue(0);
+	m_cpu->setMaximum(80);
+	m_disk->setSuffix("MB/s");
+	m_disk->setValue(0);
+	m_disk->setMaximum(100);
+	m_mem->setSuffix("%");
+	m_mem->setValue(0);
+	m_mem->setMaximum(80);
+
+	m_bottomLayout->addLayout(m_layout1);
+	m_bottomLayout->addLayout(m_layout2);
+	m_bottomLayout->addLayout(m_layout3);
+	m_bottomLayout->setSpacing(5);
+	m_bottomLayout->setContentsMargins(0, 5, 0, 0);
+
+	m_mainLayout->addWidget(m_chart);
+	m_mainLayout->addLayout(m_bottomLayout);
+	m_mainLayout->setSpacing(5);
+	m_mainLayout->setContentsMargins(0, 0, 0, 0);
+	setLayout(m_mainLayout);
 }
 
 //////////////////////////////////////////////////////////////////////////

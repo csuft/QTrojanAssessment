@@ -12,7 +12,6 @@ int main(int argc, char *argv[])
 	app.setOrganizationName(QStringLiteral("HUST"));
 	app.setApplicationName(QStringLiteral("TrojanDetector"));
 	app.setApplicationVersion(QStringLiteral("1.0-alpha"));
-	QApplication::setStyle(QStyleFactory::create(QStringLiteral("Fusion")));
 	// To add a splash screen.
 
 	// add qt style sheet

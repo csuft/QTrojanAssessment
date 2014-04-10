@@ -37,7 +37,6 @@ DataFileTab::DataFileTab(QWidget* parent)
 	m_mainLayout = new QVBoxLayout(this);
 	m_statusLayout = new QHBoxLayout(this);
 	m_topLayout = new QHBoxLayout(this);
-	m_bottomLayout = new QHBoxLayout(this);
 
 	// top layout
 	m_filter = new QLineEdit(this);
@@ -76,13 +75,6 @@ DataFileTab::DataFileTab(QWidget* parent)
 	m_startBtn->setFixedSize(75, 25);
 	m_stopBtn = new QPushButton(QStringLiteral("Stop"), this);
 	m_stopBtn->setFixedSize(75, 25);
-	m_bottomLayout = new QHBoxLayout(this);
-	m_bottomLayout->addStretch();
-	m_bottomLayout->addWidget(m_chooseDir, 0, Qt::AlignVCenter);
-	m_bottomLayout->addWidget(m_startBtn, 0, Qt::AlignVCenter);
-	m_bottomLayout->addWidget(m_stopBtn, 0, Qt::AlignVCenter);
-	m_bottomLayout->setSpacing(5);
-	m_bottomLayout->setContentsMargins(1, 1, 1, 1);
 
 	// status information label
 	m_status = new QLabel(QStringLiteral("Directory: "), this);
@@ -94,6 +86,9 @@ DataFileTab::DataFileTab(QWidget* parent)
 	m_status->setBuddy(m_status_info);
 	m_statusLayout->addWidget(m_status, 0, Qt::AlignVCenter);
 	m_statusLayout->addWidget(m_status_info, 1, Qt::AlignVCenter);
+	m_statusLayout->addWidget(m_chooseDir);
+	m_statusLayout->addWidget(m_startBtn);
+	m_statusLayout->addWidget(m_stopBtn);
 	m_statusLayout->setSpacing(5);
 	m_statusLayout->setContentsMargins(1, 1, 1, 1);
 
@@ -101,7 +96,6 @@ DataFileTab::DataFileTab(QWidget* parent)
 	m_mainLayout->addLayout(m_topLayout);
 	m_mainLayout->addWidget(m_view);
 	m_mainLayout->addLayout(m_statusLayout);
-	m_mainLayout->addLayout(m_bottomLayout);
 	m_mainLayout->setSpacing(0);
 	m_mainLayout->setContentsMargins(0, 0, 0, 0);
 
@@ -113,7 +107,33 @@ DataFileTab::DataFileTab(QWidget* parent)
 ExecFileTab::ExecFileTab(QWidget* parent)
 	: QWidget(parent)
 {
+	m_mainLayout = new QVBoxLayout(this);
+	m_topLayout = new QHBoxLayout(this);
 
+	m_clearBtn = new QPushButton(QStringLiteral("Clear"), this);
+	m_clearBtn->setFixedSize(75, 25);
+	m_startBtn = new QPushButton(QStringLiteral("Start"), this);
+	m_startBtn->setFixedSize(75, 25);
+	m_stopBtn = new QPushButton(QStringLiteral("Stop"), this);
+	m_stopBtn->setFixedSize(75, 25);
+	m_topLayout->addStretch();
+	m_topLayout->addWidget(m_clearBtn);
+	m_topLayout->addWidget(m_startBtn);
+	m_topLayout->addWidget(m_stopBtn);
+	m_topLayout->setSpacing(5);
+	m_topLayout->setContentsMargins(1, 1, 1, 1);
+
+	m_view = new QTableView(this);
+	m_model = new CustomItemModel(0, 6, this);
+	m_view->setModel(m_model);
+	m_view->horizontalHeader()->setStretchLastSection(true);
+
+	m_mainLayout->addLayout(m_topLayout);
+	m_mainLayout->addWidget(m_view, 1);
+	m_mainLayout->setSpacing(0);
+	m_mainLayout->setContentsMargins(0, 0, 0, 0);
+
+	setLayout(m_mainLayout);
 }
 
 //////////////////////////////////////////////////////////////////////////

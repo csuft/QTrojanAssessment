@@ -23,7 +23,7 @@
 #ifndef BARMETER_H
 #define BARMETER_H
 
-#include "abstractmeter.h"
+#include "3rdParty/Manometer/abstractmeter.h"
 
 class ManoMeter : public AbstractMeter
 {

@@ -27,6 +27,8 @@
 class AssessmentTab;
 class SysInfoTab;
 class LoadedLibTab;
+class ManoMeter;
+class RealtimeChart;
 
 class SecurityCenterPage : public QTabWidget
 {
@@ -61,7 +63,18 @@ private:
 	AssessmentTab(const AssessmentTab& obj);
 	AssessmentTab& operator=(const AssessmentTab& obj);
 private:
-	QGridLayout* m_mainLayout;
+	ManoMeter* m_cpu;
+	QVBoxLayout* m_layout1;
+	QLabel* m_cpu_label;
+	ManoMeter* m_disk;
+	QVBoxLayout* m_layout2;
+	QLabel* m_disk_label;
+	ManoMeter* m_mem;
+	QVBoxLayout* m_layout3;
+	QLabel* m_mem_label;
+	RealtimeChart* m_chart;
+	QHBoxLayout* m_bottomLayout;
+	QVBoxLayout* m_mainLayout;
 };
 
 //////////////////////////////////////////////////////////////////////////

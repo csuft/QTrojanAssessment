@@ -23,7 +23,7 @@
 #ifndef ABSTRACTMETER_H
 #define ABSTRACTMETER_H
 
-#include "widgetwithbackground.h"
+#include "3rdParty/Manometer/widgetwithbackground.h"
 
 /**
 * Abstract class for Meter/Gauge classes 

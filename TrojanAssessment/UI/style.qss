@@ -79,6 +79,7 @@ QTabBar::tab{
 	color:white;
 	min-width:100px;
 	min-height:25px;
+	padding: 0px;
 }
 
 QTabBar::tab:selected{
@@ -110,7 +111,7 @@ QComboBox::drop-down {
 }
 
 QHeaderView::section {
-	background-color: rgb(41, 119, 191);
+	background-color: rgb(231, 233, 250);
 	color: white;
 	padding-left: 4px;
 	border: none;

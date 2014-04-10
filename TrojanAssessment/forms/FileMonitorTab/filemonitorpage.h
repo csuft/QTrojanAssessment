@@ -38,7 +38,6 @@ private:
 	
 private:
 	//QTabWidget* m_tabWidget;
-
 	DataFileTab* m_dataFileTab;
 	ExecFileTab* m_execFileTab;
 	FileBrowserTab* m_browserTab;
@@ -61,16 +60,14 @@ private:
 	QSortFilterProxyModel* m_proxy;
 	QTableView* m_view;
 	
-	QHBoxLayout* m_statusLayout;
-	QLabel* m_status;
-	QLineEdit* m_status_info;
-
 	QHBoxLayout* m_topLayout;
 	QLineEdit* m_filter;
 	QPushButton* m_clearBtn;
 	QPushButton* m_exportBtn;
 
-	QHBoxLayout* m_bottomLayout;
+	QHBoxLayout* m_statusLayout;
+	QLabel* m_status;
+	QLineEdit* m_status_info;
 	QPushButton* m_chooseDir;
 	QPushButton* m_startBtn;
 	QPushButton* m_stopBtn;
@@ -93,15 +90,14 @@ private:
 	ExecFileTab& operator=(const ExecFileTab& obj);
 private:
 	QTableView* m_view;
-	QStandardItemModel* m_model;
+	CustomItemModel* m_model;
 
 	QHBoxLayout* m_topLayout;
-	QLineEdit* m_filter;
 	QPushButton* m_clearBtn;
 	QPushButton* m_startBtn;
 	QPushButton* m_stopBtn;
 
-	QHBoxLayout* m_mainLayout;
+	QVBoxLayout* m_mainLayout;
 };
 
 //////////////////////////////////////////////////////////////////////////
