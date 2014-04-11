@@ -11,11 +11,13 @@
 static const int DataInterval = 250;
 
 RealtimeChart::RealtimeChart(const char* ytitle, const char* mainTitle,
-	const char* labela, const char* labelb, QWidget *parent) : QWidget(parent)
+	const char* labela, const char* labelb, QWidget *parent) 
+	: QWidget(parent), m_yTitle(ytitle), m_mainTitle(mainTitle), m_labelA(labela), m_labelB(labelb)
+
 {
     // Chart Viewer
     m_ChartViewer = new QChartViewer(this);
-    m_ChartViewer->setGeometry(2, 2, 600, 270);
+    m_ChartViewer->setGeometry(0, 0, 645, 270);
 	m_ChartViewer->setFrameShape(QFrame::NoFrame);
     connect(m_ChartViewer, SIGNAL(viewPortChanged()), SLOT(drawChart()));
 
@@ -36,6 +38,7 @@ RealtimeChart::RealtimeChart(const char* ytitle, const char* mainTitle,
     // Set up the chart update timer
     m_ChartUpdateTimer = new QTimer(this);
     connect(m_ChartUpdateTimer, SIGNAL(timeout()), SLOT(updateChart()));
+	m_ChartUpdateTimer->start(1000);
 }
 
 //
@@ -77,14 +80,6 @@ void RealtimeChart::getData()
         m_nextDataTime = m_nextDataTime.addMSecs(DataInterval);
     }
     while (m_nextDataTime < now);
-
-    //
-    // We provide some visual feedback to the latest numbers generated, so you can see the
-    // data being generated.
-    //
-    m_ValueA->setText(QString::number(m_dataSeriesA[sampleSize - 1], 'f', 2));
-    m_ValueB->setText(QString::number(m_dataSeriesB[sampleSize - 1], 'f', 2));
-    m_ValueC->setText(QString::number(m_dataSeriesC[sampleSize - 1], 'f', 2));
 }
 
 //
@@ -106,14 +101,14 @@ void RealtimeChart::drawChart()
 {
     // Create an XYChart object 600 x 270 pixels in size, with light white (ffffff)
     // background, white (000000) border, no raised effect, and with a rounded frame.
-    XYChart *c = new XYChart(600, 270, 0xffffff, 0xffffff, 0);
+    XYChart *c = new XYChart(645, 270, 0xffffff, 0xffffff, 0);
     QColor bgColor = palette().color(backgroundRole()).rgb();
     //c->setRoundedFrame((bgColor.red() << 16) + (bgColor.green() << 8) + bgColor.blue());
 
     // Set the plotarea at (55, 62) and of size 520 x 175 pixels. Use white (ffffff)
     // background. Enable both horizontal and vertical grids by setting their colors to
     // grey (cccccc). Set clipping mode to clip the data lines to the plot area.
-    c->setPlotArea(55, 62, 520, 175, 0xffffff, -1, -1, 0xcccccc, 0xcccccc);
+    c->setPlotArea(55, 62, 580, 185, 0xffffff, -1, -1, 0xcccccc, 0xcccccc);
     c->setClipping();
 
     // Add a title to the chart using 15 pts Times New Roman Bold Italic font, with a light
@@ -126,7 +121,7 @@ void RealtimeChart::drawChart()
     // plot area.
     LegendBox *b = c->addLegend2(55, 33, 3, "arialbd.ttf", 9);
     b->setBackground(Chart::Transparent, Chart::Transparent);
-    b->setWidth(520);
+    b->setWidth(580);
 
     // Configure the y-axis with a 10pts Arial Bold axis title
     c->yAxis()->setTitle(m_yTitle, "arialbd.ttf", 10);

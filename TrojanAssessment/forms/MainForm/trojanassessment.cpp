@@ -205,7 +205,7 @@ void TrojanAssessment::changePage(QTreeWidgetItem* cur, QTreeWidgetItem* prev)
 			{
 				stackedWidget->setCurrentWidget(iep);	
 			}
-			else if (str == "Windows Register")
+			else if (str == "Windows Registry")
 			{
 				stackedWidget->setCurrentWidget(rp);	
 			}

@@ -87,6 +87,10 @@ MemMonitorTab::MemMonitorTab(QWidget* parent /* = 0 */)
 
 	m_chart = new RealtimeChart("Primary Memory", "Memory Usage Monitor", "Used", "Available", this);
 	m_memusage = new ManoMeter(this);
+	m_memusage->setValue(0);
+	m_memusage->setMaximum(80);
+	m_memusage->setSuffix("%");
+	m_memusage->setFixedSize(150, 150);
 	m_total_mem = new QLabel(this);
 	m_avail_mem = new QLabel(this);
 	m_used_mem = new QLabel(this);
@@ -98,9 +102,9 @@ MemMonitorTab::MemMonitorTab(QWidget* parent /* = 0 */)
 	m_bottomLayout->addWidget(m_memusage);
 	m_bottomLayout->addLayout(m_formLayout);
 	m_bottomLayout->setSpacing(5);
-	m_bottomLayout->setContentsMargins(0, 0, 0, 0);
+	m_bottomLayout->setContentsMargins(15, 5, 5, 5);
 
-	m_mainLayout->addWidget(m_chart, 1);
+	m_mainLayout->addWidget(m_chart);
 	m_mainLayout->addLayout(m_bottomLayout);
 	m_mainLayout->setSpacing(5);
 	m_mainLayout->setContentsMargins(0, 0, 0, 0);

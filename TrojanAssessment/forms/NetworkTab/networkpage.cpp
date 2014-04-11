@@ -54,7 +54,7 @@ RealTimeFlowTab::RealTimeFlowTab(QWidget *parent)
 	m_leftForm->addRow(QStringLiteral("Non-business:"), m_non_business_value);
 	m_leftForm->addRow(QStringLiteral("Average:"), m_average_value);
 	m_leftForm->setSpacing(5);
-	m_leftForm->setContentsMargins(0, 0, 0, 0);
+	m_leftForm->setContentsMargins(5, 5, 5, 3);
 
 	m_tcp_value = new QLabel(this);
 	m_udp_value = new QLabel(this);
@@ -65,7 +65,7 @@ RealTimeFlowTab::RealTimeFlowTab(QWidget *parent)
 	m_rightForm->addRow(QStringLiteral("ICMP packets: "), m_tcp_value);
 	m_rightForm->addRow(QStringLiteral("Average packets: "), m_tcp_value);
 	m_rightForm->setSpacing(5);
-	m_rightForm->setContentsMargins(0, 0, 0, 0);
+	m_rightForm->setContentsMargins(5, 5, 5, 3);
 
 	m_leftGroup->setLayout(m_leftForm);
 	m_rightGroup->setLayout(m_rightForm);

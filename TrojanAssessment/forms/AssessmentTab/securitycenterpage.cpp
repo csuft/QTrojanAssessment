@@ -37,46 +37,52 @@ AssessmentTab::AssessmentTab(QWidget *parent): QWidget(parent)
 	m_mainLayout = new QVBoxLayout(this);
 	m_bottomLayout = new QHBoxLayout(this);
 	m_chart = new RealtimeChart("Network Flow(KB/s)", "Network Flow Monitor", "Business", "Non-business", this);
+	
 	m_cpu = new ManoMeter(this);
 	m_cpu_label = new QLabel(QStringLiteral("CPU Usage"), this);
 	m_layout1 = new QVBoxLayout(this);
-	m_layout1->addWidget(m_cpu, 1);
-	m_layout1->addWidget(m_cpu_label, 0, Qt::AlignCenter);
+	m_layout1->addWidget(m_cpu);
+	m_layout1->addWidget(m_cpu_label, 0, Qt::AlignHCenter);
 	m_layout1->setSpacing(0);
-	m_layout1->setContentsMargins(0, 0, 0, 0);
+	m_layout1->setContentsMargins(0, 0, 0, 5);
 	m_disk = new ManoMeter(this);
 	m_disk_label = new QLabel(QStringLiteral("Disk Load"), this);
-	m_layout2->addWidget(m_disk, 1);
-	m_layout2->addWidget(m_disk_label, 0, Qt::AlignCenter);
+	m_layout2 = new QVBoxLayout(this);
+	m_layout2->addWidget(m_disk);
+	m_layout2->addWidget(m_disk_label, 0, Qt::AlignHCenter);
 	m_layout2->setSpacing(0);
-	m_layout2->setContentsMargins(0, 0, 0, 0);
+	m_layout2->setContentsMargins(0, 0, 0, 5);
 	m_mem = new ManoMeter(this);
 	m_mem_label = new QLabel(QStringLiteral("Memory Usage"), this);
-	m_layout3->addWidget(m_mem, 1);
-	m_layout3->addWidget(m_mem_label, 0, Qt::AlignCenter);
+	m_layout3 = new QVBoxLayout(this);
+	m_layout3->addWidget(m_mem);
+	m_layout3->addWidget(m_mem_label, 0, Qt::AlignHCenter);
 	m_layout3->setSpacing(0);
-	m_layout3->setContentsMargins(0, 0, 0, 0);
+	m_layout3->setContentsMargins(0, 0, 0, 5);
 
 	m_cpu->setSuffix("%");
 	m_cpu->setValue(0);
 	m_cpu->setMaximum(80);
+	m_cpu->setFixedSize(135, 135);
 	m_disk->setSuffix("MB/s");
 	m_disk->setValue(0);
 	m_disk->setMaximum(100);
+	m_disk->setFixedSize(135, 135);
 	m_mem->setSuffix("%");
 	m_mem->setValue(0);
 	m_mem->setMaximum(80);
+	m_mem->setFixedSize(135, 135);
 
 	m_bottomLayout->addLayout(m_layout1);
 	m_bottomLayout->addLayout(m_layout2);
 	m_bottomLayout->addLayout(m_layout3);
-	m_bottomLayout->setSpacing(5);
-	m_bottomLayout->setContentsMargins(0, 5, 0, 0);
+	m_bottomLayout->setSpacing(10);
+	m_bottomLayout->setContentsMargins(10, 5, 10, 5);
 
-	m_mainLayout->addWidget(m_chart);
+	m_mainLayout->addWidget(m_chart, 1);
 	m_mainLayout->addLayout(m_bottomLayout);
 	m_mainLayout->setSpacing(5);
-	m_mainLayout->setContentsMargins(0, 0, 0, 0);
+	m_mainLayout->setContentsMargins(0, 0, 0, 5);
 	setLayout(m_mainLayout);
 }
 

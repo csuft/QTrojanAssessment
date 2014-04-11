@@ -19,6 +19,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NanoMeter", "NanoMeter\Nano
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ChartDirectorRealTime", "ChartDirectorRealTime\ChartDirectorRealTime.vcxproj", "{D0ED35D3-410D-4400-8E7A-2A2656969C5A}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestRealTimeChart", "TestRealTimeChart\TestRealTimeChart.vcxproj", "{203E4F64-1A71-4D80-AA4C-8DC1CDC8143B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -61,6 +63,10 @@ Global
 		{D0ED35D3-410D-4400-8E7A-2A2656969C5A}.Debug|Win32.Build.0 = Debug|Win32
 		{D0ED35D3-410D-4400-8E7A-2A2656969C5A}.Release|Win32.ActiveCfg = Release|Win32
 		{D0ED35D3-410D-4400-8E7A-2A2656969C5A}.Release|Win32.Build.0 = Release|Win32
+		{203E4F64-1A71-4D80-AA4C-8DC1CDC8143B}.Debug|Win32.ActiveCfg = Debug|Win32
+		{203E4F64-1A71-4D80-AA4C-8DC1CDC8143B}.Debug|Win32.Build.0 = Debug|Win32
+		{203E4F64-1A71-4D80-AA4C-8DC1CDC8143B}.Release|Win32.ActiveCfg = Release|Win32
+		{203E4F64-1A71-4D80-AA4C-8DC1CDC8143B}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

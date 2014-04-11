@@ -5,7 +5,7 @@
 #include <QDateTime>
 #include <QTimer>
 #include <QLabel>
-#include "qchartviewer.h"
+#include "3rdParty/ChartDirector/qchartviewer.h"
 
 // The number of samples per data series used in this demo
 const int sampleSize = 240;
@@ -23,17 +23,13 @@ private:
 
     QDateTime m_nextDataTime;           // Used by the random number generator to generate realtime data.
 
-    QLabel *m_ValueA;                   // Label to display the realtime value A
-    QLabel *m_ValueB;                   // Label to display the realtime value B
-    QLabel *m_ValueC;                   // Label to display the realtime value C
-
     QChartViewer *m_ChartViewer;        // QChartViewer control
     QTimer *m_ChartUpdateTimer;         // The chart update timer
 
-	char* m_yTitle;
-	char* m_mainTitle;
-	char* m_labelA;
-	char* m_labelB;
+	const char* m_yTitle;
+	const char* m_mainTitle;
+	const char* m_labelA;
+	const char* m_labelB;
 
 private slots:
     void getData();                     // Get new data values
