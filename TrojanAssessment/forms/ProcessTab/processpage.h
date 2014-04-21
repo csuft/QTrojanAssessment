@@ -19,7 +19,7 @@
 #include "base/CustomControl/customitemmodel.h"
 #include "base/CustomControl/nofocusdelegate.h"
 #include "base/BusinessLayer/BasicInformation.h"
-
+#include "base/BusinessLayer/WindowsServices.h"
 #include <vector>
 using std::vector;
 
@@ -27,6 +27,7 @@ class RuntimeMonitorTab;
 class WinServicesTab;
 class ProcessListTab;
 class SoftwareInstalledTab;
+class WindowsServices;
 
 class ProcessPage : public QTabWidget
 {
@@ -89,7 +90,7 @@ private:
 	QHBoxLayout* m_topLayout;
 	QLineEdit* m_filter;
 	QPushButton* m_reloadBtn;
-
+	WindowsServices m_svrs;
 	QVBoxLayout* m_layout;
 };
 

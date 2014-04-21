@@ -63,15 +63,15 @@ AssessmentTab::AssessmentTab(QWidget *parent): QWidget(parent)
 	m_cpu->setSuffix("%");
 	m_cpu->setValue(0);
 	m_cpu->setMaximum(80);
-	m_cpu->setFixedSize(135, 135);
+	m_cpu->setFixedSize(125, 125);
 	m_disk->setSuffix("MB/s");
 	m_disk->setValue(0);
 	m_disk->setMaximum(100);
-	m_disk->setFixedSize(135, 135);
+	m_disk->setFixedSize(125, 125);
 	m_mem->setSuffix("%");
 	m_mem->setValue(0);
 	m_mem->setMaximum(80);
-	m_mem->setFixedSize(135, 135);
+	m_mem->setFixedSize(125, 125);
 
 	m_bottomLayout->addLayout(m_layout1);
 	m_bottomLayout->addLayout(m_layout2);

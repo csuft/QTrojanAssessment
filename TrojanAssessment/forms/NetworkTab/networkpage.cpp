@@ -53,7 +53,7 @@ RealTimeFlowTab::RealTimeFlowTab(QWidget *parent)
 	m_leftForm->addRow(QStringLiteral("Business:"), m_business_value);
 	m_leftForm->addRow(QStringLiteral("Non-business:"), m_non_business_value);
 	m_leftForm->addRow(QStringLiteral("Average:"), m_average_value);
-	m_leftForm->setSpacing(5);
+	m_leftForm->setSpacing(10);
 	m_leftForm->setContentsMargins(5, 5, 5, 3);
 
 	m_tcp_value = new QLabel(this);
@@ -63,16 +63,17 @@ RealTimeFlowTab::RealTimeFlowTab(QWidget *parent)
 	m_rightForm->addRow(QStringLiteral("TCP packets: "), m_tcp_value);
 	m_rightForm->addRow(QStringLiteral("UDP packets: "), m_tcp_value);
 	m_rightForm->addRow(QStringLiteral("ICMP packets: "), m_tcp_value);
-	m_rightForm->addRow(QStringLiteral("Average packets: "), m_tcp_value);
-	m_rightForm->setSpacing(5);
+	m_rightForm->addRow(QStringLiteral("Packets Speed: "), m_tcp_value);
+	m_rightForm->setSpacing(10);
 	m_rightForm->setContentsMargins(5, 5, 5, 3);
-
+	m_leftGroup->setFixedHeight(140);
+	m_rightGroup->setFixedHeight(140);
 	m_leftGroup->setLayout(m_leftForm);
 	m_rightGroup->setLayout(m_rightForm);
 	m_bottomLayout->addWidget(m_leftGroup);
 	m_bottomLayout->addWidget(m_rightGroup);
 	m_bottomLayout->setSpacing(5);
-	m_bottomLayout->setContentsMargins(0, 0, 0, 0);
+	m_bottomLayout->setContentsMargins(20, 0, 5, 5);
 	m_mainLayout->addWidget(m_chart, 1);
 	m_mainLayout->addLayout(m_bottomLayout);
 	m_mainLayout->setSpacing(5);
@@ -143,7 +144,7 @@ PortsStatusTab::PortsStatusTab(QWidget *parent)
 	m_layout->addWidget(m_view, 1);
 	m_layout->addWidget(m_infoLabel, 0, Qt::AlignLeft);
 	m_layout->setSpacing(2);
-	m_layout->setContentsMargins(1, 1, 1, 1);
+	m_layout->setContentsMargins(0,0,0,0);
 	setLayout(m_layout);
 }
 

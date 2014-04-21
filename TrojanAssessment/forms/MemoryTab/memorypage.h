@@ -11,6 +11,7 @@
 #include <QTableWidget>
 #include <QCompleter>
 #include <QFormLayout>
+#include <QGroupBox>
 #include <QLabel>
 
 #include "base/CustomControl/customitemmodel.h"
@@ -86,6 +87,7 @@ private:
 	QLabel* m_total_mem;
 	QLabel* m_avail_mem;
 	QLabel* m_used_mem;
+	QGroupBox* m_groupBox;
 };
 
 //////////////////////////////////////////////////////////////////////////

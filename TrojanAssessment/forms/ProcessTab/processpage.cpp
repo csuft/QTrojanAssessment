@@ -1,5 +1,6 @@
 #include "processpage.h"
 
+
 ProcessPage::ProcessPage(QWidget *parent)
 	: QTabWidget(parent)
 {
@@ -45,17 +46,15 @@ RuntimeMonitorTab::RuntimeMonitorTab(QWidget *parent)
 //////////////////////////////////////////////////////////////////////////
 //
 WinServicesTab::WinServicesTab(QWidget *parent)
-	: QWidget(parent)
+	: QWidget(parent), m_svrs()
 {
 	QVector<int> colsAlignCenter;
-	colsAlignCenter.push_back(2);
 	colsAlignCenter.push_back(3);
-	colsAlignCenter.push_back(4);
 
 	m_layout = new QVBoxLayout(this);
 	m_topLayout = new QHBoxLayout(this);
 
-	m_srcModel = new CustomItemModel(colsAlignCenter, QVector<int>(), 0, 5, this);
+	m_srcModel = new CustomItemModel(colsAlignCenter, QVector<int>(), 0, 4, this);
 	m_proxyModel = new QSortFilterProxyModel(this);
 	m_proxyModel->setSourceModel(m_srcModel);
 
@@ -69,8 +68,9 @@ WinServicesTab::WinServicesTab(QWidget *parent)
 	m_view->horizontalHeader()->setStretchLastSection(true);
 	m_view->horizontalHeader()->setHighlightSections(false);
 	m_view->setSortingEnabled(false);
-	m_view->verticalHeader()->setDefaultSectionSize(20);
+	m_view->verticalHeader()->setDefaultSectionSize(25);
 	m_view->setShowGrid(false);
+	m_view->setItemDelegate(new NoFocusDelegate(this));
 	m_view->setModel(m_proxyModel);
 
 	createHeaders();
@@ -90,29 +90,35 @@ WinServicesTab::WinServicesTab(QWidget *parent)
 	m_layout->setSpacing(0);
 	m_layout->setContentsMargins(0, 0, 0, 0);
 	setLayout(m_layout);
-
+	enrichTableView();
+	
 	connect(m_reloadBtn, SIGNAL(clicked()), this, SLOT(enrichTableView()));
 }
 
 void WinServicesTab::enrichTableView()
 {
-
-
+	const vector<ServiceItem> vs = m_svrs.getServiceList();
+	for (vector<ServiceItem>::const_iterator begin = vs.cbegin(); begin != vs.cend(); ++begin)
+	{
+		m_srcModel->insertRow(0);
+		m_srcModel->setData(m_srcModel->index(0, 0), QString::fromStdWString(begin->display_name));
+		m_srcModel->setData(m_srcModel->index(0, 1), QString::fromStdWString(begin->service_name));
+		m_srcModel->setData(m_srcModel->index(0, 2), QString::fromStdWString(begin->service_type));
+		m_srcModel->setData(m_srcModel->index(0, 3), QString::fromStdWString(begin->service_status));
+	}
 }
 
 void WinServicesTab::createHeaders()
 {
-	m_view->setColumnWidth(0, 150);
-	m_view->setColumnWidth(1, 120);
-	m_view->setColumnWidth(2, 50);
+	m_view->setColumnWidth(0, 270);
+	m_view->setColumnWidth(1, 125);
+	m_view->setColumnWidth(2, 140);
 	m_view->setColumnWidth(3, 80);
-	m_view->setColumnWidth(4, 50);
 
 	m_srcModel->setHeaderData(0, Qt::Horizontal, QStringLiteral("Display Name"));
 	m_srcModel->setHeaderData(1, Qt::Horizontal, QStringLiteral("Service Name"));
 	m_srcModel->setHeaderData(2, Qt::Horizontal, QStringLiteral("Type"));
 	m_srcModel->setHeaderData(3, Qt::Horizontal, QStringLiteral("Current State"));
-	m_srcModel->setHeaderData(4, Qt::Horizontal, QStringLiteral("Process ID"));
 }
 
 //////////////////////////////////////////////////////////////////////////

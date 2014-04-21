@@ -83,6 +83,7 @@ MemMonitorTab::MemMonitorTab(QWidget* parent /* = 0 */)
 {
 	m_mainLayout = new QVBoxLayout(this);
 	m_formLayout = new QFormLayout(this);
+	m_groupBox = new QGroupBox(QStringLiteral("Statistical"), this);
 	m_bottomLayout = new QHBoxLayout(this);
 
 	m_chart = new RealtimeChart("Primary Memory", "Memory Usage Monitor", "Used", "Available", this);
@@ -98,11 +99,13 @@ MemMonitorTab::MemMonitorTab(QWidget* parent /* = 0 */)
 	m_formLayout->addRow(QStringLiteral("Total Memory: "), m_total_mem);
 	m_formLayout->addRow(QStringLiteral("Available Memory: "), m_avail_mem);
 	m_formLayout->addRow(QStringLiteral("Used Memory: "), m_used_mem);
-
+	m_formLayout->setSpacing(10);
+	m_groupBox->setLayout(m_formLayout);
+	m_groupBox->setFixedHeight(130);
 	m_bottomLayout->addWidget(m_memusage);
-	m_bottomLayout->addLayout(m_formLayout);
-	m_bottomLayout->setSpacing(5);
-	m_bottomLayout->setContentsMargins(15, 5, 5, 5);
+	m_bottomLayout->addWidget(m_groupBox);
+	m_bottomLayout->setSpacing(20);
+	m_bottomLayout->setContentsMargins(15, 5, 10, 5);
 
 	m_mainLayout->addWidget(m_chart);
 	m_mainLayout->addLayout(m_bottomLayout);
