@@ -27,7 +27,6 @@ class RuntimeMonitorTab;
 class WinServicesTab;
 class ProcessListTab;
 class SoftwareInstalledTab;
-class WindowsServices;
 
 class ProcessPage : public QTabWidget
 {

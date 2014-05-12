@@ -17,11 +17,14 @@
 #include "base/CustomControl/customitemmodel.h"
 #include "base/CustomControl/nofocusdelegate.h"
 
+
 class SysUsageTab;
 class MemMonitorTab;
 class MemProtectionTab;
 class ManoMeter;
 class RealtimeChart;
+class DynamicMemory;
+class MemoryProps;
 
 class MemoryPage : public QTabWidget
 {
@@ -54,6 +57,9 @@ public:
 private:
 	SysUsageTab(const SysUsageTab& obj);
 	SysUsageTab& operator=(const SysUsageTab& obj);
+
+	void createTableHeaders();
+	void fulfillTable();
 private:
 	QVBoxLayout* m_mainLayout;
 	QTableView* m_procList;
@@ -61,6 +67,7 @@ private:
 	QSortFilterProxyModel* m_proxy;
 	QLineEdit* m_filter;
 	QCompleter* m_completer;
+	DynamicMemory* m_memory;
 	// PageFaultCount, PeakWorkingSetSize, WorkingSetSize, QuotaPeakPagedPoolUsage, QuotaPagedPoolUsage
 	// QuotaPeakNonPagedPoolUsage, QuotaNonPagedPoolUsage, PagefileUsage, PeakPagefileUsage
 };
@@ -102,11 +109,15 @@ public:
 private:
 	MemProtectionTab(const MemProtectionTab& obj);
 	MemProtectionTab& operator=(const MemProtectionTab& obj);
+
+	void createTableHeaders();
+	void fulfillTable();
 private:
-	// PID, Name, AllocationBase, State, AllocationProtect, BaseAddress, RegionSize, Type, Protect
+	// PID, AllocationBase, State, AllocationProtect, BaseAddress, RegionSize, Type, Protect
 	QTableView* m_view;
 	CustomItemModel* m_model;
 	QVBoxLayout* m_layout;
+	MemoryProps* m_memproperty;
 };
 
 #endif // MEMORYPAGE_H
