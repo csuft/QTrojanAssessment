@@ -34,6 +34,7 @@ void SecurityCenterPage::onChangeTab(int index)
 //
 AssessmentTab::AssessmentTab(QWidget *parent): QWidget(parent)
 {
+	m_timer = new QTimer(this);
 	m_mainLayout = new QVBoxLayout(this);
 	m_bottomLayout = new QHBoxLayout(this);
 	m_chart = new RealtimeChart("Network Flow(KB/s)", "Network Flow Monitor", "Business", "Non-business", this);
@@ -64,10 +65,12 @@ AssessmentTab::AssessmentTab(QWidget *parent): QWidget(parent)
 	m_cpu->setValue(0);
 	m_cpu->setMaximum(80);
 	m_cpu->setFixedSize(125, 125);
+	
 	m_disk->setSuffix("MB/s");
 	m_disk->setValue(0);
 	m_disk->setMaximum(100);
 	m_disk->setFixedSize(125, 125);
+
 	m_mem->setSuffix("%");
 	m_mem->setValue(0);
 	m_mem->setMaximum(80);
@@ -84,6 +87,20 @@ AssessmentTab::AssessmentTab(QWidget *parent): QWidget(parent)
 	m_mainLayout->setSpacing(5);
 	m_mainLayout->setContentsMargins(0, 0, 0, 5);
 	setLayout(m_mainLayout);
+
+	m_timer->start(1000);
+	connect (m_timer, SIGNAL(timeout()), this, SLOT(onUpdateTimer()));
+}
+
+void AssessmentTab::onUpdateTimer()
+{
+	// simulation of updating
+	int r;
+	r = qrand();
+	m_cpu->setValue(r%80);
+	m_disk->setValue(r%120);
+	m_mem->setValue(qrand()%80);
+	
 }
 
 //////////////////////////////////////////////////////////////////////////

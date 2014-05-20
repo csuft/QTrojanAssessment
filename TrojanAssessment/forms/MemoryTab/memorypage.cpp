@@ -137,6 +137,7 @@ SysUsageTab::~SysUsageTab()
 MemMonitorTab::MemMonitorTab(QWidget* parent /* = 0 */)
 	: QWidget(parent)
 {
+	m_timer = new QTimer(this);
 	m_mainLayout = new QVBoxLayout(this);
 	m_formLayout = new QFormLayout(this);
 	m_groupBox = new QGroupBox(QStringLiteral("Statistical"), this);
@@ -169,6 +170,14 @@ MemMonitorTab::MemMonitorTab(QWidget* parent /* = 0 */)
 	m_mainLayout->setContentsMargins(0, 0, 0, 0);
 
 	setLayout(m_mainLayout);
+	m_timer->start(1000);
+	connect(m_timer, SIGNAL(timeout()), this, SLOT(onUpdateTimer()));
+}
+
+void MemMonitorTab::onUpdateTimer()
+{
+	int r = qrand();
+	m_memusage->setValue(r%80);
 }
 
 MemMonitorTab::~MemMonitorTab()

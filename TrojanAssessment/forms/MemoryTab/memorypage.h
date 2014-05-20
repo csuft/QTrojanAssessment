@@ -13,6 +13,7 @@
 #include <QFormLayout>
 #include <QGroupBox>
 #include <QLabel>
+#include <QTimer>
 
 #include "base/CustomControl/customitemmodel.h"
 #include "base/CustomControl/nofocusdelegate.h"
@@ -84,7 +85,8 @@ public:
 private:
 	MemMonitorTab(const MemMonitorTab& obj);
 	MemMonitorTab& operator=(const MemMonitorTab& obj);
-
+private slots:
+	void onUpdateTimer();
 private:
 	QFormLayout* m_formLayout;
 	QVBoxLayout* m_mainLayout;
@@ -95,6 +97,7 @@ private:
 	QLabel* m_avail_mem;
 	QLabel* m_used_mem;
 	QGroupBox* m_groupBox;
+	QTimer* m_timer;
 };
 
 //////////////////////////////////////////////////////////////////////////

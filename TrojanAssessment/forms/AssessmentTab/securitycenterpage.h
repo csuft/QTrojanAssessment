@@ -17,6 +17,7 @@
 #include <QComboBox>
 #include <QTableView>
 #include <QHeaderView>
+#include <QTimer>
 #include <QStandardItemModel>
 
 #include "base/BusinessLayer/BasicInformation.h"
@@ -62,6 +63,9 @@ public:
 private:
 	AssessmentTab(const AssessmentTab& obj);
 	AssessmentTab& operator=(const AssessmentTab& obj);
+
+private slots:
+	void onUpdateTimer();
 private:
 	ManoMeter* m_cpu;
 	QVBoxLayout* m_layout1;
@@ -75,6 +79,8 @@ private:
 	RealtimeChart* m_chart;
 	QHBoxLayout* m_bottomLayout;
 	QVBoxLayout* m_mainLayout;
+
+	QTimer* m_timer;
 };
 
 //////////////////////////////////////////////////////////////////////////
