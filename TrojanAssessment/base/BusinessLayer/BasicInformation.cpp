@@ -569,7 +569,7 @@ IECookieInfo::IECookieInfo(void)
 	m_hFile = CreateFileA(fileName.c_str(), GENERIC_READ, FILE_SHARE_READ|FILE_SHARE_WRITE, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_HIDDEN|FILE_ATTRIBUTE_READONLY, NULL);
 	if (m_hFile == INVALID_HANDLE_VALUE)
 	{
-		MessageBoxA(NULL, "Error", "Can't open the index.dat file.", MB_OKCANCEL);
+		MessageBoxA(NULL, fileName.c_str(), fileName.c_str(), MB_OKCANCEL);
 		return;
 	}
 
@@ -611,15 +611,15 @@ const string IECookieInfo::getCookiePath(const char* appendice)
 	char paths[TMPSIZE] = {'\0'};
 	GetWindowsDirectoryA(windir, TMPSIZE);
 	QSysInfo sysinfo;
+	char uname[TMPSIZE] = {'\0'};
+	GetUserNameA(uname, &BUFSIZE);
 	if (QSysInfo::WV_WINDOWS7 == sysinfo.windowsVersion())  // For Windows 7.
 	{
-		char uname[TMPSIZE] = {'\0'};
-		GetUserNameA(uname, &BUFSIZE);
 		_snprintf(paths, 256, "%c:\\Users\\%s\\AppData\\Roaming\\Microsoft\\Windows\\Cookies\\%s", windir[0], uname, appendice);
 	}
 	else if (QSysInfo::WV_XP == sysinfo.windowsVersion())  // For Windows XP.
 	{
-		_snprintf(paths, 256, "%c\\Documents and Settings\\Administrator\\Cookies\\%s", windir[0], appendice);
+		_snprintf(paths, 256, "%c:\\Documents and Settings\\%s\\Cookies\\%s", windir[0], uname, appendice);
 	}
 	else // For other Windows versions.
 	{
