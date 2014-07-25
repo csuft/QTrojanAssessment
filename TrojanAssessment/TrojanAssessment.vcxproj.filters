@@ -390,4 +390,7 @@
     <None Include="UI\images\ToolButtons\ruanJian.png" />
     <None Include="UI\images\ToolButtons\tiJian.png" />
   </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="UI\images\app.rc" />
+  </ItemGroup>
 </Project>

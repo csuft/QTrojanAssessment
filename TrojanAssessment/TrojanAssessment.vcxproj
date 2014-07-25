@@ -509,6 +509,9 @@
     <None Include="UI\images\ToolButtons\xiTong.png" />
     <None Include="UI\style.qss" />
   </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="UI\images\app.rc" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
