@@ -964,7 +964,7 @@ void QChartViewer::updateViewPort(bool needUpdateChart, bool needUpdateImageMap)
 // Build in mouse cursors for zooming and scrolling support
 //
 
-static const int zoomInCursorA[] =
+static const unsigned int zoomInCursorA[] =
 {
 0xffffffff,
 0xffffffff,
@@ -1000,7 +1000,7 @@ static const int zoomInCursorA[] =
 0xffffffff
 };
 
-static const int zoomInCursorB[] =
+static const unsigned int zoomInCursorB[] =
 {
 0x00000000,
 0x00000000,
@@ -1036,7 +1036,7 @@ static const int zoomInCursorB[] =
 0x00000000
 };
 
-static const int zoomOutCursorA[] =
+static const unsigned int zoomOutCursorA[] =
 {
 0xffffffff,
 0xffffffff,
@@ -1072,7 +1072,7 @@ static const int zoomOutCursorA[] =
 0xffffffff
 };
 
-static const int zoomOutCursorB[] =
+static const unsigned int zoomOutCursorB[] =
 {
 0x00000000,
 0x00000000,
@@ -1108,7 +1108,7 @@ static const int zoomOutCursorB[] =
 0x00000000
 };
 
-static const int noZoomCursorA[] =
+static const unsigned int noZoomCursorA[] =
 {
 0xffffffff,
 0xffffffff,
@@ -1144,7 +1144,7 @@ static const int noZoomCursorA[] =
 0xffffffff
 };
 
-static const int noZoomCursorB[] =
+static const unsigned int noZoomCursorB[] =
 {
 0x00000000,
 0x00000000,
@@ -1180,7 +1180,7 @@ static const int noZoomCursorB[] =
 0x00000000
 };
 
-static int noMove2DCursorA[] =
+static const unsigned int noMove2DCursorA[] =
 {
 0xffffffff,
 0xffffffff,
@@ -1216,7 +1216,7 @@ static int noMove2DCursorA[] =
 0xffffffff
 };
 
-static int noMove2DCursorB[] =
+static const unsigned int noMove2DCursorB[] =
 {
 0x00000000,
 0x00000000,
@@ -1252,7 +1252,7 @@ static int noMove2DCursorB[] =
 0x00000000
 };
 
-static int noMoveHorizCursorA[] =
+static const unsigned int noMoveHorizCursorA[] =
 {
 0xffffffff,
 0xffffffff,
@@ -1288,7 +1288,7 @@ static int noMoveHorizCursorA[] =
 0xffffffff
 };
 
-static int noMoveHorizCursorB[] =
+static const unsigned int noMoveHorizCursorB[] =
 {
 0x00000000,
 0x00000000,
@@ -1324,7 +1324,7 @@ static int noMoveHorizCursorB[] =
 0x00000000
 };
 
-static int noMoveVertCursorA[] =
+static const unsigned int noMoveVertCursorA[] =
 {
 0xffffffff,
 0xffffffff,
@@ -1360,7 +1360,7 @@ static int noMoveVertCursorA[] =
 0xffffffff
 };
 
-static int noMoveVertCursorB[] =
+static const unsigned int noMoveVertCursorB[] =
 {
 0x00000000,
 0x00000000,
@@ -1417,11 +1417,11 @@ public:
     }
 } dummyFreeCursorObj;
 
-static QCursor *createCursor(const int *andPlane, const int *orPlane, int hotX, int hotY)
+static QCursor *createCursor(const unsigned int *andPlane, const unsigned int *orPlane, int hotX, int hotY)
 {
     // The cursor bitmaps are in and/or plane formats used in the Win32 CreateCursor
     // function. We need to change it to the bitmap/mask format used by QT.
-    int buffer[32];
+    unsigned int buffer[32];
     for (int i = 0; i < 32; ++i)
         buffer[i] = ~(orPlane[i] + andPlane[i]);
     QBitmap bitmap = QBitmap::fromData(QSize(32, 32), (uchar *)buffer, QImage::Format_Mono);

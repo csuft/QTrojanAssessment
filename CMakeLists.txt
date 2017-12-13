@@ -36,6 +36,7 @@ FIND_PACKAGE(Qt5 COMPONENTS Core Widgets Xml Gui REQUIRED)
 qt5_wrap_ui(UI_HEADERS ${CMAKE_CURRENT_SOURCE_DIR}/resource/cacheentrydetail.ui)
 
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_BINARY_DIR})
+LINK_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/ChartDirector/lib/)
 ################################################################################
 # Compile target
 ADD_EXECUTABLE ( ${PROJECT_NAME} 
@@ -59,3 +60,4 @@ ADD_EXECUTABLE ( ${PROJECT_NAME}
 				${CMAKE_CURRENT_SOURCE_DIR}/base/main.cpp)
 # https://www.kdab.com/using-cmake-with-qt-5/
 qt5_use_modules(${PROJECT_NAME} Core Widgets Gui Xml) 
+TARGET_LINK_LIBRARIES(${PROJECT_NAME} chartdir51.lib)

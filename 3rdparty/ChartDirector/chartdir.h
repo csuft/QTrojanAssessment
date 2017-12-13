@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012 Advanced Software Engineering Limited.
+ * Copyright (C) 2013 Advanced Software Engineering Limited.
  *
  * This file is part of the ChartDirector software. Usage of this file is
  * subjected to the ChartDirector license agreement. See the LICENSE.TXT
@@ -27,7 +27,7 @@ class GarbagePtr
 private :
 	AutoDestroy *ptr;
 public :
-	GarbagePtr(AutoDestroy *ptr, GarbagePtr *next) : ptr(ptr), next(next) {}
+	GarbagePtr(AutoDestroy *_ptr, GarbagePtr *_next) : ptr(_ptr), next(_next) {}
 	~GarbagePtr() { delete ptr; }
 	GarbagePtr *next;
 };
@@ -263,14 +263,14 @@ namespace Chart
 	{
 		0xffffff, 0x000000, 0x000000, 0x808080,
 		0x808080, 0x808080, 0x808080, 0x808080,
-		0x80ff0000, 0x8000ff00, 0x800000ff, 0x80ffff00,
-		0x80ff00ff, 0x8066ffff,	0x80ffcc33, 0x80cccccc,
-		0x809966ff, 0x80339966, 0x80999900, 0x80cc3300,
-		0x8099cccc, 0x80006600, 0x80660066, 0x80cc9999,
-		0x80ff9966, 0x8099ff99, 0x809999ff, 0x80cc6600,
-		0x8033cc33, 0x80cc99ff, 0x80ff6666, 0x8099cc66,
-		0x80009999, 0x80cc3333, 0x809933ff, 0x80ff0000,
-		0x800000ff, 0x8000ff00, 0x80ffcc99, 0x80999999,
+		(int)0x80ff0000, (int)0x8000ff00, (int)0x800000ff, (int)0x80ffff00,
+		(int)0x80ff00ff, (int)0x8066ffff, (int)0x80ffcc33, (int)0x80cccccc,
+		(int)0x809966ff, (int)0x80339966, (int)0x80999900, (int)0x80cc3300,
+		(int)0x8099cccc, (int)0x80006600, (int)0x80660066, (int)0x80cc9999,
+		(int)0x80ff9966, (int)0x8099ff99, (int)0x809999ff, (int)0x80cc6600,
+		(int)0x8033cc33, (int)0x80cc99ff, (int)0x80ff6666, (int)0x8099cc66,
+		(int)0x80009999, (int)0x80cc3333, (int)0x809933ff, (int)0x80ff0000,
+		(int)0x800000ff, (int)0x8000ff00, (int)0x80ffcc99, (int)0x80999999,
 		-1
 	};
 
@@ -527,7 +527,7 @@ public :
 	//obsoleted - for compatibility only
 	static void destroy(TTFText *t) { t->destroy(); }
 
-	TTFText(TTFTextInternal *ptr) : ptr(ptr) {}
+	TTFText(TTFTextInternal *_ptr) : ptr(_ptr) {}
 	~TTFText() { CTTFText_destroy(ptr); }
 	void destroy() { delete this; }
 
@@ -559,7 +559,7 @@ public :
 
 	DrawArea() : ptr(CDrawArea_create()), own_this(true) {}
 	static DrawArea* create() { return new DrawArea(); }
-	DrawArea(DrawAreaInternal *ptr) : ptr(ptr), own_this(false) {}
+	DrawArea(DrawAreaInternal *_ptr) : ptr(_ptr), own_this(false) {}
 	~DrawArea() { if (own_this) CDrawArea_destroy(ptr); }
 	void destroy() { delete this; }
 	DrawAreaInternal *getInternalPtr() { return ptr; }
@@ -782,7 +782,7 @@ private :
 	DrawObjInternal *ptr;
 
 public :
-	DrawObj(DrawObjInternal *ptr) : ptr(ptr) {}
+	DrawObj(DrawObjInternal *_ptr) : ptr(_ptr) {}
 	void destroy() { delete this; }
 	DrawObjInternal *getInternalPtr() { return ptr; }
 
@@ -801,7 +801,7 @@ private :
 	BoxInternal *ptr;
 
 public :
-	Box(BoxInternal *ptr) : DrawObj(Box2DrawObj(ptr)), ptr(ptr) {}
+	Box(BoxInternal *_ptr) : DrawObj(Box2DrawObj(_ptr)), ptr(_ptr) {}
 	~Box() {}
 
 	void setPos(int x, int y) { CBox_setPos(ptr, x, y); }
@@ -829,7 +829,7 @@ private :
 	TextBoxInternal *ptr;
 
 public :
-	TextBox(TextBoxInternal *ptr) : Box(TextBox2Box(ptr)), ptr(ptr) {}
+	TextBox(TextBoxInternal *_ptr) : Box(TextBox2Box(_ptr)), ptr(_ptr) {}
 	~TextBox() {}
 
 	void setText(const char *text) { CTextBox_setText(ptr, text); }
@@ -866,12 +866,12 @@ private :
 	LineInternal *ptr;
 
 public :
-	Line(LineInternal *ptr) : DrawObj(Line2DrawObj(ptr)), ptr(ptr) {}
+	Line(LineInternal *_ptr) : DrawObj(Line2DrawObj(_ptr)), ptr(_ptr) {}
 	~Line() {}
 
 	void setPos(int x1, int y1, int x2, int y2) { CLine_setPos(ptr, x1, y1, x2, y2); }
 	void setColor(int c) { CLine_setColor(ptr, c); }
-	void setWidth(int w) { CLine_setWidth(ptr, w); };
+	void setWidth(int w) { CLine_setWidth(ptr, w); }
 };
 
 
@@ -888,7 +888,7 @@ private :
 	{ if (!p) return 0; TextBox *ret = new TextBox(p); reg(ret); return ret; }
 
 public :
-	CDMLTable(CDMLTableInternal *ptr) : DrawObj(CDMLTable2DrawObj(ptr)), ptr(ptr) {}
+	CDMLTable(CDMLTableInternal *_ptr) : DrawObj(CDMLTable2DrawObj(_ptr)), ptr(_ptr) {}
 	~CDMLTable() {}
 
 	void setPos(int x, int y, int alignment = Chart::TopLeft)
@@ -932,7 +932,7 @@ private :
 	LegendBoxInternal *ptr;
 
 public :
-	LegendBox(LegendBoxInternal *ptr) : TextBox(LegendBox2TextBox(ptr)), ptr(ptr) {}
+	LegendBox(LegendBoxInternal *_ptr) : TextBox(LegendBox2TextBox(_ptr)), ptr(_ptr) {}
 	~LegendBox() {}
 
 	void setCols(int noOfCols) { CLegendBox_setCols(ptr, noOfCols); }
@@ -967,15 +967,23 @@ private :
 
 	BaseChartInternal *ptr;
 	int *refCount;
-	DrawArea *dynamicLayerCache;
+	
+	DrawArea *drawAreaCache;
+	DrawArea *regDrawArea(DrawAreaInternal *_ptr) {
+		if (!_ptr) return 0;
+		if ((0 == drawAreaCache) || (_ptr != drawAreaCache->getInternalPtr())) { 
+			drawAreaCache = new DrawArea(_ptr); reg(drawAreaCache); 
+		}
+		return drawAreaCache;
+	}
 
 public :
 	//obsoleted constants - for compatibility only
 	enum ImgFormat {PNG, GIF, JPG, WMP};
 
-	BaseChart() : ptr(0), refCount(new int), dynamicLayerCache(0) { *refCount = 1; }
-	BaseChart(BaseChart *rhs) : ptr(rhs->ptr), refCount(rhs->refCount), dynamicLayerCache(0) { ++(*refCount); }
-	void init(BaseChartInternal *ptr) { this->ptr = ptr; }
+	BaseChart() : ptr(0), refCount(new int), drawAreaCache(0) { *refCount = 1; }
+	BaseChart(BaseChart *rhs) : ptr(rhs->ptr), refCount(rhs->refCount), drawAreaCache(0) { ++(*refCount); }
+	void init(BaseChartInternal *_ptr) { this->ptr = _ptr; }
 	~BaseChart() { if (--(*refCount) == 0) { CBaseChart_destroy(ptr); delete refCount; } }
 	void destroy() { delete this; }
 	BaseChartInternal *getInternalPtr() { return ptr; }
@@ -1023,7 +1031,7 @@ public :
 	//////////////////////////////////////////////////////////////////////////////////////
 	//	drawing primitives
 	//////////////////////////////////////////////////////////////////////////////////////
-	DrawArea *getDrawArea() { DrawArea *ret = new DrawArea(CBaseChart_getDrawArea(ptr)); reg(ret); return ret; }
+	DrawArea *getDrawArea() { return regDrawArea(CBaseChart_getDrawArea(ptr)); }
 	TextBox *addText(int x, int y, const char *text, const char *font = 0, double fontSize = 8,
 		int fontColor = Chart::TextColor, int alignment = Chart::TopLeft, double angle = 0, bool vertical = false)
 	{ TextBox *ret = new TextBox(CBaseChart_addText(ptr, x, y, text, font, fontSize, fontColor, alignment, angle, vertical)); reg(ret); return ret; }
@@ -1104,7 +1112,7 @@ public :
 	MemBlock makeChart(int format)
 	{ const char *data; int len; makeChart(format, &data, &len); return MemBlock(data, len); }
 	DrawArea *makeChart()
-	{ DrawArea *ret = new DrawArea(CBaseChart_makeChart3(ptr)); reg(ret); return ret; }
+	{ return regDrawArea(CBaseChart_makeChart3(ptr)); }
 
 	//////////////////////////////////////////////////////////////////////////////////////
 	//	image map support
@@ -1122,13 +1130,8 @@ public :
 	int getAbsOffsetY() const
 	{ return CBaseChart_getAbsOffsetY(ptr); }
 
-	DrawArea *initDynamicLayer() { 
-		DrawAreaInternal *retPtr = CBaseChart_initDynamicLayer(ptr);
-		if ((0 == dynamicLayerCache) || (retPtr != dynamicLayerCache->getInternalPtr())) { 
-			dynamicLayerCache = new DrawArea(retPtr); reg(dynamicLayerCache); 
-		}
-		return dynamicLayerCache;
-	}
+	DrawArea *initDynamicLayer() 
+	{ return regDrawArea(CBaseChart_initDynamicLayer(ptr)); }
 	void removeDynamicLayer() 
 	{ CBaseChart_removeDynamicLayer(ptr); }
 	
@@ -1198,7 +1201,7 @@ private :
 	SectorInternal *ptr;
 
 public :
-	Sector(SectorInternal *ptr) : ptr(ptr) {}
+	Sector(SectorInternal *_ptr) : ptr(_ptr) {}
 	~Sector() {}
 
 	void setExplode(int distance = -1)
@@ -1297,7 +1300,7 @@ private :
 	MarkInternal *ptr;
 
 public :
-	Mark(MarkInternal *ptr) : TextBox(Mark2TextBox(ptr)), ptr(ptr) {}
+	Mark(MarkInternal *_ptr) : TextBox(Mark2TextBox(_ptr)), ptr(_ptr) {}
 	~Mark() {}
 
 	void setValue(double value) { CMark_setValue(ptr, value); }
@@ -1319,7 +1322,7 @@ private :
 	AxisInternal *ptr;
 
 public :
-	Axis(AxisInternal *ptr) : ptr(ptr) {}
+	Axis(AxisInternal *_ptr) : ptr(_ptr) {}
 	~Axis() {}
 	AxisInternal *getInternalPtr() { return ptr; }
 	const AxisInternal *getInternalPtr() const { return ptr; }
@@ -1481,7 +1484,7 @@ private :
 	AngularAxisInternal *ptr;
 
 public :
-	AngularAxis(AngularAxisInternal *ptr) : ptr(ptr) {}
+	AngularAxis(AngularAxisInternal *_ptr) : ptr(_ptr) {}
 	~AngularAxis() {}
 
 	TextBox *setLabelStyle(const char *font = "bold", double fontSize = 10,
@@ -1526,7 +1529,7 @@ private :
 	ColorAxisInternal *ptr;
 
 public :
-	ColorAxis(ColorAxisInternal *ptr) : Axis(ColorAxis2Axis(ptr)), ptr(ptr) {}
+	ColorAxis(ColorAxisInternal *_ptr) : Axis(ColorAxis2Axis(_ptr)), ptr(_ptr) {}
 	~ColorAxis() {}
 
 	void setColorGradient(bool isContinuous = true, IntArray colors = IntArray(), int underflowColor = -1, int overflowColor = -1)
@@ -1559,7 +1562,7 @@ private :
 	Axis *useYAxisCache;
 
 public :
-	DataSet(DataSetInternal *ptr) : ptr(ptr), useYAxisCache(0) {}
+	DataSet(DataSetInternal *_ptr) : ptr(_ptr), useYAxisCache(0) {}
 	~DataSet() {}
 	DataSetInternal *getInternalPtr() { return ptr; }
 	const DataSetInternal *getInternalPtr() const { return ptr; }
@@ -1628,11 +1631,11 @@ private :
 	int dataSetCacheCount;
 	int maxDataSetCacheCount;
 
-	DataSet *regDataSet(DataSetInternal *ptr) {
-		if (!ptr) return 0;
+	DataSet *regDataSet(DataSetInternal *_ptr) {
+		if (!_ptr) return 0;
 		for (int i = 0; i < dataSetCacheCount; ++i)
-			if (dataSetCache[i]->getInternalPtr() == ptr) return dataSetCache[i];
-		DataSet *ret = new DataSet(ptr); reg(ret); 
+			if (dataSetCache[i]->getInternalPtr() == _ptr) return dataSetCache[i];
+		DataSet *ret = new DataSet(_ptr); reg(ret); 
 		if (dataSetCacheCount >= maxDataSetCacheCount) {
 			maxDataSetCacheCount = (maxDataSetCacheCount < 10) ? 10 : maxDataSetCacheCount * 2;
 			DataSet **temp = new DataSet*[maxDataSetCacheCount];
@@ -1643,7 +1646,7 @@ private :
 	}
 
 public :
-	Layer(LayerInternal *ptr) : ptr(ptr), dataSetCache(0), dataSetCacheCount(0), maxDataSetCacheCount(0) {}
+	Layer(LayerInternal *_ptr) : ptr(_ptr), dataSetCache(0), dataSetCacheCount(0), maxDataSetCacheCount(0) {}
 	~Layer() { delete[] dataSetCache; }
 	LayerInternal *getInternalPtr() { return ptr; }
 	const LayerInternal *getInternalPtr() const { return ptr; }
@@ -1752,7 +1755,7 @@ private :
 	BarLayerInternal *ptr;
 
 public :
-	BarLayer(BarLayerInternal *ptr) : Layer(BarLayer2Layer(ptr)), ptr(ptr) {}
+	BarLayer(BarLayerInternal *_ptr) : Layer(BarLayer2Layer(_ptr)), ptr(_ptr) {}
 	~BarLayer() {}
 
 	void setBarGap(double barGap, double subBarGap = Chart::NoValue)
@@ -1785,7 +1788,7 @@ private :
 	InterLineLayerInternal *ptr;
 
 public :
-	InterLineLayer(InterLineLayerInternal *ptr) : Layer(InterLineLayer2Layer(ptr)), ptr(ptr) {}
+	InterLineLayer(InterLineLayerInternal *_ptr) : Layer(InterLineLayer2Layer(_ptr)), ptr(_ptr) {}
 	~InterLineLayer() {}
 
 	void setGapColor(int gapColor12, int gapColor21 = -1)
@@ -1803,7 +1806,7 @@ private :
 	LineLayerInternal *ptr;
 
 public :
-	LineLayer(LineLayerInternal *ptr) : Layer(LineLayer2Layer(ptr)), ptr(ptr) {}
+	LineLayer(LineLayerInternal *_ptr) : Layer(LineLayer2Layer(_ptr)), ptr(_ptr) {}
 	~LineLayer() {}
 
 	void setSymbolScale(DoubleArray zDataX, int scaleTypeX = Chart::PixelScale,
@@ -1836,7 +1839,7 @@ private :
 	SplineLayerInternal *ptr;
 
 public :
-	SplineLayer(SplineLayerInternal *ptr) : LineLayer(SplineLayer2LineLayer(ptr)), ptr(ptr) {}
+	SplineLayer(SplineLayerInternal *_ptr) : LineLayer(SplineLayer2LineLayer(_ptr)), ptr(_ptr) {}
 	~SplineLayer() {}
 
 	void setTension(double tension) { CSplineLayer_setTension(ptr, tension); }
@@ -1854,7 +1857,7 @@ private :
 	StepLineLayerInternal *ptr;
 
 public :
-	StepLineLayer(StepLineLayerInternal *ptr) : LineLayer(StepLineLayer2LineLayer(ptr)), ptr(ptr) {}
+	StepLineLayer(StepLineLayerInternal *_ptr) : LineLayer(StepLineLayer2LineLayer(_ptr)), ptr(_ptr) {}
 	~StepLineLayer() {}
 
 	void setAlignment(int a) { CStepLineLayer_setAlignment(ptr, a); }
@@ -1871,7 +1874,7 @@ private :
 	AreaLayerInternal *ptr;
 
 public :
-	AreaLayer(AreaLayerInternal *ptr) : Layer(AreaLayer2Layer(ptr)), ptr(ptr) {}
+	AreaLayer(AreaLayerInternal *_ptr) : Layer(AreaLayer2Layer(_ptr)), ptr(_ptr) {}
 	~AreaLayer() {}
 
 	void setMinLabelSize(int s) { CAreaLayer_setMinLabelSize(ptr, s); }
@@ -1889,7 +1892,7 @@ private :
 	BaseBoxLayerInternal *ptr;
 
 public :
-	BaseBoxLayer(BaseBoxLayerInternal *ptr) : Layer(BaseBoxLayer2Layer(ptr)), ptr(ptr) {}
+	BaseBoxLayer(BaseBoxLayerInternal *_ptr) : Layer(BaseBoxLayer2Layer(_ptr)), ptr(_ptr) {}
 	~BaseBoxLayer() {}
 
 	void setDataGap(double gap) { CBaseBoxLayer_setDataGap(ptr, gap); }
@@ -1908,7 +1911,7 @@ private :
 	HLOCLayerInternal *ptr;
 
 public :
-	HLOCLayer(HLOCLayerInternal *ptr) : BaseBoxLayer(HLOCLayer2BaseBoxLayer(ptr)), ptr(ptr) {}
+	HLOCLayer(HLOCLayerInternal *_ptr) : BaseBoxLayer(HLOCLayer2BaseBoxLayer(_ptr)), ptr(_ptr) {}
 	~HLOCLayer() {}
 
 	void setColorMethod(int colorMethod, int riseColor, int fallColor = -1,
@@ -1927,7 +1930,7 @@ private :
 	CandleStickLayerInternal *ptr;
 
 public :
-	CandleStickLayer(CandleStickLayerInternal *ptr) : BaseBoxLayer(CandleStickLayer2BaseBoxLayer(ptr)), ptr(ptr) {}
+	CandleStickLayer(CandleStickLayerInternal *_ptr) : BaseBoxLayer(CandleStickLayer2BaseBoxLayer(_ptr)), ptr(_ptr) {}
 	~CandleStickLayer() {}
 };
 
@@ -1942,7 +1945,7 @@ private :
 	BoxWhiskerLayerInternal *ptr;
 
 public :
-	BoxWhiskerLayer(BoxWhiskerLayerInternal *ptr) : BaseBoxLayer(BoxWhiskerLayer2BaseBoxLayer(ptr)), ptr(ptr) {}
+	BoxWhiskerLayer(BoxWhiskerLayerInternal *_ptr) : BaseBoxLayer(BoxWhiskerLayer2BaseBoxLayer(_ptr)), ptr(_ptr) {}
 	~BoxWhiskerLayer() {}
 
 	void setBoxColors(IntArray colors, StringArray names = StringArray())
@@ -1964,7 +1967,7 @@ private :
 	TrendLayerInternal *ptr;
 
 public :
-	TrendLayer(TrendLayerInternal *ptr) : Layer(TrendLayer2Layer(ptr)), ptr(ptr) {}
+	TrendLayer(TrendLayerInternal *_ptr) : Layer(TrendLayer2Layer(_ptr)), ptr(_ptr) {}
 	~TrendLayer() {}
 
 	void setRegressionType(int regressionType) { CTrendLayer_setRegressionType(ptr, regressionType); }
@@ -1999,7 +2002,7 @@ private :
 	VectorLayerInternal *ptr;
 
 public :
-	VectorLayer(VectorLayerInternal *ptr) : Layer(VectorLayer2Layer(ptr)), ptr(ptr) {}
+	VectorLayer(VectorLayerInternal *_ptr) : Layer(VectorLayer2Layer(_ptr)), ptr(_ptr) {}
 	~VectorLayer() {}
 
 	void setVector(DoubleArray lengths, DoubleArray directions, int lengthScale = Chart::PixelScale)
@@ -2024,7 +2027,7 @@ private :
 	ContourLayerInternal *ptr;
 
 public :
-	ContourLayer(ContourLayerInternal *ptr) : Layer(ContourLayer2Layer(ptr)), ptr(ptr) {}
+	ContourLayer(ContourLayerInternal *_ptr) : Layer(ContourLayer2Layer(_ptr)), ptr(_ptr) {}
 	~ContourLayer() {}
 
 	void setZData(DoubleArray zData) { CContourLayer_setZData(ptr, zData.data, zData.len); }
@@ -2056,8 +2059,9 @@ private :
 	PlotAreaInternal *ptr;
 
 public :
-	PlotArea(PlotAreaInternal *ptr) : ptr(ptr) {}
+	PlotArea(PlotAreaInternal *_ptr) : ptr(_ptr) {}
 	~PlotArea() {}
+	PlotAreaInternal *getInternalPtr() { return ptr; }
 
 	void setBackground(int color, int altBgColor = -1, int edgeColor = -1)
 	{ CPlotArea_setBackground(ptr, color, altBgColor, edgeColor); }
@@ -2095,15 +2099,23 @@ private :
 
 	XYChartInternal *ptr;
 
+	PlotArea *plotAreaCache;
+	PlotArea *regPlotArea(PlotAreaInternal *_ptr) {
+		if (!_ptr) return 0;
+		if ((0 == plotAreaCache) || (_ptr != plotAreaCache->getInternalPtr())) { 
+			plotAreaCache = new PlotArea(_ptr); reg(plotAreaCache); 
+		}
+		return plotAreaCache;
+	}
+
 	Layer **layerCache;
 	int layerCacheCount;
 	int maxLayerCacheCount;
-
-	Layer *regLayer(LayerInternal *ptr) {
-		if (!ptr) return 0;
+	Layer *regLayer(LayerInternal *_ptr) {
+		if (!_ptr) return 0;
 		for (int i = 0; i < layerCacheCount; ++i)
-			if (layerCache[i]->getInternalPtr() == ptr) return layerCache[i];
-		Layer *ret = new Layer(ptr); reg(ret); 
+			if (layerCache[i]->getInternalPtr() == _ptr) return layerCache[i];
+		Layer *ret = new Layer(_ptr); reg(ret); 
 		if (layerCacheCount >= maxLayerCacheCount) {
 			maxLayerCacheCount = (maxLayerCacheCount < 10) ? 10 : maxLayerCacheCount * 2;
 			Layer **temp = new Layer*[maxLayerCacheCount];
@@ -2113,25 +2125,43 @@ private :
 		return layerCache[layerCacheCount++] = ret;
 	}
 
+	Axis **axisCache;
+	int axisCacheCount;
+	int maxAxisCacheCount;
+	Axis *regAxis(AxisInternal *_ptr) {
+		if (!_ptr) return 0;
+		for (int i = 0; i < axisCacheCount; ++i)
+			if (axisCache[i]->getInternalPtr() == _ptr) return axisCache[i];
+		Axis *ret = new Axis(_ptr); reg(ret); 
+		if (axisCacheCount >= maxAxisCacheCount) {
+			maxAxisCacheCount = (maxAxisCacheCount < 10) ? 10 : maxAxisCacheCount * 2;
+			Axis **temp = new Axis*[maxAxisCacheCount];
+			for (int i = 0; i < axisCacheCount; ++i) temp[i] = axisCache[i];
+			delete[] axisCache; axisCache = temp;
+		}
+		return axisCache[axisCacheCount++] = ret;
+	}
+
 public :
 	XYChart(int width, int height, int bgColor = Chart::BackgroundColor,
 		int edgeColor = Chart::Transparent, int raisedEffect = 0) :
-		layerCache(0), layerCacheCount(0), maxLayerCacheCount(0)
+		plotAreaCache(0), layerCache(0), layerCacheCount(0), maxLayerCacheCount(0),
+		axisCache(0), axisCacheCount(0), maxAxisCacheCount(0)
 	{ ptr = CXYChart_create(width, height, bgColor, edgeColor, raisedEffect);
 	  init(XYChart2BaseChart(ptr)); }
 	static XYChart *create(int width, int height, int bgColor = Chart::BackgroundColor,
 		int edgeColor = Chart::Transparent, int raisedEffect = 0)
 	{ return new XYChart(width, height, bgColor, edgeColor, raisedEffect); }
-	~XYChart() { delete[] layerCache; }
+	~XYChart() { delete[] layerCache; delete[] axisCache; }
 
-	Axis *addAxis(int align, int offset) { Axis *ret = new Axis(CXYChart_addAxis(ptr, align, offset)); reg(ret); return ret; }
-	Axis *yAxis() { Axis *ret = new Axis(CXYChart_yAxis(ptr)); reg(ret); return ret; }
-	Axis *yAxis2() { Axis *ret = new Axis(CXYChart_yAxis2(ptr)); reg(ret); return ret; }
+	Axis *addAxis(int align, int offset) { return regAxis(CXYChart_addAxis(ptr, align, offset)); }
+	Axis *yAxis() { return regAxis(CXYChart_yAxis(ptr)); }
+	Axis *yAxis2() { return regAxis(CXYChart_yAxis2(ptr)); }
 	void syncYAxis(double slope = 1, double intercept = 0)
 	{ CXYChart_syncYAxis(ptr, slope, intercept); }
 	void setYAxisOnRight(bool b = true) { CXYChart_setYAxisOnRight(ptr, b); }
-	Axis *xAxis() { Axis *ret = new Axis(CXYChart_xAxis(ptr)); reg(ret); return ret; }
-	Axis *xAxis2() { Axis *ret = new Axis(CXYChart_xAxis2(ptr)); reg(ret); return ret; }
+	Axis *xAxis() { return regAxis(CXYChart_xAxis(ptr)); }
+	Axis *xAxis2() { return regAxis(CXYChart_xAxis2(ptr)); }
 	void setXAxisOnTop(bool b = true) { CXYChart_setXAxisOnTop(ptr, b); }
 	void swapXY(bool b = true) { CXYChart_swapXY(ptr, b); }
 	void setAxisAtOrigin(int originMode = Chart::XYAxisAtOrigin, int symmetryMode = 0)
@@ -2155,9 +2185,8 @@ public :
 	PlotArea *setPlotArea(int x, int y, int width, int height,
 		int bgColor = Chart::Transparent, int altBgColor = -1, int edgeColor = -1,
 		int hGridColor = 0xc0c0c0, int vGridColor = Chart::Transparent)
-	{ PlotArea *ret = new PlotArea(CXYChart_setPlotArea(ptr, x, y, width, height, bgColor,
-		altBgColor, edgeColor, hGridColor, vGridColor)); reg(ret); return ret; }
-	PlotArea *getPlotArea() { PlotArea *ret = new PlotArea(CXYChart_getPlotArea(ptr)); reg(ret); return ret; }
+	{ return regPlotArea(CXYChart_setPlotArea(ptr, x, y, width, height, bgColor, altBgColor, edgeColor, hGridColor, vGridColor)); }
+	PlotArea *getPlotArea() { return regPlotArea(CXYChart_getPlotArea(ptr)); }
 	void setClipping(int margin = 0) { CXYChart_setClipping(ptr, margin); }
 	void setTrimData(int startPos, int len = 0x7fffffff) { CXYChart_setTrimData(ptr, startPos, len); }
 
@@ -2282,7 +2311,7 @@ private :
 
 public :
 	ThreeDChart() : ptr(0) {}
-	void init(ThreeDChartInternal *ptr) { this->ptr = ptr; BaseChart::init(ThreeDChart2BaseChart(ptr)); }
+	void init(ThreeDChartInternal *_ptr) { this->ptr = _ptr; BaseChart::init(ThreeDChart2BaseChart(_ptr)); }
 
 	void setPlotRegion(int cx, int cy, int xWidth, int yDepth, int zHeight)
 	{ CThreeDChart_setPlotRegion(ptr, cx, cy, xWidth, yDepth, zHeight); }
@@ -2361,7 +2390,7 @@ private :
 	ThreeDScatterGroupInternal *ptr;
 	
 public :
-	ThreeDScatterGroup(ThreeDScatterGroupInternal *ptr) : ptr(ptr) {}
+	ThreeDScatterGroup(ThreeDScatterGroupInternal *_ptr) : ptr(_ptr) {}
 	~ThreeDScatterGroup() {}
 
 	void setDataSymbol(int symbol, int size = 5, int fillColor = -1, int edgeColor = -1, int lineWidth = 1)
@@ -2412,7 +2441,7 @@ private :
 	PolarLayerInternal *ptr;
 
 public :
-	PolarLayer(PolarLayerInternal *ptr) : ptr(ptr) {}
+	PolarLayer(PolarLayerInternal *_ptr) : ptr(_ptr) {}
 	~PolarLayer() {}
 
 	void setData(DoubleArray data, int color = -1, const char *name = 0)
@@ -2423,8 +2452,8 @@ public :
 	void setBorderColor(int edgeColor) { CPolarLayer_setBorderColor(ptr, edgeColor); }
 	void setLineWidth(int w) { CPolarLayer_setLineWidth(ptr, w); }
 
-	void setDataSymbol(const char *image) { CPolarLayer_setDataSymbol2(ptr, image); };
-	void setDataSymbol(const DrawArea *obj) { CPolarLayer_setDataSymbol3(ptr, obj->getInternalPtr()); };
+	void setDataSymbol(const char *image) { CPolarLayer_setDataSymbol2(ptr, image); }
+	void setDataSymbol(const DrawArea *obj) { CPolarLayer_setDataSymbol3(ptr, obj->getInternalPtr()); }
 	void setDataSymbol(int symbol, int size = 7,
 		int fillColor = -1, int edgeColor = -1, int lineWidth = 1)
 	{ CPolarLayer_setDataSymbol(ptr, symbol, size, fillColor, edgeColor, lineWidth); }
@@ -2477,7 +2506,7 @@ private :
 	PolarLineLayerInternal *ptr;
 
 public :
-	PolarLineLayer(PolarLineLayerInternal *ptr) : PolarLayer(PolarLineLayer2PolarLayer(ptr)), ptr(ptr) {}
+	PolarLineLayer(PolarLineLayerInternal *_ptr) : PolarLayer(PolarLineLayer2PolarLayer(_ptr)), ptr(_ptr) {}
 	~PolarLineLayer() {}
 
 	void setCloseLoop(bool b)
@@ -2497,7 +2526,7 @@ private :
 	PolarSplineLineLayerInternal *ptr;
 
 public :
-	PolarSplineLineLayer(PolarSplineLineLayerInternal *ptr) : PolarLineLayer(PolarSplineLineLayer2PolarLineLayer(ptr)), ptr(ptr) {}
+	PolarSplineLineLayer(PolarSplineLineLayerInternal *_ptr) : PolarLineLayer(PolarSplineLineLayer2PolarLineLayer(_ptr)), ptr(_ptr) {}
 	~PolarSplineLineLayer() {}
 
 	void setTension(double tension) { CPolarSplineLineLayer_setTension(ptr, tension); }
@@ -2514,7 +2543,7 @@ private :
 	PolarSplineAreaLayerInternal *ptr;
 
 public :
-	PolarSplineAreaLayer(PolarSplineAreaLayerInternal *ptr) : PolarAreaLayer(PolarSplineAreaLayer2PolarAreaLayer(ptr)), ptr(ptr) {}
+	PolarSplineAreaLayer(PolarSplineAreaLayerInternal *_ptr) : PolarAreaLayer(PolarSplineAreaLayer2PolarAreaLayer(_ptr)), ptr(_ptr) {}
 	~PolarSplineAreaLayer() {}
 
 	void setTension(double tension) { CPolarSplineAreaLayer_setTension(ptr, tension); }
@@ -2531,7 +2560,7 @@ private :
 	PolarVectorLayerInternal *ptr;
 
 public :
-	PolarVectorLayer(PolarVectorLayerInternal *ptr) : PolarLayer(PolarVectorLayer2PolarLayer(ptr)), ptr(ptr) {}
+	PolarVectorLayer(PolarVectorLayerInternal *_ptr) : PolarLayer(PolarVectorLayer2PolarLayer(_ptr)), ptr(_ptr) {}
 	~PolarVectorLayer() {}
 
 	void setVector(DoubleArray lengths, DoubleArray directions, int lengthScale = Chart::PixelScale)
@@ -2609,7 +2638,7 @@ private :
 	PyramidLayerInternal *ptr;
 
 public :
-	PyramidLayer(PyramidLayerInternal *ptr) : ptr(ptr) {}
+	PyramidLayer(PyramidLayerInternal *_ptr) : ptr(_ptr) {}
 	~PyramidLayer() {}
 
 	TextBox *setCenterLabel(const char *labelTemplate = "{skip}", const char *font = "{skip}", double fontSize = -1, int fontColor = -1)
@@ -2696,7 +2725,7 @@ class MeterPointer : public DrawObj
 	MeterPointerInternal *ptr;
 
 public :
-	MeterPointer(MeterPointerInternal *ptr) : DrawObj(MeterPointer2DrawObj(ptr)), ptr(ptr) {}
+	MeterPointer(MeterPointerInternal *_ptr) : DrawObj(MeterPointer2DrawObj(_ptr)), ptr(_ptr) {}
 	void setColor(int fillColor, int edgeColor = -1)
 	{ CMeterPointer_setColor(ptr, fillColor, edgeColor); }
 	void setPos(double value) { CMeterPointer_setPos(ptr, value); }
@@ -2718,7 +2747,7 @@ private :
 
 public :
 	BaseMeter() : ptr(0) {}
-	void init(BaseMeterInternal *ptr) { this->ptr = ptr; BaseChart::init(BaseMeter2BaseChart(ptr)); }
+	void init(BaseMeterInternal *_ptr) { this->ptr = _ptr; BaseChart::init(BaseMeter2BaseChart(_ptr)); }
 
 	MeterPointer *addPointer(double value, int fillColor = Chart::LineColor, int edgeColor = -1)
 	{ MeterPointer *ret = new MeterPointer(CBaseMeter_addPointer(ptr, value, fillColor, edgeColor)); reg(ret); return ret; }

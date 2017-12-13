@@ -17,10 +17,9 @@ When the command finished, you can find a newly created sub directory in the pat
 **System Prerequisite** 
 
  - ```Microsoft Visual Studio 2010``` or later
- - ```Windows XP SP3``` or higher
+ - **CMake** is required.
  - Qt library version ```Qt 5.2.1-OpenGL```, earlier version may also work.
- - Qt plugin for MSVC2010 ```qt-vs-addin-1.2.0```
-
+ - compatible with Qt 5.8 and VS 2015.
 
 **Note**
 
@@ -34,5 +33,5 @@ For more information, please visit http://www.cnblogs.com/csuftzzk
 
 ## Screen shot
 
-![MethodOne.jpg](https://github.com/csuft/QTrojanAssessment/raw/master/TrojanAssessment/screenshots/2014-03-21_073706.png "")  
-![MethodOne.jpg](https://github.com/csuft/QTrojanAssessment/raw/master/TrojanAssessment/screenshots/2014-03-21_074023.png "")
+![MethodOne.jpg](https://raw.githubusercontent.com/csuft/QTrojanAssessment/master/screenshots/2014-03-21_073706.png "")  
+![MethodOne.jpg](https://raw.githubusercontent.com/csuft/QTrojanAssessment/master/screenshots/2014-03-21_074023.png "")
